@@ -6,7 +6,7 @@
 - 通过在卡片上留下自己的名字，或者将对应 Issue assign 给自己声明任务负责人
 - 及时更新 Projects 里 Main 看板的进度
 
-## Commit 规范
+## Commit Message 规范
 - 用英语
 - 首字母小写
 - 不加句点
