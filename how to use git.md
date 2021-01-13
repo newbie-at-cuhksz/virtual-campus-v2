@@ -13,27 +13,9 @@ $ git config --global user.name "Your Name"
 $ git config --global user.email "email@example.com"
 ```
 
-### 2. 创建本地库
+### 2.从远程仓库克隆
 
-创建你要使用的文件夹, 并在路径栏中输入`powershell`打开(最好路径中不要有中文).
-
-![image-20210113195724283](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20210113195724283.png)
-
-![image-20210113195453057](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20210113195453057.png)
-
-然后创建本地库
-
-```
-❯ git init
-
-Initialized empty Git repository in E:/lenovo/STUDY/Y2_2/CUHKSZ_MODEL/.git/
-```
-
-(注意第三行是执行后的提示, 输入git init即可)
-
-然后应该会看到.git文件. 这个不去动它. 没有的话看看是不是被隐藏了
-
-### 3) 从远程仓库克隆
+打开一个文件夹. 最好不要包含中文路径
 
 `git@github.com:newbie-at-cuhksz/virtual-campus-v2.git`是我们仓库的ssh地址.
 
@@ -61,9 +43,9 @@ Are you sure you want to continue connecting (yes/no)?
 
 yes即可
 
-然后文件就同步完成了.目前应该在master分支上
+然后文件就同步完成了.目前应该在main分支上
 
-### 4) push & pull
+### 3) push & pull
 
 
 
