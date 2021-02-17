@@ -10,8 +10,7 @@ namespace GercStudio.USK.Scripts
 {
 	public class UIManager : MonoBehaviour
 	{
-
-        [Serializable]
+		[Serializable]
 		public class multiplayerGameLobby
 		{
 			public UIPlaceholder weaponPlaceholder;
@@ -28,8 +27,6 @@ namespace GercStudio.USK.Scripts
 			public UIHelper.LobbyCharactersMenu CharactersMenu;
 			public UIHelper.AllRoomsMenu AllRoomsMenu;
 			public UIHelper.CreateRoomMenu CreateRoomMenu;
-            public UIHelper.CreditsMenu CreditsMenu;
-            public UIHelper.SettingsMenu SettingsMenu;
 		}
 
 		[Serializable]
@@ -45,7 +42,6 @@ namespace GercStudio.USK.Scripts
 			public PUNHelper.TimerBeforeMatch TimerBeforeMatch;
 			public PUNHelper.TimerAfterDeath TimerAfterDeath;
 			public PUNHelper.PreMatchMenu PreMatchMenu;
-            public PUNHelper.LoadingScreen LoadingScreen;
 		}
 
 		public multiplayerGameLobby MultiplayerGameLobby;
@@ -60,17 +56,16 @@ namespace GercStudio.USK.Scripts
 		public GameObject moveStickOutline;
 		public GameObject cameraStick;
 		public GameObject cameraStickOutline;
-
-        #region InspectorVariables
-
-        public int inspectorTab;
+		
+		#region InspectorVariables
+		
+		public int inspectorTab;
 
 		public int multiplayerGameInspectorTab;
 		
 		public int roomInspectorTabTop;
-		public int roomInspectorTabMid;
-        public int roomInspectorTabDown;
-        public int currentRoomInspectorTab;
+		public int roomInspectorTabDown;
+		public int currentRoomInspectorTab;
 		public int roomMatchStatsTab;
 
 		public int lobbyInspectorTabTop;
@@ -81,9 +76,7 @@ namespace GercStudio.USK.Scripts
 		public int characterUiInspectorTab;
 		public int curWeaponSlot;
 
-        #endregion
-
-        
+		#endregion
 
 		private void Awake()
 		{
@@ -122,11 +115,7 @@ namespace GercStudio.USK.Scripts
 			MultiplayerGameLobby.CharactersMenu.DisableAll();
 			MultiplayerGameLobby.AllRoomsMenu.DisableAll();
 			MultiplayerGameLobby.CreateRoomMenu.DisableAll();
-            MultiplayerGameLobby.CreditsMenu.DisableAll();
-
-            if (MultiplayerGameLobby.MainMenu.BGMAudioSource) MultiplayerGameLobby.MainMenu.BGMAudioSource.SetActive(false);
-
-        }
+		}
 		
 		public void HideAllMultiplayerRoomUI()
 		{
@@ -145,10 +134,8 @@ namespace GercStudio.USK.Scripts
 			MultiplayerGameRoom.TimerAfterDeath.DisableAll();
            
 			MultiplayerGameRoom.PreMatchMenu.DisableAll();
-
-            MultiplayerGameRoom.LoadingScreen.DisableAll();
-
-            if (MultiplayerGameRoom.MatchStats.KillStatsContent)
+           
+			if(MultiplayerGameRoom.MatchStats.KillStatsContent)
 				MultiplayerGameRoom.MatchStats.KillStatsContent.gameObject.SetActive(false);
 		}
 	}

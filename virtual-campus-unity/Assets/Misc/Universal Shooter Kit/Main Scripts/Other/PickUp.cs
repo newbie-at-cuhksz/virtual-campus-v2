@@ -2,7 +2,6 @@
 // © 2018-2019
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 #if UNITY_EDITOR
@@ -46,31 +45,13 @@ namespace GercStudio.USK.Scripts
 
         public Vector3 ColliderSize = Vector3.one;
 
-        [Range(1, 100)] public int distance = 2;
+        [Range(1, 100)] public int distance = 10;
         [Range(1, 8)] public int Slots = 1;
 
         public BoxCollider pickUpArea;
 
         private GameObject target;
 
-        private void CalculateColliderSize()
-        {
-            float x = Mathf.Abs(transform.rotation.x);
-            float y = Mathf.Abs(transform.rotation.y);
-            float z = Mathf.Abs(transform.rotation.z);
-            if (80f < z && z < 100f)
-            {
-                ColliderSize = new Vector3(5, 1, 1);
-            }
-            else if (80f < x && x < 100f)
-            {
-                ColliderSize = new Vector3(1, 1, 5);
-            }
-            else
-            {
-                ColliderSize = new Vector3(1, 5, 1);
-            }
-        }
         private void OnEnable()
         {
             var rigidbody = GetComponent<Rigidbody>();
@@ -79,33 +60,13 @@ namespace GercStudio.USK.Scripts
             rigidbody.isKinematic = false;
             rigidbody.useGravity = true;
             collider.isTrigger = false;
-
-            StartCoroutine(UpdateMethod(1.5f));
-
-            /*
+            
             if (Method == PickUpMethod.Collider && !pickUpArea)
             {
                 pickUpArea = gameObject.AddComponent<BoxCollider>();
-                //StartCoroutine(UpdateColliderSize(1.5f));
                 pickUpArea.size = ColliderSize;
                 pickUpArea.isTrigger = true;
             }
-            */
-        }
-
-        IEnumerator UpdateMethod(float waittime)
-        {
-            yield return new WaitForSeconds(waittime);
-            Method = PickUpMethod.Collider;
-            pickUpArea = gameObject.AddComponent<BoxCollider>();
-            pickUpArea.size = 3 * ColliderSize;
-            pickUpArea.isTrigger = true;
-        }
-        IEnumerator UpdateColliderSize(float waittime)
-        {
-            yield return new WaitForSeconds(waittime);
-            CalculateColliderSize();
-            pickUpArea.size = ColliderSize;
         }
 
         public void PickUpObject(GameObject character)
@@ -188,7 +149,6 @@ namespace GercStudio.USK.Scripts
                 }
                 case TypeOfPickUp.Weapon:
                 {
-
                     var weaponController = GetComponent<WeaponController>();
                     var weaponManager = target.GetComponent<InventoryManager>();
                     var controller = target.GetComponent<Controller>();

@@ -249,29 +249,15 @@ namespace GercStudio.USK.Scripts
 									EditorGUILayout.Space();
 									EditorGUILayout.BeginVertical("helpbox");
 									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameLobby.MainMenu.CurrentModeAndMap"), new GUIContent("Current Mode & Map"));
-									//bottun to choose map
 									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameLobby.MainMenu.ChooseGameModeButton"), new GUIContent("Choose Mode & Map"));
-									//character change button
 									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameLobby.MainMenu.ChangeCharacter"), new GUIContent("Change Character"));
 									EditorGUILayout.Space();
 									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameLobby.MainMenu.PlayButton"), new GUIContent("Play"));
 									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameLobby.MainMenu.LoadoutButton"), new GUIContent("Open Loadout"));
 									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameLobby.MainMenu.AllRoomsButton"), new GUIContent("All Rooms"));
 									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameLobby.MainMenu.CreateRoomButton"), new GUIContent("Create Room"));
-                                    EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameLobby.MainMenu.CreditsButton"), new GUIContent("Credits"));
-                                    EditorGUILayout.Space();
-                                    EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameLobby.CreditsMenu.MainObject"), new GUIContent("Credits MainObject"));
-                                    EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameLobby.CreditsMenu.BackButton"), new GUIContent("Credits BackButton"));
-                                    EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameLobby.MainMenu.BGMAudioSource"), new GUIContent("BGM Audio Source"));
 									EditorGUILayout.EndVertical();
-
-									EditorGUILayout.Space();
-									EditorGUILayout.BeginVertical("helpbox");
-                                    EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameLobby.SettingsMenu.MainObject"), new GUIContent("Settings Menu"));
-                                    EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameLobby.SettingsMenu.BackButton"), new GUIContent("Settings Menu BackButton"));
-                                    EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameLobby.MainMenu.SettingsButton"), new GUIContent("Settings Button"));
-									EditorGUILayout.EndVertical();
-
+									
 
 									break;
 								
@@ -426,76 +412,40 @@ namespace GercStudio.USK.Scripts
 							switch (script.roomInspectorTabTop)
 							{
 								case 0:
-                                    script.roomInspectorTabDown = 3;
-                                    script.roomInspectorTabMid = 3;
+									script.roomInspectorTabDown = 3;
 									script.currentRoomInspectorTab = 0;
 									break;
 								case 1:
-                                    script.roomInspectorTabDown = 3;
-                                    script.roomInspectorTabMid = 3;
+									script.roomInspectorTabDown = 3;
 									script.currentRoomInspectorTab = 1;
 									break;
 								case 2:
-                                    script.roomInspectorTabDown = 3;
-                                    script.roomInspectorTabMid = 3;
+									script.roomInspectorTabDown = 3;
 									script.currentRoomInspectorTab = 2;
 									break;
 							}
 
-							script.roomInspectorTabMid = GUILayout.Toolbar(script.roomInspectorTabMid, new[] {"Pre-Match Menus", "Match Stats", "Death Screens"});
+							script.roomInspectorTabDown = GUILayout.Toolbar(script.roomInspectorTabDown, new[] {"Pre-Match Menus", "Match Stats", "Death Screens"});
 
-							switch (script.roomInspectorTabMid)
+							switch (script.roomInspectorTabDown)
 							{
 								case 0:
-                                    script.roomInspectorTabDown = 3;
-                                    script.roomInspectorTabTop = 3;
+									script.roomInspectorTabTop = 3;
 									script.currentRoomInspectorTab = 3;
 									break;
 								case 1:
-                                    script.roomInspectorTabDown = 3;
-                                    script.roomInspectorTabTop = 3;
+									script.roomInspectorTabTop = 3;
 									script.currentRoomInspectorTab = 4;
 									break;
 								case 2:
-                                    script.roomInspectorTabDown = 3;
-                                    script.roomInspectorTabTop = 3;
+									script.roomInspectorTabTop = 3;
 									script.currentRoomInspectorTab = 5;
 									break;
 							}
 
-                            script.roomInspectorTabDown = GUILayout.Toolbar(script.roomInspectorTabDown, new[] { "Loading Screen" });
-
-                            switch (script.roomInspectorTabDown)
-                            {
-                                case 0:
-                                    script.roomInspectorTabTop = 3;
-                                    script.roomInspectorTabMid = 3;
-                                    script.currentRoomInspectorTab = 6;
-                                    break;
-                            }
-
-                            
-
-                            switch (script.currentRoomInspectorTab)
+							switch (script.currentRoomInspectorTab)
 							{
-                                
-
-                                case 6:
-
-                                    EditorGUILayout.Space();
-                                    EditorGUILayout.HelpBox("The loading screen", MessageType.Info);
-                                    EditorGUILayout.Space();
-                                    EditorGUILayout.BeginVertical("helpbox");
-                                    EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.LoadingScreen.MainObject"), new GUIContent("Main Object"));
-
-                                    EditorGUILayout.Space();
-                                    EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.LoadingScreen.Status"), new GUIContent("Status"));
-                                    EditorGUILayout.EndVertical();
-
-                                    break;
-
-
-                                case 0:
+								case 0:
 									
 									EditorGUILayout.Space();
 									EditorGUILayout.HelpBox("This is the menu in which players are searched. It is the same for all modes.", MessageType.Info);
@@ -513,49 +463,6 @@ namespace GercStudio.USK.Scripts
 
 									EditorGUILayout.Space();
 									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.StartMenu.ExitButton"), new GUIContent("Exit Button"));
-
-									EditorGUILayout.Space();
-									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.StartMenu.StartButton"), new GUIContent("Start Button"));
-									
-									EditorGUILayout.Space();
-									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.StartMenu.ChooseMapButton"), new GUIContent("Choose Map Button"));
-
-									EditorGUILayout.Space();
-									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.StartMenu.MapsMenuRoom"), new GUIContent("Maps Menu Room"));
-
-									EditorGUILayout.Space();
-									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.StartMenu.SwitchButton"), new GUIContent("Switch Button"));
-
-									EditorGUILayout.Space();
-									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.StartMenu.ChangeButton"), new GUIContent("Change Button"));
-
-									EditorGUILayout.Space();
-									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.StartMenu.TeamList"), new GUIContent("Team List"));
-									
-									EditorGUILayout.Space();
-									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.StartMenu.TeamListContent"), new GUIContent("Team List Content"));
-									
-									EditorGUILayout.Space();
-									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.StartMenu.ChangeCharacter"), new GUIContent("Change Character Menu"));
-
-									EditorGUILayout.Space();
-									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.StartMenu.ExitCharacterButton"), new GUIContent("Exit Character Button"));
-
-									EditorGUILayout.Space();
-									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.StartMenu.LeftCharacterButton"), new GUIContent("Left Character Button"));
-
-									EditorGUILayout.Space();
-									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.StartMenu.RightCharacterButton"), new GUIContent("Right Character Button"));
-
-									EditorGUILayout.Space();
-									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.StartMenu.IconTypeShwon"), new GUIContent("Icon Type Shwon"));
-
-									EditorGUILayout.Space();
-									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.StartMenu.ExitButtonMapMenu"), new GUIContent("Exit Button Map Menu"));
-
-									EditorGUILayout.Space();
-									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.StartMenu.MapMenuContent"), new GUIContent("Map Menu Content"));
-
 									EditorGUILayout.EndVertical();
 
 									break;
@@ -698,8 +605,7 @@ namespace GercStudio.USK.Scripts
 									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.MatchStats.MatchTimer"), new GUIContent("Match Timer"));
 									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.MatchStats.TargetText"), new GUIContent("Match Target"));
 									EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.MatchStats.AddScorePopup"), new GUIContent("Add Score Popup"));
-                                    EditorGUILayout.PropertyField(serializedObject.FindProperty("MultiplayerGameRoom.MatchStats.TeamLOGO"), new GUIContent("Team LOGO"));
-                                    EditorGUILayout.EndVertical();
+									EditorGUILayout.EndVertical();
 									EditorGUILayout.Space();
 
 									EditorGUILayout.HelpBox("If the [Use Respawns] parameter is not active, the player won't be respawned. This mode calls 'Survival'." + "\n" +
@@ -933,15 +839,7 @@ namespace GercStudio.USK.Scripts
 							EditorGUILayout.PropertyField(serializedObject.FindProperty("CharacterUI.Health"), new GUIContent("Health"));
 							EditorGUILayout.PropertyField(serializedObject.FindProperty("CharacterUI.HealthBar"), new GUIContent("Health bar"));
 							EditorGUILayout.Space();
-							EditorGUILayout.PropertyField(serializedObject.FindProperty("CharacterUI.PickupHUD"), new GUIContent("Pick-up HUD"));
-							EditorGUILayout.Space();
-							EditorGUILayout.Space();
-							//
-							EditorGUILayout.PropertyField(serializedObject.FindProperty("CharacterUI.PickupEggHUD"), new GUIContent("Pick-up-egg HUD"));
-							EditorGUILayout.Space();
-							EditorGUILayout.PropertyField(serializedObject.FindProperty("CharacterUI.ShowEggNum"), new GUIContent("ShowEggNum"));
-							EditorGUILayout.Space();
-							//
+							EditorGUILayout.PropertyField(serializedObject.FindProperty("CharacterUI.PickupImage"), new GUIContent("Pick-up Image"));
 							EditorGUILayout.EndVertical();
 							EditorGUILayout.Space();
 							EditorGUILayout.LabelField("Blood Splatter", EditorStyles.boldLabel);

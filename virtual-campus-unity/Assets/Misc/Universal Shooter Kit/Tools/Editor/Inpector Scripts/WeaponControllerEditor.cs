@@ -591,14 +591,6 @@ namespace GercStudio.USK.Scripts
                                         EditorGUILayout.PropertyField(curAttackSerialized.FindPropertyRelative("FlashExplosion"), new GUIContent("Flash Effect"));
                                         
                                         EditorGUILayout.EndVertical();
-                                        //EditorGUILayout.EndVertical();
-
-                                        EditorGUILayout.Space();
-                                        EditorGUILayout.BeginVertical("HelpBox");
-                                        EditorGUILayout.HelpBox("Use it, if you need a Toxic Babe.", MessageType.Info);
-                                        EditorGUILayout.PropertyField(curAttackSerialized.FindPropertyRelative("isToxin"), new GUIContent("Toxic"));
-
-                                        EditorGUILayout.EndVertical();
                                         EditorGUILayout.EndVertical();
 
                                         break;

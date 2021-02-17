@@ -69,11 +69,7 @@ namespace GercStudio.USK.Scripts
 			public Text Health;
 			public Image HealthBar;
 			public RawImage WeaponAmmoImagePlaceholder;
-			public PickUpHUD PickupHUD;
-			//
-			public PickUpEggHUD PickupEggHUD;
-			public ShowEggNum ShowEggNum;
-			//
+			public RawImage PickupImage;
 			public RawImage bloodSplatter;
 			public List<RawImage> hitMarkers;
 
@@ -105,8 +101,6 @@ namespace GercStudio.USK.Scripts
 
 				if (bottomCrosshairPart)
 					bottomCrosshairPart.gameObject.SetActive(false);
-
-                //Debug.Log("disabled");
 			}
 
 			public void ManageCrosshairParts(WeaponsHelper.CrosshairType type)
@@ -206,13 +200,8 @@ namespace GercStudio.USK.Scripts
 				if (HealthBar)
 					HealthBar.gameObject.SetActive(false);
 
-				if (PickupHUD)
-					PickupHUD.gameObject.SetActive(false);
-
-				//
-				if (PickupEggHUD)
-					PickupEggHUD.gameObject.SetActive(false);
-				//
+				if (PickupImage)
+					PickupImage.gameObject.SetActive(false);
 
 				Inventory.MainObject.SetActive(false);
 			}
@@ -569,57 +558,6 @@ namespace GercStudio.USK.Scripts
 			}
 		}
 
-        [Serializable]
-        public class CreditsMenu
-        {
-            public GameObject MainObject;
-
-            public Button BackButton;
-
-            
-            public void DisableAll()
-            {
-
-
-                if (MainObject)
-                    MainObject.SetActive(false);
-            }
-
-            public void ActivateAll()
-            {
-
-
-                if (MainObject)
-                    MainObject.SetActive(true);
-            }
-        }
-
-		[Serializable]
-		public class SettingsMenu
-		{
-			public GameObject MainObject;
-
-			public Button BackButton;
-
-
-			public void DisableAll()
-			{
-
-
-				if (MainObject)
-					MainObject.SetActive(false);
-			}
-
-			public void ActivateAll()
-			{
-
-
-				if (MainObject)
-					MainObject.SetActive(true);
-			}
-		}
-
-
 		[Serializable]
 		public class LobbyMainUI
 		{
@@ -642,12 +580,6 @@ namespace GercStudio.USK.Scripts
 			public Button LoadoutButton;
 			public Button AllRoomsButton;
 			public Button CreateRoomButton;
-            public GameObject BGMAudioSource;
-
-            public Button CreditsButton;
-            public Button SettingsButton;
-
-
 
 			public void DisableAll()
 			{
@@ -832,7 +764,6 @@ namespace GercStudio.USK.Scripts
 			}
 		}
 
-		//````change character menu
 		[Serializable]
 		public class LobbyCharactersMenu
 		{

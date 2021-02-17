@@ -381,8 +381,6 @@ namespace GercStudio.USK.Scripts
 			public bool ApplyForce = true;
 			public bool FlashExplosion;
 
-            public bool isToxin;
-
 			public string AmmoType = "gun";
 		}
 
@@ -473,7 +471,7 @@ namespace GercStudio.USK.Scripts
 			Melee,
 			Grenade,
 			Minigun
-        }
+		}
 
 		public enum CrosshairType
 		{

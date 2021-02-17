@@ -102,7 +102,7 @@ namespace GercStudio.USK.Scripts
         private bool UIButtonAttack;
         private bool gamepadInput;
         private bool fistInstance;
-        public bool inMultiplayerLobby;
+        private bool inMultiplayerLobby;
         public bool activeAimByGamepadButton;
 
         private GameObject currentDropWeapon;
@@ -151,7 +151,7 @@ namespace GercStudio.USK.Scripts
                 fistInstance = true;
             }
             
-            //FindWeapon(true, true);
+            FindWeapon(true, true);
             
 
             if (!Controller.AdjustmentScene 
@@ -160,7 +160,6 @@ namespace GercStudio.USK.Scripts
 #endif                
                 )
                     DeactivateInventory();
-            FindWeapon(true, true);
         }
 
         void Update()
@@ -331,40 +330,6 @@ namespace GercStudio.USK.Scripts
                         Controller.UIManager.CharacterUI.WeaponAmmoImagePlaceholder.texture = FistIcon;
                 }
             }
-
-            //Drop egg
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-
-#if PHOTON_UNITY_NETWORKING
-                if (!Controller.GetComponent<PhotonView>().IsMine)
-                    return;
-#endif
-
-                if (gameObject.GetComponent<EggBag>().bag.Count > 0)
-                {
-
-                    if (!pickupEggCooldown)
-                    {
-                        return;
-                    }
-
-                    pickupEggCooldown = false;
-                    StartCoroutine(CoolDownEggPickUp());
-                    int countBeforeDrop = gameObject.GetComponent<EggBag>().bag.Count;
-                    gameObject.GetComponent<EggBag>().DropEgg();
-                    if (countBeforeDrop - 1 > 0)
-                    {
-                        //can still drop the eggs since some eggs remains in bag
-                        Controller.UIManager.CharacterUI.PickupEggHUD.UpdateHUD(1); //the parameter in UpdateHUD means dropping the eggs
-                    }
-                    else
-                    {
-                        Controller.UIManager.CharacterUI.PickupEggHUD.gameObject.SetActive(false);
-                    }
-                }
-            }
-              
         }
 
         void MeleeAttackTimeout()
@@ -797,126 +762,7 @@ namespace GercStudio.USK.Scripts
                 Controller.UIManager.CharacterUI.Inventory.WeaponsCount.text = slots[currentSlot].currentWeaponInSlot + 1 + "/" + slots[currentSlot].weaponSlotInGame.Count;
             }
         }
-
-        public void DropWeapon(int slot, bool getNewWeapon)
-        {
-            if (WeaponController.DropWeaponAudio)
-                GetComponent<AudioSource>().PlayOneShot(WeaponController.DropWeaponAudio);
-
-            Helper.ChangeLayersRecursively(WeaponController.transform, "Weapon");
-
-            WeaponController = null;
-            currentWeapon = null;
-
-            var curIndex = slots[slot].currentWeaponInSlot;
-
-            var curWeapon = slots[slot].weaponSlotInGame[curIndex];
-
-            curWeapon.weapon.GetComponent<WeaponController>().enabled = false;
-
-            if (!curWeapon.weapon.GetComponent<PickUp>())
-            {
-                var pickUpScript = curWeapon.weapon.AddComponent<PickUp>();
-                pickUpScript.enabled = true;
-                pickUpScript.PickUpType = PickUp.TypeOfPickUp.Weapon;
-                pickUpScript.distance = 10;
-                pickUpScript.Slots = slot;
-                pickUpScript.Method = PickUp.PickUpMethod.Raycast;
-
-                if (!Controller.isMultiplayerCharacter)
-                {
-                    if (pickUpScript.pickUpId == null)
-                    {
-                        pickUpScript.pickUpId = Helper.GenerateRandomString(20);
-                        DropIdMultiplayer = pickUpScript.pickUpId;
-                    }
-                }
-                else
-                {
-                    if (pickUpScript.pickUpId == null)
-                    {
-                        pickUpScript.pickUpId = DropIdMultiplayer;
-                    }
-                }
-            }
-
-            if (!Controller.isMultiplayerCharacter)
-            {
-                switch (Controller.TypeOfCamera)
-                {
-                    case CharacterHelper.CameraType.ThirdPerson:
-                        DropDirection = Controller.DirectionObject.forward * 5;
-                        break;
-                    case CharacterHelper.CameraType.FirstPerson:
-                        DropDirection = Controller.thisCamera.transform.forward * 5;
-                        break;
-                    case CharacterHelper.CameraType.TopDown:
-                        DropDirection = Controller.DirectionObject.forward * 5;
-                        break;
-                }
-            }
-
-            curWeapon.weapon.GetComponent<BoxCollider>().isTrigger = false;
-
-            curWeapon.weapon.transform.parent = null;
-
-            curWeapon.weapon.SetActive(true);
-
-            var rigidbody = curWeapon.weapon.GetComponent<Rigidbody>();
-
-            rigidbody.velocity = 0.01f * Vector3.forward;
-            rigidbody.isKinematic = false;
-            rigidbody.useGravity = true;
-
-            foreach (var kit in slots[slot].weaponSlotInGame[curIndex].WeaponAmmoKits)
-            {
-                ReserveAmmo.Add(kit);
-            }
-
-            //var id = slots[currentSlot].weaponsInInventory[curIndex].weapon.GetInstanceID();
-            slots[slot].weaponSlotInGame.Remove(curWeapon);
-
-            if (getNewWeapon)
-            {
-                if (slots[slot].weaponSlotInGame.Count > 0)
-                {
-                    if (CharacterHelper.FindWeapon(slots, slot, slots[slot].currentWeaponInSlot, true) != -1)
-                    {
-                        slots[slot].currentWeaponInSlot = CharacterHelper.FindWeapon(slots, slot, slots[slot].currentWeaponInSlot, true);
-
-                        if (slots[slot].weaponSlotInGame[slots[slot].currentWeaponInSlot].fistAttack) HandsOnly(false);
-                        else Switch(slot, false, false);
-                    }
-                    else
-                    {
-                        FindWeapon(true, false);
-                    }
-                }
-                else
-                {
-                    FindWeapon(true, false);
-                }
-            }
-            else
-            {
-                HandsOnly(false);
-            }
-
-            // ChoiceNewWeapon(curIndex, "up", id, false);
-
-            if (!Controller.isMultiplayerCharacter)
-            {
-#if PHOTON_UNITY_NETWORKING
-                if (Controller.CharacterSync)
-                    Controller.CharacterSync.DropWeapon(getNewWeapon);
-#endif
-
-                canDropWeapon = false;
-                StartCoroutine(DropTimeOut(curWeapon));
-            }
-
-        }
-
+        
         public void DropWeapon(bool getNewWeapon)
         {
 
@@ -927,7 +773,7 @@ namespace GercStudio.USK.Scripts
             if (WeaponController.DropWeaponAudio)
                 GetComponent<AudioSource>().PlayOneShot(WeaponController.DropWeaponAudio);
 
-            Helper.ChangeLayersRecursively(WeaponController.transform, "Weapon");
+            Helper.ChangeLayersRecursively(WeaponController.transform, "Default");
 
             WeaponController = null;
             currentWeapon = null;
@@ -1158,20 +1004,7 @@ namespace GercStudio.USK.Scripts
             }
             else if(hideAllWeapons)
             {
-                //return;
-                //Debug.Log(1);
-                //HandsOnly(sendToNetwork);
-                if (currentSlot < 0 || currentSlot > 7)
-                {
-                    Switch(0, false, sendToNetwork);
-                    hasWeaponChanged = false;
-                    return;
-                }
-
-                //Debug.Log(currentSlot);
-                Switch(currentSlot, false, sendToNetwork);
-                
-                hasWeaponChanged = false;
+               HandsOnly(sendToNetwork);
             }
         }
 
@@ -1186,7 +1019,6 @@ namespace GercStudio.USK.Scripts
 //                Controller.UIManager.CharacterUI.WeaponAmmo.gameObject.SetActive(false);
                     
             NullWeapons();
-
             
             Controller.anim.SetBool("NoWeapons", true);
                 
@@ -1208,7 +1040,6 @@ namespace GercStudio.USK.Scripts
                 
             hideAllWeapons = false;
             hasAnyWeapon = false;
-
         }
 
         void SetHandsAnimations()
@@ -1301,8 +1132,6 @@ namespace GercStudio.USK.Scripts
             {
                 hideAllWeapons = true;
                 hasWeaponChanged = false;
-                //hideAllWeapons = false;
-                //hasWeaponChanged = false;
             }
 
             if (!gamepadInput)
@@ -1538,7 +1367,7 @@ namespace GercStudio.USK.Scripts
             }
 
         }
-        /*
+        
         void OnTriggerEnter(Collider other)
         {
             if(other.GetComponent<PickUp>())
@@ -1556,311 +1385,6 @@ namespace GercStudio.USK.Scripts
                 }
             }
         }
-        */
-
-        void OnTriggerEnter(Collider other)
-        {
-
-#if PHOTON_UNITY_NETWORKING
-            if (Controller.GetComponent<PhotonView>())
-            {
-                if (!Controller.GetComponent<PhotonView>().IsMine)
-                    return;
-            }
-#endif
-
-            if (other.GetComponent<PickUp>())
-            {
-                
-                var pickUp = other.GetComponent<PickUp>();
-                if (pickUp.Method == PickUp.PickUpMethod.Collider && pickUp.enabled)
-                {
-                    //other.GetComponent<WeaponController>().enabled = true;
-                    Controller.UIManager.CharacterUI.PickupHUD.gameObject.SetActive(true);
-                    //Debug.Log("testing here 2");
-                    //other.GetComponent<WeaponController>().enabled = false;
-                }
-            }
-
-            if (other.GetComponent<PickedUpEgg>())
-            {
-                if (gameObject.GetComponent<EggBag>().bag.Count < gameObject.GetComponent<EggBag>().capacity)
-                {
-                    Controller.UIManager.CharacterUI.PickupEggHUD.batteryFullPrompt.gameObject.SetActive(false);
-                    Controller.UIManager.CharacterUI.PickupEggHUD.pickUpEggPrompt.gameObject.SetActive(true);
-                }
-                else
-                {
-                    Controller.UIManager.CharacterUI.PickupEggHUD.batteryFullPrompt.gameObject.SetActive(true);
-                    Controller.UIManager.CharacterUI.PickupEggHUD.pickUpEggPrompt.gameObject.SetActive(false);
-                }
-                Controller.UIManager.CharacterUI.PickupEggHUD.gameObject.SetActive(true);
-            }
-
-
-            //+++++++
-            /*
-            if (other.GetComponent<PickedUpEgg>())
-            {
-                Debug.Log("enter the egg area");
-                Controller.UIManager.CharacterUI.PickupEggHUD.gameObject.SetActive(true);
-            }
-            */
-            /*
-            if (other.GetComponent<Vault>())
-            {
-                Debug.Log("enter the vault");
-                if (gameObject.GetComponent<EggBag>().bag.Count > 0)
-                {
-                    Controller.UIManager.CharacterUI.VaultHUD.gameObject.SetActive(true);
-                }
-                else
-                {
-                    Controller.UIManager.CharacterUI.VaultHUD.gameObject.SetActive(false);
-                }
-            }
-            */
-
-
-        }
-        private void OnTriggerExit(Collider other)
-        {
-
-#if PHOTON_UNITY_NETWORKING
-            if (Controller.GetComponent<PhotonView>())
-            {
-                if (!Controller.GetComponent<PhotonView>().IsMine)
-                    return;
-            }
-#endif
-
-            if (other.GetComponent<PickUp>())
-            {
-                Controller.UIManager.CharacterUI.PickupHUD.gameObject.SetActive(false);
-            }
-            
-            if (other.GetComponent<PickedUpEgg>() || other.GetComponent<Vault>())
-            {
-                Controller.UIManager.CharacterUI.PickupEggHUD.gameObject.SetActive(false);
-            }
-
-        }
-
-        private bool pickupCooldown = true;
-        private bool pickupUpdate = true;
-        private bool pickupEggCooldown = true;
-        private bool pickupEggUpdate = true;
-        private bool vaultEggCooldown = true;
-        private bool vaultEggUpdate = true;
-
-
-        //
-        //
-        //
-        //
-        //
-        void OnTriggerStay(Collider other)
-        {
-
-#if PHOTON_UNITY_NETWORKING
-            if (Controller.GetComponent<PhotonView>())
-            {
-                if (!Controller.GetComponent<PhotonView>().IsMine)
-                    return;
-            }
-#endif
-
-            if (other.GetComponent<PickUp>())
-            {
-                if (!other.GetComponent<PickUp>().enabled) return;
-                var pickUp = other.GetComponent<PickUp>();
-                if (!Controller.UIManager.CharacterUI.PickupHUD.gameObject.activeSelf)
-                    Controller.UIManager.CharacterUI.PickupHUD.gameObject.SetActive(true);
-                if (pickUp.Method == PickUp.PickUpMethod.Collider && pickUp.enabled)
-                {
-                    if (pickupUpdate)
-                    {
-                        pickupUpdate = false;
-                        StartCoroutine(CoolDownPickUpUpdate());
-                        if (pickUp.Slots == 1)
-                        {
-                            if (slots[0].weaponSlotInGame.Count >= 2)
-                            {
-                                if (currentSlot != 0)
-                                {
-                                    //Switch(0, false, false);
-                                    Controller.UIManager.CharacterUI.PickupHUD.UpdateHUD(other.GetComponent<WeaponController>().WeaponImage, other.name,
-                                        slots[0].weaponSlotInGame[slots[0].currentWeaponInSlot].weapon.name);
-                                }
-                                else
-                                {
-                                    Controller.UIManager.CharacterUI.PickupHUD.UpdateHUD(other.GetComponent<WeaponController>().WeaponImage, other.name,
-                                        currentWeapon.name);
-                                }
-                            }
-                            else
-                            {
-                                Controller.UIManager.CharacterUI.PickupHUD.UpdateHUD(other.GetComponent<WeaponController>().WeaponImage, other.name);
-                            }
-                        }
-                        else if (pickUp.Slots == 2)
-                        {
-                            if (slots[1].weaponSlotInGame.Count >= 2)
-                            {
-                                if (currentSlot != 1)
-                                {
-                                    //Switch(0, false, false);
-                                    Controller.UIManager.CharacterUI.PickupHUD.UpdateHUD(other.GetComponent<WeaponController>().WeaponImage, other.name,
-                                        slots[1].weaponSlotInGame[slots[1].currentWeaponInSlot].weapon.name);
-                                }
-                                else
-                                {
-                                    Controller.UIManager.CharacterUI.PickupHUD.UpdateHUD(other.GetComponent<WeaponController>().WeaponImage, other.name,
-                                        currentWeapon.name);
-                                }
-                            }
-                            else
-                            {
-                                Controller.UIManager.CharacterUI.PickupHUD.UpdateHUD(other.GetComponent<WeaponController>().WeaponImage, other.name);
-                            }
-                        }
-                    }
-                    //Debug.Log(other);
-                    if (Input.GetKeyDown(Controller._gamepadCodes[8]) || Input.GetKey(Controller._keyboardCodes[8]) || pickUpUiButton ||
-                        Helper.CheckGamepadAxisButton(8, Controller._gamepadButtonsAxes, Controller.hasAxisButtonPressed, "GetKeyDown", Controller.projectSettings.AxisButtonValues[8]))
-                    {
-
-                        if (!pickupCooldown)
-                        {
-                            return;
-                        }
-                        pickupCooldown = false;
-                        StartCoroutine(CoolDownPickUp());
-
-
-                        if (pickUp.Slots == 1)
-                        {
-                            if (slots[0].weaponSlotInGame.Count >= 2)
-                            {
-                                DropWeapon(0, false);
-                            }
-                        }
-                        else if (pickUp.Slots == 2)
-                        {
-                            if (slots[1].weaponSlotInGame.Count >= 2)
-                            {
-                                DropWeapon(1, false);
-                            }
-                        }
-                        pickUp.PickUpObject(gameObject);
-                        currentPickUpId = pickUp.pickUpId;
-                        Controller.UIManager.CharacterUI.PickupHUD.gameObject.SetActive(false);
-
-//????????????????????
-#if PHOTON_UNITY_NETWORKING
-                        if (Controller.CharacterSync)
-                            Controller.CharacterSync.PickUp();
-#endif
-//????????????????????
-                    }
-
-                }
-            }
-
-            if (other.GetComponent<PickedUpEgg>())
-            {
-                if (!other.GetComponent<PickedUpEgg>().enabled) return;
-                var pickUpEgg = other.GetComponent<PickedUpEgg>();
-                if (pickUpEgg.enabled)
-                {
-                    //the egg bag is not full
-                    if (gameObject.GetComponent<EggBag>().capacity > gameObject.GetComponent<EggBag>().bag.Count)
-                    {
-                        if (pickupEggUpdate)
-                        {
-                            Controller.UIManager.CharacterUI.PickupEggHUD.UpdateHUD();
-                            pickupEggUpdate = false;
-                            StartCoroutine(CoolDownEggPickUpUpdate());
-                        }
-
-                        //if (Input.GetKeyDown(Controller._gamepadCodes[8]) || Input.GetKeyDown(Controller._keyboardCodes[8]) || pickUpUiButton ||
-                            //Helper.CheckGamepadAxisButton(8, Controller._gamepadButtonsAxes, Controller.hasAxisButtonPressed, "GetKeyDown", Controller.projectSettings.AxisButtonValues[8]))
-                        if(Input.GetKey(KeyCode.E))
-                        {
-                            //Debug.Log("KEY.E");
-                            if (!pickupEggCooldown)
-                            {
-                                return;
-                            }
-                            pickupEggCooldown = false;
-                            //Debug.Log("PICKED");
-                            StartCoroutine(CoolDownEggPickUp());
-                            gameObject.GetComponent<EggBag>().GetEgg(other.gameObject);
-                            Controller.UIManager.CharacterUI.PickupEggHUD.gameObject.SetActive(false);
-                        }
-                    }
-                    //the egg bag is full
-                    else
-                    {
-                        if (pickupEggUpdate)
-                        {
-                            Controller.UIManager.CharacterUI.PickupEggHUD.UPdateHUDFull();
-                            pickupEggUpdate = false;
-                            StartCoroutine(CoolDownEggPickUpUpdate());
-                        }
-                    }
-                }
-            }
-
-            if (other.GetComponent<Vault>())
-            {
-                if (GetComponent<EggBag>().bag.Count > 0)
-                {
-                    Controller.UIManager.CharacterUI.PickupEggHUD.UpdateHUD(1); //the parameter in UpdateHUD means dropping the eggs
-                }
-                
-            }
-
-        }
-
-        private IEnumerator CoolDownPickUpUpdate()
-        {
-            yield return new WaitForSeconds(0.1f);
-            pickupUpdate = true;
-        }
-
-        private IEnumerator CoolDownPickUp()
-        {
-            yield return new WaitForSeconds(1f);
-            pickupCooldown = true;
-        }
-
-        private IEnumerator CoolDownEggPickUpUpdate()
-        {
-            yield return new WaitForSeconds(0.1f);
-            pickupEggUpdate = true;
-        }
-
-        private IEnumerator CoolDownEggPickUp()
-        {
-            yield return new WaitForSeconds(0.5f);
-            pickupEggCooldown = true;
-        }
-
-        
-        private IEnumerator CoolDownVaultUpdate()
-        {
-            yield return new WaitForSeconds(0.1f);
-            vaultEggUpdate = true;
-        }
-
-        private IEnumerator CoolDownVaultPickUp()
-        {
-            yield return new WaitForSeconds(1f);
-            vaultEggCooldown = true;
-        }
-        
-
 
         public void NullWeapons()
         {
@@ -1876,7 +1400,6 @@ namespace GercStudio.USK.Scripts
 
         public void Switch(int slot, bool isGrenade, bool sendToNetwork)
         {
-
             StopCoroutine("TakeWeapon");
 
             NullWeapons();
@@ -2160,7 +1683,6 @@ namespace GercStudio.USK.Scripts
             else
             {
 #if PHOTON_UNITY_NETWORKING
-                /*
                 if (Controller.projectSettings)
                 {
                     for (var i = 0; i < Controller.projectSettings.weaponSlots.Count; i++)
@@ -2188,28 +1710,6 @@ namespace GercStudio.USK.Scripts
                             {
                                 WeaponsHelper.InstantiateWeapon(weaponSlot.weapon.gameObject, weaponSlot.slot, this, Controller);
                             }
-                        }
-                    }
-                }
-                */
-
-                for (var i = 0; i < 8; i++)
-                {
-                    foreach (var slot in slots[i].weaponSlotInInspector)
-                    {
-                        var weapon = slot.weapon;
-
-                        if (!weapon && !slot.fistAttack) continue;
-                        if (weapon && !weapon.GetComponent<WeaponController>()) continue;
-
-                        if (weapon)
-                        {
-                            WeaponsHelper.InstantiateWeapon(weapon, i, this, Controller);
-                        }
-                        else if (slot.fistAttack)
-                        {
-                            slots[i].weaponSlotInGame.Add(new CharacterHelper.Weapon { fistAttack = true });
-                            allWeaponsCount++;
                         }
                     }
                 }

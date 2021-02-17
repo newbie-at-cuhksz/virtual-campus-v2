@@ -31,7 +31,6 @@ namespace GercStudio.USK.Scripts
         [HideInInspector] public bool isEnemy;
         [HideInInspector] public bool isTracer;
         [HideInInspector] public bool isRocket;
-        [HideInInspector] public bool isToxin;
         [HideInInspector] public bool isGrenade;
         [HideInInspector] public bool stickOnObject;
         [HideInInspector] public bool ApplyForce;
@@ -234,7 +233,6 @@ namespace GercStudio.USK.Scripts
                     script.damage = damage;
                     script.owner = Owner;
                     script.ownerName = ownerName;
-                    //Debug.Log(ownerName);
                     script.applyForce = ApplyForce;
                     if (WeaponImage) script.weaponImage = WeaponImage;
                     script.instanceId = gameObject.GetInstanceID();
@@ -246,11 +244,6 @@ namespace GercStudio.USK.Scripts
                 {
                     if (!isRaycast && !isEnemy)
                         Destroy(OriginalCameraPosition.gameObject);
-                }
-
-                if (isToxin)
-                {
-                    _explosion.gameObject.GetComponent<ToxicZone>().Init(damage, ownerName, WeaponImage, ExplodeWhenTouchGround);
                 }
             }
             else

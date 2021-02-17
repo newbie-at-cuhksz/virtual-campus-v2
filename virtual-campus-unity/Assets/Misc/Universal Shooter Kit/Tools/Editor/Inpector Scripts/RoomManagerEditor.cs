@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEditorInternal;
-using UnityEngine.SceneManagement;
 
 namespace GercStudio.USK.Scripts
 {
@@ -21,10 +20,7 @@ namespace GercStudio.USK.Scripts
         private ReorderableList redSpawnList;
         private ReorderableList blueSpawnList;
         private ReorderableList hardPointsList;
-        private ReorderableList vaultsList;
-        private ReorderableList charactersList;
-
-        private ReorderableList levelsList;
+        
 
         public void Awake()
         {
@@ -150,35 +146,7 @@ namespace GercStudio.USK.Scripts
                 }
             };
 
-            vaultsList = new ReorderableList(serializedObject, serializedObject.FindProperty("Vaults"), true, true, true, true)
-            {
-                drawHeaderCallback = rect => { EditorGUI.LabelField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), "Vaults"); },
-
-                onAddCallback = items =>
-                {
-                    if (!Application.isPlaying)
-                    {
-                        script.Vaults.Add(null);
-                    }
-                },
-
-                onRemoveCallback = items =>
-                {
-                    if (!Application.isPlaying)
-                    {
-                        script.Vaults.RemoveAt(items.index);
-                    }
-                },
-
-                drawElementCallback = (rect, index, isActive, isFocused) =>
-                {
-                    script.Vaults[index] = (Vault)EditorGUI.ObjectField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), script.Vaults[index], typeof(Vault), true);
-                }
-            };
-
-
-
-
+            
             blueSpawnList = new ReorderableList(serializedObject, serializedObject.FindProperty("BlueTeamSpawnAreas"), false, true, true, true)
             {
                 drawHeaderCallback = rect => { EditorGUI.LabelField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), "For the 2nd Team"); },
@@ -241,71 +209,6 @@ namespace GercStudio.USK.Scripts
                 }
             };
 
-            levelsList = new ReorderableList(serializedObject, serializedObject.FindProperty("MapsFromLobby"), true, true, true, true)
-            {
-                drawHeaderCallback = rect =>
-                {
-                    EditorGUI.LabelField(new Rect(rect.x, rect.y, rect.width / 2, EditorGUIUtility.singleLineHeight), "Scene");
-
-                    EditorGUI.LabelField(new Rect(rect.x + rect.width / 2 + 10, rect.y, rect.width / 2 - 10, EditorGUIUtility.singleLineHeight), "Image");
-                },
-
-                onAddCallback = items =>
-                {
-                    if (!Application.isPlaying)
-                    {
-                        script.MapsFromLobby.Add(new PUNHelper.PhotonLevel());
-                    }
-                },
-
-                onRemoveCallback = items =>
-                {
-                    if (!Application.isPlaying)
-                    {
-                        script.MapsFromLobby.Remove(script.MapsFromLobby[items.index]);
-                    }
-                },
-
-
-                drawElementCallback = (rect, index, isActive, isFocused) =>
-                {
-                    //                   script.Levels[index].LevelName = EditorGUI.TextField(new Rect(rect.x, rect.y, rect.width / 2, EditorGUIUtility.singleLineHeight), script.Levels[index].LevelName);
-
-                    script.MapsFromLobby[index].Scene = (SceneAsset)EditorGUI.ObjectField(new Rect(rect.x, rect.y, rect.width / 2, EditorGUIUtility.singleLineHeight),
-                        script.MapsFromLobby[index].Scene, typeof(SceneAsset), false);
-
-                    script.MapsFromLobby[index].Image = (Texture)EditorGUI.ObjectField(new Rect(rect.x + rect.width / 2 + 10, rect.y, rect.width / 2 - 10, EditorGUIUtility.singleLineHeight),
-                        script.MapsFromLobby[index].Image, typeof(Texture), true);
-                }
-            };
-
-
-            //charactersList = new ReorderableList(serializedObject, serializedObject.FindProperty("Characters"), true, true, true, true)
-            //{
-            //    drawHeaderCallback = rect => { EditorGUI.LabelField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), "Character"); },
-
-            //    onAddCallback = items =>
-            //    {
-            //        if (!Application.isPlaying)
-            //        {
-            //            script.Characters.Add(null);
-            //        }
-            //    },
-
-            //    onRemoveCallback = items =>
-            //    {
-            //        if (!Application.isPlaying)
-            //        {
-            //            script.Characters.RemoveAt(items.index);
-            //        }
-            //    },
-
-            //    drawElementCallback = (rect, index, isActive, isFocused) =>
-            //    {
-            //        script.Characters[index] = (string) EditorGUI.ObjectField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), script.Characters[index], typeof(string), true);
-            //    }
-            //};
-
             EditorApplication.update += Update;
         }
 
@@ -318,14 +221,6 @@ namespace GercStudio.USK.Scripts
         {
             if (!Application.isPlaying)
             {
-                foreach (var level in script.MapsFromLobby)
-                {
-                    if (!level.Scene) continue;
-
-                    if (!string.Equals(level.Scene.name, level.Name, StringComparison.Ordinal))
-                        level.Name = level.Scene.name;
-                }
-
                 if (!script.UiManager)
                 {
                     script.UiManager = AssetDatabase.LoadAssetAtPath("Assets/Universal Shooter Kit/Tools/!Settings/UI Manager.prefab", typeof(UIManager)) as UIManager;
@@ -361,7 +256,7 @@ namespace GercStudio.USK.Scripts
             EditorGUI.BeginDisabledGroup(true);
 #endif
             
-            script.inspectorTab = GUILayout.Toolbar(script.inspectorTab, new[] {"Spawn Zones", "Capture Points", "Cameras", "Vaults", "MapsFromLobby", "Prefabs" });
+            script.inspectorTab = GUILayout.Toolbar(script.inspectorTab, new[] {"Spawn Zones", "Capture Points", "Cameras"});
 
             EditorGUILayout.Space();
             switch (script.inspectorTab)
@@ -425,67 +320,6 @@ namespace GercStudio.USK.Scripts
 
                     spectateCamerasList.DoLayoutList();
                     EditorGUILayout.EndVertical();
-                    EditorGUILayout.Space();
-                    break;
-
-                case 3:
-                    /*
-                    EditorGUILayout.LabelField("Vaults", EditorStyles.boldLabel);
-                    EditorGUILayout.Space();
-                    vaultsList.DoLayoutList();
-                    EditorGUILayout.EndVertical();
-                    EditorGUILayout.Space();
-                    */
-                    EditorGUILayout.Space();
-                    EditorGUILayout.LabelField("Vaults", EditorStyles.boldLabel);
-                    EditorGUILayout.BeginVertical("helpbox");
-                    EditorGUILayout.HelpBox("The vaults in the Robbery mode", MessageType.Info);
-                    EditorGUILayout.Space();
-                    vaultsList.DoLayoutList();
-                    EditorGUILayout.EndVertical();
-                    EditorGUILayout.Space();
-
-                    EditorGUILayout.BeginVertical();
-                    EditorGUILayout.PropertyField(serializedObject.FindProperty("eggTarget"));
-                    EditorGUILayout.EndVertical();
-                    break;
-
-                case 4:
-                    GUIStyle style = new GUIStyle(EditorStyles.helpBox) { richText = true, fontSize = 10 };
-
-
-                    EditorGUILayout.Space();
-                    levelsList.DoLayoutList();
-                    EditorGUILayout.Space();
-
-                    EditorGUILayout.LabelField("Make sure that all scenes are in the <b><color=blue>Build Settings</color></b> (including the Lobby scene).", style);
-
-                    if (GUILayout.Button("Add all scenes to the Build Settings"))
-                    {
-                        var editorBuildSettingsScenes = new List<EditorBuildSettingsScene>();
-
-                        editorBuildSettingsScenes.Add(new EditorBuildSettingsScene(SceneManager.GetActiveScene().path, true));
-
-                        foreach (var sceneAsset in script.MapsFromLobby)
-                        {
-                            if (!sceneAsset.Scene) continue;
-
-                            var scenePath = AssetDatabase.GetAssetPath(sceneAsset.Scene);
-
-                            if (!string.IsNullOrEmpty(scenePath))
-                                editorBuildSettingsScenes.Add(new EditorBuildSettingsScene(scenePath, true));
-                        }
-
-                        EditorBuildSettings.scenes = editorBuildSettingsScenes.ToArray();
-                        EditorWindow.GetWindow(Type.GetType("UnityEditor.BuildPlayerWindow,UnityEditor"));
-                    }
-                    break;
-
-                case 5:
-                    EditorGUILayout.Space();
-                    EditorGUILayout.PropertyField(serializedObject.FindProperty("Characters"));
-                    EditorGUILayout.Space();
-                    EditorGUILayout.PropertyField(serializedObject.FindProperty("playerIcon"));
                     EditorGUILayout.Space();
                     break;
             }

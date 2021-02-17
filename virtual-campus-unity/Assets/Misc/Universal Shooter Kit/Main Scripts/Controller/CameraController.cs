@@ -121,23 +121,11 @@ namespace GercStudio.USK.Scripts
 			}
 
 			Camera = GetComponent<Camera>();
-
-			Camera.cullingMask &= ~(1 << 15); //Layer Hidden = 15
-			Camera.cullingMask &= ~(1 << 16); //Layer Minimap = 16
-
-			Camera.renderingPath = RenderingPath.DeferredShading;
-
-			Camera.fieldOfView = 20;
-
+			
 			MainCamera = new GameObject("Camera").transform;
-            MainCamera.gameObject.AddComponent<Camera>().backgroundColor = new Color(0, 0, 0);
-			MainCamera.gameObject.GetComponent<Camera>().cullingMask = ~(1 << 15); //Layer Hidden = 15
-			MainCamera.gameObject.GetComponent<Camera>().cullingMask = ~(1 << 16); //Layer Minimap = 16
-			MainCamera.gameObject.GetComponent<Camera>().enabled = false;
-            //MainCamera.gameObject.GetComponent<AudioListener>().enabled = false;
-
-
-            LayerCamera = Helper.NewCamera("LayerCamera", transform, "CameraController").gameObject;
+			MainCamera.gameObject.AddComponent<Camera>().enabled = false;
+			
+			LayerCamera = Helper.NewCamera("LayerCamera", transform, "CameraController").gameObject;
 			LayerCamera.SetActive(false);
 			LayerCamera.hideFlags = HideFlags.HideInHierarchy;
 			
@@ -147,48 +135,7 @@ namespace GercStudio.USK.Scripts
 				Debug.Break();
 				return;
 			}
-            
-
-        }
-
-        public void AddAudioListener()
-        {
-
-            foreach (var audioListeners in GetComponentsInChildren<AudioListener>())
-            {
-                audioListeners.enabled = false;
-            }
-
-            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("AudioListener"))
-            {
-                Destroy(obj);
-            }
-
-            Transform player = null;
-            while (!player)
-            {
-                foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Player"))
-                {
-                    if (obj.layer == LayerMask.NameToLayer("Character"))
-                    {
-                        player = obj.transform;
-                    }
-                }
-            }
-            //Debug.Log(transform.parent.position.y);
-
-
-            GameObject audioListener = new GameObject();
-            audioListener.name = "Audio Listener";
-            audioListener.transform.position = new Vector3(0, -(transform.parent.position.y - player.position.y), 0);
-            audioListener.transform.localEulerAngles = Vector3.zero;
-            audioListener.AddComponent<AudioListener>();
-            audioListener.tag = "AudioListener";
-            var follow = audioListener.AddComponent<Follow>();
-            follow.target = transform.parent;
-            follow.yOffset = -(transform.parent.position.y - player.position.y);
-            //Debug.Log(follow.yOffset);
-        }
+		}
 
 		void Start()
 		{
@@ -225,9 +172,7 @@ namespace GercStudio.USK.Scripts
 			transform.position = new Vector3(0, 0, 0);
 			transform.rotation = Quaternion.Euler(0, 0, 0);
 
-            
-
-            body = Controller.BodyObjects.TopBody;
+			body = Controller.BodyObjects.TopBody;
 			BodyLookAt = new GameObject("BodyLookAt").transform;
 			BodyLookAt.hideFlags = HideFlags.HideInHierarchy;
 			
@@ -280,15 +225,7 @@ namespace GercStudio.USK.Scripts
 			}
 
 			Reset();
-
-            StartCoroutine(LateAddAudioListener());
-        }
-
-        IEnumerator LateAddAudioListener()
-        {
-            yield return new WaitForEndOfFrame();
-            AddAudioListener();
-        }
+		}
 
 		void Update()
 		{
@@ -481,12 +418,9 @@ namespace GercStudio.USK.Scripts
 			RaycastHit hit;
 
 			floorHeight = Physics.Raycast(Controller.BodyObjects.Hips.position, Vector3.down, out hit, 100, Helper.layerMask()) ? hit.point.y : Controller.transform.position.y;
-
-
-            //TOPDOWN-ANGLE
-            //desiredCameraPosition = CharacterHelper.CalculatePosition(mouseX, 10, Controller, CameraOffset.TopDownAngle - 10, floorHeight, "camera");
-            desiredCameraPosition = CharacterHelper.CalculatePosition(mouseX, 34, Controller, CameraOffset.TopDownAngle - 10, floorHeight, "camera");
-        }
+			
+			desiredCameraPosition = CharacterHelper.CalculatePosition(mouseX, 10, Controller, CameraOffset.TopDownAngle - 10, floorHeight, "camera");
+		}
 
 		void tpCalculateDesiredPosition()
 		{
@@ -1087,8 +1021,7 @@ namespace GercStudio.USK.Scripts
 				                  || Controller.WeaponManager.inventoryIsOpened || Controller.PlayerHealth <= 0;
 
 				
-				//Cursor.visible = cursorState;
-
+				Cursor.visible = cursorState;
 				
 				if (Controller.TypeOfCamera == CharacterHelper.CameraType.TopDown && Controller.CameraParameters.lockCamera)
 				{
@@ -1143,19 +1076,13 @@ namespace GercStudio.USK.Scripts
 
 						var gun = Controller.WeaponManager.WeaponController;
 
-
-
 						//weapons related conditions
 						var crosshairAdditionalState = !gun || gun && !gun.DetectObject && (Controller.TypeOfCamera != CharacterHelper.CameraType.TopDown && !gun.isReloadEnabled || Controller.TypeOfCamera == CharacterHelper.CameraType.TopDown) &&
 						                               (gun.Attacks[gun.currentAttack].AttackType == WeaponsHelper.TypeOfAttack.Grenade && !gun.isAimEnabled || gun.Attacks[gun.currentAttack].AttackType != WeaponsHelper.TypeOfAttack.Grenade) &&
 						                               (gun.Attacks[gun.currentAttack].AttackType == WeaponsHelper.TypeOfAttack.GrenadeLauncher && !gun.isAimEnabled || gun.Attacks[gun.currentAttack].AttackType != WeaponsHelper.TypeOfAttack.GrenadeLauncher);
 
-                        //crosshairAdditionalState = true;
 
-
-                        characterUI.crosshairMainObject.gameObject.SetActive(crosshairState && crosshairAdditionalState);
-
-
+						characterUI.crosshairMainObject.gameObject.SetActive(crosshairState && crosshairAdditionalState);
 
 						if (Controller.anim.GetBool("Attack"))
 						{
@@ -1280,12 +1207,8 @@ namespace GercStudio.USK.Scripts
 						//the pick-up icon adjustment
 						if (!Application.isMobilePlatform && !Controller.projectSettings.mobileDebug)
 						{
-                            if (Controller.UIManager.CharacterUI.PickupHUD)
-                            {
-                                //Controller.UIManager.CharacterUI.PickupHUD.gameObject.SetActive(Controller.WeaponManager.isPickUp);
-                                //Debug.Log(Controller.WeaponManager.isPickUp);
-
-                            }
+							if (Controller.UIManager.CharacterUI.PickupImage)
+								Controller.UIManager.CharacterUI.PickupImage.gameObject.SetActive(Controller.WeaponManager.isPickUp);
 						}
 						else
 						{
@@ -1299,8 +1222,8 @@ namespace GercStudio.USK.Scripts
 					{
 						characterUI.crosshairMainObject.gameObject.SetActive(false);
 
-						if (Controller.UIManager.CharacterUI.PickupHUD)
-							Controller.UIManager.CharacterUI.PickupHUD.gameObject.SetActive(false);
+						if (Controller.UIManager.CharacterUI.PickupImage)
+							Controller.UIManager.CharacterUI.PickupImage.gameObject.SetActive(false);
 
 						if (Controller.UIManager.uiButtons[11])
 							Controller.UIManager.uiButtons[11].gameObject.SetActive(false);
@@ -1354,9 +1277,6 @@ namespace GercStudio.USK.Scripts
 						AimCamera.gameObject.SetActive(false);
 				}
 			}
-
-			if (Controller.TypeOfCamera == CharacterHelper.CameraType.TopDown)
-				AimCamera.gameObject.SetActive(false);
 		}
 
 		public void SetSensitivity()

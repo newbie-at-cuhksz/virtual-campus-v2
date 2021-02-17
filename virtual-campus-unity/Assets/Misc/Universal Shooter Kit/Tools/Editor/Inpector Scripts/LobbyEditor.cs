@@ -474,8 +474,8 @@ namespace GercStudio.USK.Scripts
                         {
                             gameMode.matchTarget = EditorGUILayout.Popup("Match Target", gameMode.matchTarget, PUNHelper.MatchTargets.ToArray());
 
-                            //if (gameMode.matchTarget > 4)
-                                //gameMode.matchTarget = 4;
+                            if (gameMode.matchTarget > 3)
+                                gameMode.matchTarget = 3;
                         }
                         else
                         {
@@ -512,11 +512,6 @@ namespace GercStudio.USK.Scripts
                                 EditorGUILayout.PropertyField(curModeSerialized.FindPropertyRelative("targetPoints"), new GUIContent("Score Limit"));
                                 EditorGUILayout.PropertyField(curModeSerialized.FindPropertyRelative("captureScore"), new GUIContent("Score for capturing point"));
                                 EditorGUILayout.PropertyField(curModeSerialized.FindPropertyRelative("capturePointTimeout"), new GUIContent("Earn score every (sec)"));
-                                break;
-
-                            case 4:
-                                EditorGUILayout.Space();
-                                EditorGUILayout.PropertyField(curModeSerialized.FindPropertyRelative("targetEgg"), new GUIContent("Egg Limit"));
                                 break;
                         }
                     }

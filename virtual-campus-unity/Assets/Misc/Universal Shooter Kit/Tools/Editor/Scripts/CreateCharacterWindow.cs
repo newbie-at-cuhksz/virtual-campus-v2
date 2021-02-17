@@ -348,7 +348,6 @@ namespace GercStudio.USK.Scripts
                 var cameraController = camera.AddComponent<CameraController>();
 
                 cameraComponent.nearClipPlane = 0.01f;
-                camera.GetComponent<Camera>().cullingMask &= ~(1 << 15); // Layer 15 = Hidden
 
                 camera.transform.parent = CharacterModel.transform;
                 camera.transform.localPosition = new Vector3(0, 0, 0);

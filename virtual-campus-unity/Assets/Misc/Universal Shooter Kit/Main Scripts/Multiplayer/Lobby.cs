@@ -120,9 +120,7 @@ namespace GercStudio.USK.Scripts
 
         private void Awake()
         {
-
-            PlayerPrefs.SetString("SelectedWeapons", "9");
-
+            
 #if PHOTON_UNITY_NETWORKING
             if (UiManager)
             {
@@ -219,13 +217,10 @@ namespace GercStudio.USK.Scripts
             if (currentUIManager.MultiplayerGameLobby.MainMenu.PlayButton) currentUIManager.MultiplayerGameLobby.MainMenu.PlayButton.onClick.AddListener(RandomRoomClick);
             if (currentUIManager.MultiplayerGameLobby.MainMenu.AllRoomsButton) currentUIManager.MultiplayerGameLobby.MainMenu.AllRoomsButton.onClick.AddListener(delegate { OpenMenu("allRooms"); });
             if (currentUIManager.MultiplayerGameLobby.MainMenu.CreateRoomButton) currentUIManager.MultiplayerGameLobby.MainMenu.CreateRoomButton.onClick.AddListener(delegate { OpenMenu("createGame"); });
-            if (currentUIManager.MultiplayerGameLobby.MainMenu.CreditsButton) currentUIManager.MultiplayerGameLobby.MainMenu.CreditsButton.onClick.AddListener(delegate { OpenMenu("creditsMenu"); });
-            if (currentUIManager.MultiplayerGameLobby.MainMenu.SettingsButton) currentUIManager.MultiplayerGameLobby.MainMenu.SettingsButton.onClick.AddListener(delegate { OpenMenu("settingsMenu"); });
             if (currentUIManager.MultiplayerGameLobby.MainMenu.ChooseGameModeButton) currentUIManager.MultiplayerGameLobby.MainMenu.ChooseGameModeButton.onClick.AddListener(delegate { OpenMenu("gameModes"); });
             if (currentUIManager.MultiplayerGameLobby.MainMenu.Nickname) currentUIManager.MultiplayerGameLobby.MainMenu.Nickname.onValueChanged.AddListener(SetName);
             if (currentUIManager.MultiplayerGameLobby.MainMenu.LoadoutButton) currentUIManager.MultiplayerGameLobby.MainMenu.LoadoutButton.onClick.AddListener(delegate { OpenMenu("loadout"); });
             if (currentUIManager.MultiplayerGameLobby.MainMenu.ChangeAvatarButton) currentUIManager.MultiplayerGameLobby.MainMenu.ChangeAvatarButton.onClick.AddListener(delegate { OpenMenu("avatars"); });
-
             if (currentUIManager.MultiplayerGameLobby.MainMenu.ChangeCharacter) currentUIManager.MultiplayerGameLobby.MainMenu.ChangeCharacter.onClick.AddListener(delegate { OpenMenu("characters"); });
 
             if (currentUIManager.MultiplayerGameLobby.CreateRoomMenu.CreateButton) currentUIManager.MultiplayerGameLobby.CreateRoomMenu.CreateButton.onClick.AddListener(CreateRoomClick);
@@ -242,11 +237,7 @@ namespace GercStudio.USK.Scripts
             if (currentUIManager.MultiplayerGameLobby.LoadoutMenu.EquipButton) currentUIManager.MultiplayerGameLobby.LoadoutMenu.EquipButton.onClick.AddListener(Equip);
 
             if (currentUIManager.MultiplayerGameLobby.AvatarsMenu.BackButton) currentUIManager.MultiplayerGameLobby.AvatarsMenu.BackButton.onClick.AddListener(delegate { OpenMenu("mainMenu"); });
-
-            if (currentUIManager.MultiplayerGameLobby.CreditsMenu.BackButton) currentUIManager.MultiplayerGameLobby.CreditsMenu.BackButton.onClick.AddListener(delegate { OpenMenu("mainMenu"); });
-            if (currentUIManager.MultiplayerGameLobby.SettingsMenu.BackButton) currentUIManager.MultiplayerGameLobby.SettingsMenu.BackButton.onClick.AddListener(delegate { OpenMenu("mainMenu");
-                                                                                currentUIManager.MultiplayerGameLobby.SettingsMenu.DisableAll(); });
-
+            
             if (currentUIManager.MultiplayerGameLobby.CharactersMenu.BackButton) currentUIManager.MultiplayerGameLobby.CharactersMenu.BackButton.onClick.AddListener(delegate { OpenMenu("mainMenu"); });
             if (currentUIManager.MultiplayerGameLobby.CharactersMenu.UpButton) currentUIManager.MultiplayerGameLobby.CharactersMenu.UpButton.onClick.AddListener(delegate { ChangeCharacter("+"); });
             if (currentUIManager.MultiplayerGameLobby.CharactersMenu.DownButton) currentUIManager.MultiplayerGameLobby.CharactersMenu.DownButton.onClick.AddListener(delegate { ChangeCharacter("-"); });
@@ -369,13 +360,9 @@ namespace GercStudio.USK.Scripts
                         placeholder.Button.onClick.AddListener(delegate { SetAvatar(i1); });
                 }
             }
-
-            if (!PlayerPrefs.HasKey("CurrentCharacter"))
-            {
+            
+            if(!PlayerPrefs.HasKey("CurrentCharacter"))
                 PlayerPrefs.SetInt("CurrentCharacter", 0);
-                PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable { { "tttype", 0} });
-                //PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable { { "tttypeup", 0 } });
-            }
             
             if(!PlayerPrefs.HasKey("GameModeIndex"))
                 PlayerPrefs.SetInt("GameModeIndex", 0);
@@ -457,19 +444,9 @@ namespace GercStudio.USK.Scripts
             {
                 if (!PhotonNetwork.IsConnected)
                 {
-                    //Debug.Log("Try connect");
                     PhotonNetwork.ConnectUsingSettings();
                 }
             }
-        }
-
-        public void FixedUpdate()
-        {
-            if (!PhotonNetwork.IsConnected)
-            {
-                PhotonNetwork.ConnectUsingSettings();
-            }
-            isConnected = PhotonNetwork.IsConnected;
         }
 
         private void Update()
@@ -505,7 +482,6 @@ namespace GercStudio.USK.Scripts
 //            }
 //        }
 
-        //set up character instance
         void SetPlayer(int index)
         {
             if (!Characters[index]) return;
@@ -514,13 +490,6 @@ namespace GercStudio.USK.Scripts
                 
             PlayerPrefs.SetString("CharacterPrefabName", Characters[CharacterIndex].name);
             PlayerPrefs.SetInt("CurrentCharacter", CharacterIndex);
-            PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable { { "tttype", CharacterIndex } });
-            //PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable { { "tttypeup", 0} });
-            //print("loading " + Characters[CharacterIndex].name);
-            //for(int i = 0;i <6; i++)
-            //{
-            //    print("!!!! iterating names: " + Characters[i].name);
-            //}
 
             if (CharacterSpawnPoint)
             {
@@ -529,7 +498,6 @@ namespace GercStudio.USK.Scripts
 
                 if (Characters[CharacterIndex])
                 {
-                    //instantiate the players
                     CurrentCharacter = Instantiate(Characters[CharacterIndex].gameObject, CharacterSpawnPoint.transform.position, CharacterSpawnPoint.transform.rotation);
                     CurrentCharacter.GetComponent<Animator>().runtimeAnimatorController = characterAnimatorController;
                 }
@@ -569,7 +537,7 @@ namespace GercStudio.USK.Scripts
             customValues.Add("gn", roomName);
             
             // time before match started
-            customValues.Add("st", 3);
+            customValues.Add("st", 15);
 
             customValues.Add("m", Maps.Count > 0 ? MapIndex : 1);
 
@@ -581,17 +549,8 @@ namespace GercStudio.USK.Scripts
             if(!GameModes[GameModeIndex].Teams && GameModes[GameModeIndex].matchTarget == 3)
                 GameModes[GameModeIndex].matchTarget = 1;
 
-            if (GameModes[GameModeIndex].CanRespawn)
-            {
-                if (GameModes[GameModeIndex].matchTarget == 4)
-                    GameModes[GameModeIndex].matchTarget = 5;
-            }
-
-
             switch (GameModes[GameModeIndex].matchTarget)
             {
-                
-
                 case 0:
                     customValues.Add("tar", PUNHelper.MatchTarget.WithoutTarget);
                     customValues.Add("tv", 0);
@@ -613,18 +572,9 @@ namespace GercStudio.USK.Scripts
                     customValues.Add("tv", GameModes[GameModeIndex].targetPoints);
                     customValues.Add("tl", GameModes[GameModeIndex].TimeLimit ? GameModes[GameModeIndex].targetTime : 0);
                     break;
-
-
                 case 4:
                     customValues.Add("tar", PUNHelper.MatchTarget.Survive);
                     customValues.Add("tv", 0);
-                    customValues.Add("tl", GameModes[GameModeIndex].TimeLimit ? GameModes[GameModeIndex].targetTime : 0);
-                    break;
-
-
-                case 5:
-                    customValues.Add("tar", PUNHelper.MatchTarget.Robbery);
-                    customValues.Add("tv", GameModes[GameModeIndex].targetEgg);
                     customValues.Add("tl", GameModes[GameModeIndex].TimeLimit ? GameModes[GameModeIndex].targetTime : 0);
                     break;
             }
@@ -1086,8 +1036,6 @@ namespace GercStudio.USK.Scripts
             }
         }
 
-
-        //```` load sub menu
         void OpenMenu(string type)
         {
             currentUIManager.HideAllMultiplayerLobbyUI();
@@ -1135,18 +1083,6 @@ namespace GercStudio.USK.Scripts
                     
                     currentCameraPositions = MainMenuPositions;
                     currentUIManager.MultiplayerGameLobby.MainMenu.ActivateAll(isConnected);
-                    break;
-
-                case "creditsMenu":
-
-                    currentUIManager.MultiplayerGameLobby.CreditsMenu.ActivateAll();
-
-                    break;
-
-                case "settingsMenu":
-
-                    currentUIManager.MultiplayerGameLobby.SettingsMenu.ActivateAll();
-
                     break;
             }
         }
@@ -1299,7 +1235,6 @@ namespace GercStudio.USK.Scripts
             
             var room = PhotonNetwork.CurrentRoom;
 
-            //assign members using pointer
             if ((bool) room.CustomProperties["ut"])
             {
                 if ((int) room.CustomProperties["rc"] > (int) room.CustomProperties["bc"])
@@ -1337,29 +1272,6 @@ namespace GercStudio.USK.Scripts
                             room.SetCustomProperties(new Hashtable {{"bc", count + 1}});
                             break;
                     }
-                }
-
-                //set the player prefabs according to their team numbers
-                int playerType;
-
-                if (PlayerPrefs.HasKey("CurrentCharacter")){
-                    playerType = PlayerPrefs.GetInt("CurrentCharacter") % 3;
-                }
-                else
-                {
-                    playerType = 0;
-                }
-
-                if((PUNHelper.Teams) player.CustomProperties["pt"] == PUNHelper.Teams.Blue)
-                {
-                    //PlayerPrefs.SetInt("CurrentCharacter", playerPrefabNum);
-                    SetPlayer(playerType);
-                    //print("blue prefabs"+ playerType.ToString());
-                }
-                else{
-                    //PlayerPrefs.SetInt("CurrentCharacter", playerPrefabNum+3);
-                    SetPlayer(playerType + 3);
-                    //print("red prefabs"+(playerType + 3).ToString());
                 }
             }
             else
@@ -1461,12 +1373,10 @@ namespace GercStudio.USK.Scripts
         {
             while (true)
             {
-                yield return new WaitForSeconds(3);
+                yield return new WaitForSeconds(10);
 
                 if (Helper.GetHtmlFromUri(checkConnectionServer) != "")
                 {
-                    Debug.Log(Helper.GetHtmlFromUri(checkConnectionServer));
-
                     if (currentUIManager.MultiplayerGameLobby.MainMenu.ConnectionStatus)
                         currentUIManager.MultiplayerGameLobby.MainMenu.ConnectionStatus.text = "Disconnected from Server";
 
@@ -1510,14 +1420,10 @@ namespace GercStudio.USK.Scripts
                 }
             }
 
-            //initialize the players' information (team number)
             PlayerManager();
 
-            //load new scene
-            //PhotonNetwork.LoadLevel(Maps[(int) PhotonNetwork.CurrentRoom.CustomProperties["m"]].Name);
-            PhotonNetwork.LoadLevel("WaitingRoom");
-            PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable { { "loadStatus", 0 } });
-            print("loading map "+ Maps[(int)PhotonNetwork.CurrentRoom.CustomProperties["m"]].Name);
+
+            PhotonNetwork.LoadLevel(Maps[(int) PhotonNetwork.CurrentRoom.CustomProperties["m"]].Name);
         }
 
         public override void OnJoinRoomFailed(short returnCode, string message)

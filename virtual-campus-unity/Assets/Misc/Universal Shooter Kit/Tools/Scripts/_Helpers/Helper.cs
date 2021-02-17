@@ -71,7 +71,7 @@ namespace GercStudio.USK.Scripts
         
         public static int layerMask()
         {
-            var layerMask = ~ (LayerMask.GetMask("Character") | LayerMask.GetMask("Grass") | LayerMask.GetMask("Head") | LayerMask.GetMask("Objective") | LayerMask.GetMask("Weapon"));
+            var layerMask = ~ (LayerMask.GetMask("Character") | LayerMask.GetMask("Grass") | LayerMask.GetMask("Head"));
             return layerMask;
         }
         

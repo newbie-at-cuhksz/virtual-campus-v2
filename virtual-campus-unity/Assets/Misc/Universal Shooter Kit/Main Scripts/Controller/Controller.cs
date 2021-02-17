@@ -14,1382 +14,1355 @@ using UnityEngine.UI;
 
 namespace GercStudio.USK.Scripts
 {
-    [RequireComponent(typeof(Animator))]
-    public class Controller : MonoBehaviour
-    {
-        public CharacterController CharacterController;
-        public InventoryManager WeaponManager;
-        public Controller OriginalScript;
-        public CharacterSync CharacterSync;
-        public UIManager UIManager;
-
-        public PUNHelper.Teams MyTeam;
-        public PUNHelper.CanKillOthers CanKillOthers;
-
-        public CharacterHelper.CameraType TypeOfCamera;
-        public CharacterHelper.CameraParameters CameraParameters;
-
-        public CharacterHelper.MovementType MovementType = CharacterHelper.MovementType.FastAndAccurate;
-
-        public Animator anim;
-
-        public RuntimeAnimatorController characterAnimatorController;
-
-        public AudioSource FeetAudioSource;
-
-        public Helper.AnimationClipOverrides ClipOverrides;
-
-        public CharacterHelper.CharacterOffset CharacterOffset;
-
-        public CharacterHelper.Speeds FPSpeed;
-        public CharacterHelper.Speeds TPSpeed;
-        public CharacterHelper.Speeds TDSpeed;
-
-        [Range(0.1f, 2)] public float TPspeedOffset = 1;
-
-        [Range(1, 1000)] public float PlayerHealth = 100;
-        public float PlayerHealthPercent = 100;
-
-        [Range(0, 50)] public float CrouchIdleNoise;
-        [Range(0, 50)] public float CrouchMovementNoise;
-        [Range(0, 50)] public float SprintMovementNoise;
-        [Range(0, 50)] public float MovementNoise;
-        [Range(0, 50)] public float IdleNoise;
-        [Range(0, 50)] public float JumpNoise;
-
-        public float bodyRotationUpLimit_y;
-        public float bodyRotationDownLimit_y;
-        public float bodyRotationUpLimit_x;
-        public float bodyRotationDownLimit_x;
-        public float defaultHeight = -1;
-        public float pressButtonTimeout;
-        public float changeCameraTypeTimeout;
-        public float currentCharacterControllerCenter;
-        public float speedDevider = 1;
-        public float headMultiplier = 1;
-        public float bodyMultiplier = 1;
-        public float handsMultiplier = 1;
-        public float legsMultiplier = 1;
-
-        public int characterTag;
-
-        public float noiseRadius;
-        public float CurrentSpeed;
-        [Range(0.1f, 1)] public float CrouchHeight = 0.5f;
-
-        public float defaultCharacterCenter;
-        public float middleAngleX;
-
-        #region InspectorParameters
-
-        public int TDSpeedInspectorTab;
-        public int TPSpeedInspectorTab;
-        public int moveInspectorTab;
-        public int inspectorTabTop;
-        public int inspectorTabDown;
-        public int currentInspectorTab;
-        public int otherSettingsInspectorTab;
-        public int inspectorSettingsTab;
-        public int cameraInspectorTab;
-
-        public string curName;
-
-        public bool delete;
-        public bool rename;
-        public bool renameError;
-
-        #endregion
-
-        public bool bodyLimit;
-        public bool smoothWeapons = true;
-        public bool oneShotOneKill;
-        public bool ActiveCharacter;
-        public bool isMultiplayerCharacter;
-        public bool multiplayerCrouch;
-        public bool activeJump = true;
-        public bool activeCrouch = true;
-        public bool changeCameraType;
-        public bool isPause;
-        public bool DebugMode;
-        public bool[] hasAxisButtonPressed = new bool[18];
-        public bool AdjustmentScene;
-        public bool SmoothCameraWhenMoving = false;
-        public bool CameraFollowCharacter = true;
-        public bool hasMoveButtonPressed;
-        public bool tdModeLikeTp = true; //TP-TD
-        public bool onNavMesh;
-        public bool inGrass;
-
-        public CharacterHelper.BodyObjects BodyObjects = new CharacterHelper.BodyObjects();
-        public IKHelper.FeetIKVariables IKVariables;
-
-        public List<Transform> BodyParts = new List<Transform> { null, null, null, null, null, null, null, null, null, null, null };
-        public Transform DirectionObject;
-        public Transform ColliderToObjectsDetection;
-
-        public GameObject thisCamera;
-
-        public SphereCollider noiseCollider;
-
-        public CameraController CameraController;
-
-        public List<Texture> BloodHoles = new List<Texture> { null };
-
-        public Image PlayerHealthBar;
-        public Image PlayerHealthBarBackground;
-
-        public Texture2D KilledWeaponImage;
-
-        public enum Direction
-        {
-            Forward,
-            Backward,
-            Left,
-            Right,
-            Stationary,
-            ForwardLeft,
-            ForwardRight,
-            BackwardLeft,
-            BackwardRight
-        }
-
-        public Direction MoveDirection;
-
-        public Vector3 directionVector;
-        public Vector3 MoveVector;
-        public Vector3 BodyLocalEulerAngles;
-
-        public Quaternion RotationAngle;
-        public Quaternion CurrentRotation;
-
-        public AnimatorOverrideController newController;
-
-        public ProjectSettings projectSettings;
-
-        public KeyCode[] _keyboardCodes = new KeyCode[20];
-        public KeyCode[] _gamepadCodes = new KeyCode[18];
-
-        public string[] _gamepadAxes = new string[5];
-        public string[] _gamepadButtonsAxes = new string[18];
-
-        public List<HitMarker> hitMarkers;
-
-        public string KillerName;
-        public string CharacterName;
-
-        private RaycastHit distanceInfo;
-        private RaycastHit heightInfo;
-
-        private Transform bodylooks;
-
-        private bool isObstacle;
-        private bool CanMove;
-        private bool wasRunningActiveBeforeJump;
-        public bool isSprint;
-        public bool isJump;
-        public bool isCrouch;
-        private bool deactivateCrouch;
-        private bool activateCrouch;
-        private bool isCeiling;
-        private bool leftStepSound;
-        private bool rightStepSound;
-        private bool instantiateRagdoll;
-
-        // steps for jumping
-        private bool startJumping;
-        private bool flyingUp;
-        private bool flyingDown;
-
-        private bool crouchTimeOut = true;
-        private bool setDefaultDistance;
-        private bool onGround;
-        private bool firstTake = true;
-        private bool meleeDamage;
-
-        private bool clickMoveButton;
-        private float defaultDistance;
-        public float SmoothIKSwitch = 1;
-        private float BodyHeight;
-        private float JumpPosition;
-
-        private float hipsAngleX;
-        private float spineAngleX;
-        public float headHeight = -1;
-        public float currentGravity;
-        private float defaultGravity;
-        private float newJumpHeight;
-        private float healthPercent;
-        private float checkOnNavMeshTimer;
-
-        private float angleBetweenCharacterAndCamera;
-
-        private int touchId = -1;
-        public int currentAnimatorLayer;
-
-        private Vector3 CheckCollisionVector;
-
-        private Vector2 MobileMoveStickDirection;
-        private Vector2 MobileTouchjPointA, MobileTouchjPointB;
-
-        private RaycastHit HeightInfo;
-
-        private bool clickButton;
-        public bool isCharacterInLobby;
-
-        private void OnAnimatorMove()
-        {
-            if (isCharacterInLobby) return;
-
-            if (TypeOfCamera == CharacterHelper.CameraType.FirstPerson) return;
-
-            switch (MovementType)
-            {
-                case CharacterHelper.MovementType.FastAndAccurate:
-                    {
-                        anim.SetFloat("Speed Devider", 1 * TPspeedOffset / speedDevider);
-
-                        switch (TypeOfCamera)
-                        {
-                            case CharacterHelper.CameraType.ThirdPerson:
-                                if (!isJump && !anim.GetBool("Aim"))
-                                    transform.position += anim.deltaPosition * TPspeedOffset / speedDevider;
-                                break;
-                            case CharacterHelper.CameraType.TopDown:
-                                break;
-                        }
-
-
-                        if (TypeOfCamera != CharacterHelper.CameraType.TopDown && !isJump && !anim.GetBool("Aim"))
-                        {
-                            transform.rotation = anim.rootRotation;
-                        }
-
-                        break;
-                    }
-                case CharacterHelper.MovementType.Realistic:
-
-                    //					anim.SetFloat("Speed Devider", 1 / speedDevider);
-                    //					
-                    //					transform.position += anim.deltaPosition / speedDevider;
-                    //					
-                    //					if(TypeOfCamera != CharacterHelper.CameraType.TopDown || TypeOfCamera == CharacterHelper.CameraType.TopDown && !CameraParameters.LockCamera)
-                    //						transform.rotation = anim.rootRotation;
-
-                    break;
-            }
-        }
-
-        private void Awake()
-        {
-            if (FindObjectOfType<Lobby>())
-            {
-                isCharacterInLobby = true;
-                return;
-            }
-
-            /*
-            gameObject.layer = LayerMask.NameToLayer("Character");
-
-            foreach (Transform tran in GetComponentsInChildren<Transform>())
-            {
-                tran.gameObject.layer = LayerMask.NameToLayer("Character");
-            }
-            */
-
-            if (FindObjectOfType<GameManager>())
-            {
-                UIManager = FindObjectOfType<GameManager>().CurrentUIManager;
-                CanKillOthers = PUNHelper.CanKillOthers.Everyone;
-
-                if (PlayerHealthBarBackground)
-                    PlayerHealthBarBackground.gameObject.SetActive(false);
-
-                if (PlayerHealthBar)
-                    PlayerHealthBar.gameObject.SetActive(false);
-            }
-            else if (FindObjectOfType<RoomManager>())
-            {
-                UIManager = FindObjectOfType<RoomManager>().currentUIManager;
-            }
+	[RequireComponent(typeof(Animator))]
+	public class Controller : MonoBehaviour
+	{
+		public CharacterController CharacterController;
+		public InventoryManager WeaponManager;
+		public Controller OriginalScript;
+		public CharacterSync CharacterSync;
+		public UIManager UIManager;
+		
+		public PUNHelper.Teams MyTeam;
+		public PUNHelper.CanKillOthers CanKillOthers;
+
+		public CharacterHelper.CameraType TypeOfCamera;
+		public CharacterHelper.CameraParameters CameraParameters;
+
+		public CharacterHelper.MovementType MovementType = CharacterHelper.MovementType.FastAndAccurate;
+		
+		public Animator anim;
+
+		public RuntimeAnimatorController characterAnimatorController;
+		
+		public AudioSource FeetAudioSource;
+
+		public Helper.AnimationClipOverrides ClipOverrides;
+
+		public CharacterHelper.CharacterOffset CharacterOffset;
+
+		public CharacterHelper.Speeds FPSpeed;
+		public CharacterHelper.Speeds TPSpeed;
+		public CharacterHelper.Speeds TDSpeed;
+
+		[Range(0.1f, 2)]public float TPspeedOffset = 1;
+
+		[Range(1, 1000)] public float PlayerHealth = 100;
+		public float PlayerHealthPercent = 100;
+
+		[Range(0,50)] public float CrouchIdleNoise;
+		[Range(0,50)] public float CrouchMovementNoise;
+		[Range(0,50)] public float SprintMovementNoise;
+		[Range(0,50)] public float MovementNoise;
+		[Range(0,50)] public float IdleNoise;
+		[Range(0,50)] public float JumpNoise;
+		
+		public float bodyRotationUpLimit_y;
+		public float bodyRotationDownLimit_y;
+		public float bodyRotationUpLimit_x;
+		public float bodyRotationDownLimit_x;
+		public float defaultHeight = -1;
+		public float pressButtonTimeout;
+		public float changeCameraTypeTimeout;
+		public float currentCharacterControllerCenter;
+		public float speedDevider = 1;
+		public float headMultiplier = 1;
+		public float bodyMultiplier = 1;
+		public float handsMultiplier = 1;
+		public float legsMultiplier = 1;
+		
+		public int characterTag;
+
+		public float noiseRadius;
+		public float CurrentSpeed;
+		[Range(0.1f, 1)] public float CrouchHeight = 0.5f;
+
+		public float defaultCharacterCenter;
+		public float middleAngleX;
+		
+		#region InspectorParameters
+		
+		public int TDSpeedInspectorTab;
+		public int TPSpeedInspectorTab;
+		public int moveInspectorTab;
+		public int inspectorTabTop;
+		public int inspectorTabDown;
+		public int currentInspectorTab;
+		public int otherSettingsInspectorTab;
+		public int inspectorSettingsTab;
+		public int cameraInspectorTab;
+		
+		public string curName;
+
+		public bool delete;
+		public bool rename;
+		public bool renameError;
+		
+		#endregion
+
+		public bool bodyLimit;
+		public bool smoothWeapons = true;
+		public bool oneShotOneKill;
+		public bool ActiveCharacter;
+		public bool isMultiplayerCharacter;
+		public bool multiplayerCrouch;
+		public bool activeJump = true;
+		public bool activeCrouch = true;
+		public bool changeCameraType;
+		public bool isPause;
+		public bool DebugMode;
+		public bool[] hasAxisButtonPressed = new bool[18];
+		public bool AdjustmentScene;
+		public bool SmoothCameraWhenMoving = true;
+		public bool CameraFollowCharacter = true;
+		public bool hasMoveButtonPressed;
+		public bool tdModeLikeTp;
+		public bool onNavMesh;
+		public bool inGrass;
+		
+		public CharacterHelper.BodyObjects BodyObjects = new CharacterHelper.BodyObjects();
+		public IKHelper.FeetIKVariables IKVariables;
+
+		public List<Transform> BodyParts = new List<Transform> {null, null, null, null, null, null, null, null, null, null, null};
+		public Transform DirectionObject;
+		public Transform ColliderToObjectsDetection;
+
+		public GameObject thisCamera;
+		
+		public SphereCollider noiseCollider;
+
+		public CameraController CameraController;
+		
+		public List<Texture> BloodHoles = new List<Texture>{null};
+
+		public Image PlayerHealthBar;
+		public Image PlayerHealthBarBackground;
+
+		public Texture2D KilledWeaponImage;
+
+		public enum Direction
+		{
+			Forward,
+			Backward,
+			Left,
+			Right,
+			Stationary,
+			ForwardLeft,
+			ForwardRight,
+			BackwardLeft,
+			BackwardRight
+		}
+
+		public Direction MoveDirection;
+
+		public Vector3 directionVector;
+		public Vector3 MoveVector;
+		public Vector3 BodyLocalEulerAngles;
+
+		public Quaternion RotationAngle;
+		public Quaternion CurrentRotation;
+		
+		public AnimatorOverrideController newController;
+
+		public ProjectSettings projectSettings;
+
+		public KeyCode[] _keyboardCodes = new KeyCode[20];
+		public KeyCode[] _gamepadCodes = new KeyCode[18];
+		
+		public string[] _gamepadAxes = new string[5];
+		public string[] _gamepadButtonsAxes = new string[18];
+
+		public List<HitMarker> hitMarkers;
+		
+		public string KillerName;
+		public string CharacterName;
+		
+		private RaycastHit distanceInfo;
+		private RaycastHit heightInfo;
+
+		private Transform bodylooks;
+
+		private bool isObstacle;
+		private bool CanMove;
+		private bool wasRunningActiveBeforeJump;
+		public bool isSprint;
+		public bool isJump;
+		public bool isCrouch;
+		private bool deactivateCrouch;
+		private bool activateCrouch;
+		private bool isCeiling;
+		private bool leftStepSound;
+		private bool rightStepSound;
+		private bool instantiateRagdoll;
+
+		// steps for jumping
+		private bool startJumping;
+		private bool flyingUp;
+		private bool flyingDown;
+
+		private bool crouchTimeOut = true;
+		private bool setDefaultDistance;
+		private bool onGround;
+		private bool firstTake = true;
+		private bool meleeDamage;
+
+		private bool clickMoveButton;
+		private float defaultDistance;
+		public float SmoothIKSwitch = 1;
+		private float BodyHeight;
+		private float JumpPosition;
+		
+		private float hipsAngleX;
+		private float spineAngleX;
+		public float headHeight = -1;
+		public float currentGravity;
+		private float defaultGravity;
+		private float newJumpHeight;
+		private float healthPercent;
+		private float checkOnNavMeshTimer;
+		
+		private float angleBetweenCharacterAndCamera;
+
+		private int touchId = -1;
+		public int currentAnimatorLayer;
+
+		private Vector3 CheckCollisionVector;
+
+		private Vector2 MobileMoveStickDirection;
+		private Vector2 MobileTouchjPointA, MobileTouchjPointB;
+
+		private RaycastHit HeightInfo;
+
+		private bool clickButton;
+		public bool isCharacterInLobby;
+		
+		private void OnAnimatorMove()
+		{
+			if(isCharacterInLobby) return;
+			
+			if (TypeOfCamera == CharacterHelper.CameraType.FirstPerson) return;
+
+			switch (MovementType)
+			{
+				case CharacterHelper.MovementType.FastAndAccurate:
+				{
+					anim.SetFloat("Speed Devider", 1 * TPspeedOffset / speedDevider);
+					
+					switch (TypeOfCamera)
+					{
+						case CharacterHelper.CameraType.ThirdPerson:
+							if(!isJump && !anim.GetBool("Aim"))
+								transform.position += anim.deltaPosition * TPspeedOffset / speedDevider;
+							break;
+						case CharacterHelper.CameraType.TopDown:
+							break;
+					}
+
+
+					if (TypeOfCamera != CharacterHelper.CameraType.TopDown && !isJump && !anim.GetBool("Aim"))
+					{
+						transform.rotation = anim.rootRotation;
+					}
+
+					break;
+				}
+				case CharacterHelper.MovementType.Realistic:
+					
+//					anim.SetFloat("Speed Devider", 1 / speedDevider);
+//					
+//					transform.position += anim.deltaPosition / speedDevider;
+//					
+//					if(TypeOfCamera != CharacterHelper.CameraType.TopDown || TypeOfCamera == CharacterHelper.CameraType.TopDown && !CameraParameters.LockCamera)
+//						transform.rotation = anim.rootRotation;
+					
+					break;
+			}
+		}
+
+		private void Awake()
+		{
+			if (FindObjectOfType<Lobby>())
+			{
+				isCharacterInLobby = true;
+				return;
+			}
+			
+			if (FindObjectOfType<GameManager>())
+			{
+				UIManager = FindObjectOfType<GameManager>().CurrentUIManager;
+				CanKillOthers = PUNHelper.CanKillOthers.Everyone;
+				
+				if(PlayerHealthBarBackground)
+					PlayerHealthBarBackground.gameObject.SetActive(false);
+				
+				if(PlayerHealthBar)
+					PlayerHealthBar.gameObject.SetActive(false);
+			}
+			else if (FindObjectOfType<RoomManager>())
+			{
+				UIManager = FindObjectOfType<RoomManager>().currentUIManager;
+			}
 #if UNITY_EDITOR
-            else if (FindObjectOfType<Adjustment>())
-            {
-                UIManager = FindObjectOfType<Adjustment>().UIManager;
-            }
+			else if (FindObjectOfType<Adjustment>())
+			{
+				UIManager = FindObjectOfType<Adjustment>().UIManager;
+			}
 #endif
-            else
-            {
-                Debug.LogError("UI Manager was not be loaded.");
-                Debug.Break();
-            }
-
-            WeaponManager = gameObject.GetComponent<InventoryManager>();
-
-            anim = gameObject.GetComponent<Animator>();
-
-            if (!projectSettings)
-            {
-                Debug.LogError("<color=red>Missing component</color> [Project Settings]. Please reimport this kit.");
-                Debug.Break();
-            }
-
-            if (!WeaponManager)
-            {
-                Debug.LogWarning("<color=yellow>Missing Component</color> [Weapon Manager] script. Please, add it.");
-                Debug.Break();
-            }
-
-            if (!CharacterController)
-            {
-                CharacterController = gameObject.AddComponent<CharacterController>();
-                //				Debug.LogWarning("<color=yellow>Missing Component</color> [Character Controller]. Please, add it.");
-                //				Debug.Break();
-            }
-
-            if (!gameObject.GetComponent<NavMeshObstacle>())
-            {
-                var script = gameObject.AddComponent<NavMeshObstacle>();
-                script.shape = NavMeshObstacleShape.Capsule;
-                script.carving = true;
-            }
-
-            if (!anim)
-            {
-                Debug.LogWarning("<color=yellow>Missing Component</color> [Animator]. Please, add it.");
-                Debug.Break();
-            }
-        }
-
-        void Start()
-        {
-            Helper.ManageBodyColliders(BodyParts, this);
-
-            ColliderToObjectsDetection = new GameObject("ColliderToCheckObjects").transform;
-            ColliderToObjectsDetection.parent = BodyObjects.TopBody;
-            ColliderToObjectsDetection.hideFlags = HideFlags.HideInHierarchy;
-        }
-
-        void OnEnable()
-        {
-            if (isCharacterInLobby) return;
-
-            StopAllCoroutines();
-
-            WeaponManager.pressInventoryButton = projectSettings.PressInventoryButton;
-
-            if (firstTake)
-            {
-                //tdModeLikeTp = false;
-
-                if (CameraParameters.activeFP && TypeOfCamera == CharacterHelper.CameraType.FirstPerson) TypeOfCamera = CharacterHelper.CameraType.FirstPerson;
-                else if (CameraParameters.activeTP && TypeOfCamera == CharacterHelper.CameraType.ThirdPerson)
-                {
-                    TypeOfCamera = CharacterHelper.CameraType.ThirdPerson;
-                }
-
-                else if (CameraParameters.activeTD && TypeOfCamera == CharacterHelper.CameraType.TopDown)
-                {
-                    if (CameraParameters.alwaysTDAim || CameraParameters.lockCamera)
-                        TypeOfCamera = CharacterHelper.CameraType.TopDown;
-                    else
-                    {
-                        TypeOfCamera = CharacterHelper.CameraType.ThirdPerson;
-                        tdModeLikeTp = true;
-                    }
-                }
-                else if (CameraParameters.activeFP) TypeOfCamera = CharacterHelper.CameraType.FirstPerson;
-                else if (CameraParameters.activeTD)
-                {
-                    if (CameraParameters.alwaysTDAim || CameraParameters.lockCamera)
-                        TypeOfCamera = CharacterHelper.CameraType.TopDown;
-                    else
-                    {
-                        TypeOfCamera = CharacterHelper.CameraType.ThirdPerson;
-                        tdModeLikeTp = true;
-                    }
-                }
-                else if (CameraParameters.activeTP) TypeOfCamera = CharacterHelper.CameraType.ThirdPerson;
-                else
-                {
-                    //Debug.LogError("Please select any active camera view.", gameObject);
-                    //Debug.Break();
-                }
-
-                healthPercent = PlayerHealth;
-
-                if ((Application.isMobilePlatform || projectSettings.mobileDebug) && !UIManager.UIButtonsMainObject)
-                {
-                    UIManager.UIButtonsMainObject = Helper.NewCanvas("UI Buttons MainObject", new Vector2(1920, 1080), UIManager.transform).gameObject;
-
-                    for (var i = 0; i < 17; i++)
-                    {
-                        UIManager.uiButtons[i] = Instantiate(projectSettings.uiButtons[i], UIManager.UIButtonsMainObject.transform);
-                    }
-
-                    Destroy(UIManager.uiButtons[15].GetComponent<Button>());
-                    Destroy(UIManager.uiButtons[16].GetComponent<Button>());
-
-                    UIManager.moveStick = UIManager.uiButtons[16].gameObject;
-                    UIManager.moveStickOutline = UIManager.uiButtons[15].gameObject;
-
-                    UIManager.cameraStickOutline = Instantiate(UIManager.uiButtons[15].gameObject, UIManager.UIButtonsMainObject.transform, true);
-                    UIManager.cameraStick = Instantiate(UIManager.uiButtons[16].gameObject, UIManager.UIButtonsMainObject.transform, true);
-
-                    UIManager.cameraStick.GetComponent<RectTransform>().anchoredPosition = UIManager.moveStick.GetComponent<RectTransform>().anchoredPosition;
-                    UIManager.cameraStickOutline.GetComponent<RectTransform>().anchoredPosition = UIManager.moveStickOutline.GetComponent<RectTransform>().anchoredPosition;
-
-                    Helper.AddButtonsEvents(UIManager.uiButtons, WeaponManager, this);
-
-                    var gameManager = FindObjectOfType<GameManager>();
-
-                    if (gameManager)
-                    {
-                        if (UIManager.uiButtons[9])
-                        {
-                            UIManager.uiButtons[9].onClick.AddListener(delegate { gameManager.Pause(true); });
-                        }
-
-                        if (UIManager.uiButtons[12])
-                        {
-                            UIManager.uiButtons[12].onClick.AddListener(gameManager.SwitchCharacter);
-                        }
-                    }
-
-                    UIHelper.ManageUIButtons(this, WeaponManager, UIManager, CharacterSync);
-                }
-
-                firstTake = false;
-            }
-            else
-            {
-                PlayerHealth = healthPercent;
-            }
-
-            for (var i = 0; i < 20; i++)
-            {
-                Helper.ConvertKeyCodes(ref _keyboardCodes[i], projectSettings.KeyBoardCodes[i]);
-            }
-
-            for (var i = 0; i < 18; i++)
-            {
-                Helper.ConvertGamepadCodes(ref _gamepadCodes[i], projectSettings.GamepadCodes[i]);
-            }
-
-            for (var i = 0; i < 18; i++)
-            {
-                Helper.ConvertAxes(ref _gamepadButtonsAxes[i], projectSettings.GamepadCodes[i]);
-            }
-
-            for (var i = 0; i < 5; i++)
-            {
-                Helper.ConvertAxes(ref _gamepadAxes[i], projectSettings.GamepadAxes[i]);
-            }
-
-            MoveVector = Vector3.zero;
-
-            anim.Rebind();
-
-            anim.runtimeAnimatorController = characterAnimatorController;
-
-            newController = new AnimatorOverrideController(anim.runtimeAnimatorController);
-            anim.runtimeAnimatorController = newController;
-            ClipOverrides = new Helper.AnimationClipOverrides(newController.overridesCount);
-            newController.GetOverrides(ClipOverrides);
-
-            if (DirectionObject)
-            {
-                DirectionObject.localEulerAngles = CharacterOffset.directionObjRotation;
-            }
-            else
-            {
-                Debug.LogError("<color=yellow>Missing component</color>: [Direction Object]. Please create your character again.");
-                Debug.Break();
-            }
-
-            if (!thisCamera || !CameraController)
-            {
-                var foundObjects = FindObjectsOfType<CameraController>();
-                foreach (var camera in foundObjects)
-                {
-                    if (camera.transform.parent == transform)
-                    {
-                        CameraController = camera.GetComponent<CameraController>();
-                        thisCamera = CameraController.gameObject;
-                    }
-                }
-            }
-
-            if (thisCamera)
-            {
-                thisCamera.SetActive(true);
-            }
-            else if (!thisCamera || !CameraController)
-            {
-                Debug.LogError("<Color=red>Missing component</color> [This camera] in Controller Script", gameObject);
-                Debug.Break();
-            }
-
-            StartCoroutine("SetDefaultHeight");
-
-            if (FeetAudioSource)
-                FeetAudioSource.hideFlags = HideFlags.HideInHierarchy;
-
-            defaultGravity = Physics.gravity.y;
-            currentGravity = defaultGravity;
-
-            deactivateCrouch = true;
-
-            var center = CharacterController.center;
-            center = new Vector3(center.x, -CharacterOffset.CharacterHeight, center.z);
-            CharacterController.center = center;
-            defaultCharacterCenter = -CharacterOffset.CharacterHeight;
-
-            CharacterController.skinWidth = 0.01f;
-            CharacterController.height = 1;
-            //			CharacterController.radius = 0.22f;
-
-            if (!noiseCollider)
-                Helper.CreateNoiseCollider(transform, this);
-
-            if (isMultiplayerCharacter)
-            {
-                CameraController.SetAnimVariables();
-                return;
-            }
-
-            MovementType = CharacterHelper.MovementType.FastAndAccurate;
-
-            Helper.ChangeLayersRecursively(transform, "Character");
-
-            Input.simulateMouseWithTouches = false;
-
-            if (CameraController)
-            {
-                CameraController.maxMouseAbsolute = middleAngleX + CameraParameters.fpXLimitMax;
-                CameraController.minMouseAbsolute = middleAngleX + CameraParameters.fpXLimitMin;
-            }
-
-            gameObject.tag = "Player";
-
-            //GetComponent<AudioListener>().enabled = true;
-        }
-
-
-        void Update()
-        {
-            if (isCharacterInLobby) return;
-
-            /*
-            Vector2 mouseDirection = Input.mousePosition;
-            mouseDirection -= new Vector2(Screen.width / 2, Screen.height / 2);
-            Vector3 lookDirection = new Vector3(mouseDirection.x, 0, mouseDirection.y);
-            transform.LookAt(transform.position + lookDirection);
-            */
-
-            noiseCollider.radius = noiseRadius;
-
-            GetDamageInBodyColliders();
-
-            if (isMultiplayerCharacter || !ActiveCharacter)
-                return;
-
-            CheckHealth();
-
-            currentCharacterControllerCenter = CharacterController.center.y;
-
-            if (TypeOfCamera != CharacterHelper.CameraType.TopDown)
-                anim.SetFloat("CameraAngle", Helper.AngleBetween(transform.forward, thisCamera.transform.forward));
-            else
-            {
-                anim.SetFloat("CameraAngle", Helper.AngleBetween(transform.forward, !CameraParameters.lockCamera ? thisCamera.transform.forward :
-                    CameraController.BodyLookAt.position - transform.position));
-            }
-
-            changeCameraTypeTimeout += Time.deltaTime;
-
-            if (!AdjustmentScene)
-            {
-                if (projectSettings.ButtonsActivityStatuses[11] && (Input.GetKeyDown(_gamepadCodes[11]) || Input.GetKeyDown(_keyboardCodes[11]) || Helper.CheckGamepadAxisButton(11, _gamepadButtonsAxes, hasAxisButtonPressed, "GetKeyDown", projectSettings.AxisButtonValues[11])))
-                    ChangeCameraType();
-            }
-            else
-            {
-                if (Input.GetKeyDown(KeyCode.C))
-                    ChangeCameraType();
-            }
-
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                if (!isPause && !isJump && !anim.GetBool("Pause") && (!WeaponManager.WeaponController || !WeaponManager.WeaponController.isReloadEnabled))
-                {
-                    if (TypeOfCamera == CharacterHelper.CameraType.TopDown || TypeOfCamera == CharacterHelper.CameraType.ThirdPerson && tdModeLikeTp)
-                    {
-                        CharacterHelper.ChangeTDMode(this);
-                        CameraController.ReloadParameters();
-
-                        if (WeaponManager.WeaponController)
-                            WeaponsHelper.SetWeaponPositions(WeaponManager.WeaponController, true, DirectionObject);
+			else
+			{
+				Debug.LogError("UI Manager was not be loaded.");
+				Debug.Break();
+			}
+			
+			WeaponManager = gameObject.GetComponent<InventoryManager>();
+
+			anim = gameObject.GetComponent<Animator>();
+
+			if (!projectSettings)
+			{
+				Debug.LogError("<color=red>Missing component</color> [Project Settings]. Please reimport this kit.");
+				Debug.Break();
+			}
+			
+			if (!WeaponManager)
+			{
+				Debug.LogWarning("<color=yellow>Missing Component</color> [Weapon Manager] script. Please, add it.");
+				Debug.Break();
+			}
+
+			if (!CharacterController)
+			{
+				CharacterController = gameObject.AddComponent<CharacterController>();
+//				Debug.LogWarning("<color=yellow>Missing Component</color> [Character Controller]. Please, add it.");
+//				Debug.Break();
+			}
+			
+			if (!gameObject.GetComponent<NavMeshObstacle>())
+			{
+				var script = gameObject.AddComponent<NavMeshObstacle>();
+				script.shape = NavMeshObstacleShape.Capsule;
+				script.carving = true;
+			}
+
+			if (!anim)
+			{
+				Debug.LogWarning("<color=yellow>Missing Component</color> [Animator]. Please, add it.");
+				Debug.Break();
+			}
+		}
+
+		void Start()
+		{
+			Helper.ManageBodyColliders(BodyParts, this);
+
+			ColliderToObjectsDetection = new GameObject("ColliderToCheckObjects").transform;
+			ColliderToObjectsDetection.parent = BodyObjects.TopBody;
+			ColliderToObjectsDetection.hideFlags = HideFlags.HideInHierarchy;
+		}
+
+		void OnEnable()
+		{
+			if(isCharacterInLobby) return;
+
+			StopAllCoroutines();
+
+			WeaponManager.pressInventoryButton = projectSettings.PressInventoryButton;
+
+			if (firstTake)
+			{
+				tdModeLikeTp = false;
+				
+				if (CameraParameters.activeFP && TypeOfCamera == CharacterHelper.CameraType.FirstPerson) TypeOfCamera = CharacterHelper.CameraType.FirstPerson;
+				else if (CameraParameters.activeTP && TypeOfCamera == CharacterHelper.CameraType.ThirdPerson)
+				{
+					TypeOfCamera = CharacterHelper.CameraType.ThirdPerson;
+				}
+				
+				else if (CameraParameters.activeTD && TypeOfCamera == CharacterHelper.CameraType.TopDown)
+				{
+					if(CameraParameters.alwaysTDAim || CameraParameters.lockCamera)
+						TypeOfCamera = CharacterHelper.CameraType.TopDown;
+					else
+					{
+						TypeOfCamera = CharacterHelper.CameraType.ThirdPerson;
+						tdModeLikeTp = true;
+					}
+				}
+				else if (CameraParameters.activeFP) TypeOfCamera = CharacterHelper.CameraType.FirstPerson;
+				else if (CameraParameters.activeTD)
+				{
+					if(CameraParameters.alwaysTDAim || CameraParameters.lockCamera)
+						TypeOfCamera = CharacterHelper.CameraType.TopDown;
+					else
+					{
+						TypeOfCamera = CharacterHelper.CameraType.ThirdPerson;
+						tdModeLikeTp = true;
+					}
+				}
+				else if (CameraParameters.activeTP) TypeOfCamera = CharacterHelper.CameraType.ThirdPerson;
+				else
+				{
+					Debug.LogError("Please select any active camera view.", gameObject);
+					Debug.Break();
+				}
+
+				healthPercent = PlayerHealth;
+				
+				if ((Application.isMobilePlatform || projectSettings.mobileDebug) && !UIManager.UIButtonsMainObject)
+				{
+					UIManager.UIButtonsMainObject = Helper.NewCanvas("UI Buttons MainObject", new Vector2(1920, 1080), UIManager.transform).gameObject;
+
+					for (var i = 0; i < 17; i++)
+					{
+						UIManager.uiButtons[i] = Instantiate(projectSettings.uiButtons[i], UIManager.UIButtonsMainObject.transform);
+					}
+
+					Destroy(UIManager.uiButtons[15].GetComponent<Button>());
+					Destroy(UIManager.uiButtons[16].GetComponent<Button>());
+
+					UIManager.moveStick = UIManager.uiButtons[16].gameObject;
+					UIManager.moveStickOutline = UIManager.uiButtons[15].gameObject;
+
+					UIManager.cameraStickOutline = Instantiate(UIManager.uiButtons[15].gameObject, UIManager.UIButtonsMainObject.transform, true);
+					UIManager.cameraStick = Instantiate(UIManager.uiButtons[16].gameObject, UIManager.UIButtonsMainObject.transform, true);
+
+					UIManager.cameraStick.GetComponent<RectTransform>().anchoredPosition = UIManager.moveStick.GetComponent<RectTransform>().anchoredPosition;
+					UIManager.cameraStickOutline.GetComponent<RectTransform>().anchoredPosition = UIManager.moveStickOutline.GetComponent<RectTransform>().anchoredPosition;
+
+					Helper.AddButtonsEvents(UIManager.uiButtons, WeaponManager, this);
+
+					var gameManager = FindObjectOfType<GameManager>();
+
+					if (gameManager)
+					{
+						if (UIManager.uiButtons[9])
+						{
+							UIManager.uiButtons[9].onClick.AddListener(delegate { gameManager.Pause(true); });
+						}
+
+						if (UIManager.uiButtons[12])
+						{
+							UIManager.uiButtons[12].onClick.AddListener(gameManager.SwitchCharacter);
+						}
+					}
+
+					UIHelper.ManageUIButtons(this, WeaponManager, UIManager, CharacterSync);
+				}
+				
+				firstTake = false;
+			}
+			else
+			{
+				PlayerHealth = healthPercent;
+			}
+			
+			for (var i = 0; i < 20; i++)
+			{
+				Helper.ConvertKeyCodes(ref _keyboardCodes[i], projectSettings.KeyBoardCodes[i]);
+			}
+
+			for (var i = 0; i < 18; i++)
+			{
+				Helper.ConvertGamepadCodes(ref _gamepadCodes[i], projectSettings.GamepadCodes[i]);
+			}
+			
+			for (var i = 0; i < 18; i++)
+			{
+				Helper.ConvertAxes(ref _gamepadButtonsAxes[i], projectSettings.GamepadCodes[i]);
+			}
+			
+			for (var i = 0; i < 5; i++)
+			{
+				Helper.ConvertAxes(ref _gamepadAxes[i], projectSettings.GamepadAxes[i]);
+			}
+
+			MoveVector = Vector3.zero;
+
+			anim.Rebind();
+
+			anim.runtimeAnimatorController = characterAnimatorController;
+
+			newController = new AnimatorOverrideController(anim.runtimeAnimatorController);
+			anim.runtimeAnimatorController = newController;
+			ClipOverrides = new Helper.AnimationClipOverrides(newController.overridesCount);
+			newController.GetOverrides(ClipOverrides);
+
+			if (DirectionObject)
+			{
+				DirectionObject.localEulerAngles = CharacterOffset.directionObjRotation;
+			}
+			else
+			{
+				Debug.LogError("<color=yellow>Missing component</color>: [Direction Object]. Please create your character again.");
+				Debug.Break();
+			}
+
+			if (!thisCamera || !CameraController)
+			{
+				var foundObjects = FindObjectsOfType<CameraController>();
+				foreach (var camera in foundObjects)
+				{
+					if (camera.transform.parent == transform)
+					{
+						CameraController = camera.GetComponent<CameraController>();
+						thisCamera = CameraController.gameObject;
+					}
+				}
+			}
+
+			if (thisCamera)
+			{
+				thisCamera.SetActive(true);
+			}
+			else if (!thisCamera || !CameraController)
+			{
+				Debug.LogError("<Color=red>Missing component</color> [This camera] in Controller Script", gameObject);
+				Debug.Break();
+			}
+
+			StartCoroutine("SetDefaultHeight");
+
+			if(FeetAudioSource)
+				FeetAudioSource.hideFlags = HideFlags.HideInHierarchy;
+
+			defaultGravity = Physics.gravity.y;
+			currentGravity = defaultGravity;
+			
+			deactivateCrouch = true;
+			
+			var center = CharacterController.center;
+			center = new Vector3(center.x, -CharacterOffset.CharacterHeight, center.z);
+			CharacterController.center = center;
+			defaultCharacterCenter = -CharacterOffset.CharacterHeight;
+			
+			CharacterController.skinWidth = 0.01f;
+			CharacterController.height = 1;
+//			CharacterController.radius = 0.22f;
+
+			if(!noiseCollider)
+				Helper.CreateNoiseCollider(transform, this);
+
+			if (isMultiplayerCharacter)
+			{
+				CameraController.SetAnimVariables();
+				return;
+			}
+
+			MovementType = CharacterHelper.MovementType.FastAndAccurate;
+
+			Helper.ChangeLayersRecursively(transform, "Character");
+
+			Input.simulateMouseWithTouches = false;
+			
+			if (CameraController)
+			{
+				CameraController.maxMouseAbsolute = middleAngleX + CameraParameters.fpXLimitMax;
+				CameraController.minMouseAbsolute = middleAngleX + CameraParameters.fpXLimitMin;
+			}
+
+			gameObject.tag = "Player";
+		}
+		
+
+		void Update()
+		{
+			if(isCharacterInLobby) return;
+
+			noiseCollider.radius = noiseRadius;
+
+			GetDamageInBodyColliders();
+			
+			if (isMultiplayerCharacter || !ActiveCharacter)
+				return;
+			
+			CheckHealth();
+
+			currentCharacterControllerCenter = CharacterController.center.y;
+				 
+			if(TypeOfCamera != CharacterHelper.CameraType.TopDown)
+				anim.SetFloat("CameraAngle", Helper.AngleBetween(transform.forward, thisCamera.transform.forward));
+			else
+			{
+				anim.SetFloat("CameraAngle", Helper.AngleBetween(transform.forward, !CameraParameters.lockCamera ? thisCamera.transform.forward :
+					CameraController.BodyLookAt.position - transform.position));
+			}
+
+			changeCameraTypeTimeout += Time.deltaTime;
+
+			if (!AdjustmentScene)
+			{
+				if (projectSettings.ButtonsActivityStatuses[11] && (Input.GetKeyDown(_gamepadCodes[11]) || Input.GetKeyDown(_keyboardCodes[11]) || Helper.CheckGamepadAxisButton(11, _gamepadButtonsAxes, hasAxisButtonPressed, "GetKeyDown", projectSettings.AxisButtonValues[11])))
+					ChangeCameraType();
+			}
+			else
+			{
+				if(Input.GetKeyDown(KeyCode.C))
+					ChangeCameraType();
+			}
+			
+			if (Input.GetKeyDown(KeyCode.O))
+			{
+				if (!isPause && !isJump && !anim.GetBool("Pause") && (!WeaponManager.WeaponController || !WeaponManager.WeaponController.isReloadEnabled))
+				{
+					if (TypeOfCamera == CharacterHelper.CameraType.TopDown || TypeOfCamera == CharacterHelper.CameraType.ThirdPerson && tdModeLikeTp)
+					{
+						CharacterHelper.ChangeTDMode(this);
+						CameraController.ReloadParameters();
+						
+						if(WeaponManager.WeaponController)
+							WeaponsHelper.SetWeaponPositions(WeaponManager.WeaponController, true, DirectionObject);
+						
+#if PHOTON_UNITY_NETWORKING
+						if(CharacterSync)
+							CharacterSync.ChangeTDMode();
+#endif
+					}
+				}
+			}
+
+			if (projectSettings.ButtonsActivityStatuses[2] && (Input.GetKeyDown(_gamepadCodes[2]) || Input.GetKeyDown(_keyboardCodes[2]) || Helper.CheckGamepadAxisButton(2, _gamepadButtonsAxes, hasAxisButtonPressed, "GetKeyDown",  projectSettings.AxisButtonValues[2])))
+				Jump();
+
+			if (projectSettings.PressSprintButton)
+			{
+				if ((Input.GetKey(_gamepadCodes[0]) || Input.GetKey(_keyboardCodes[0]) || Helper.CheckGamepadAxisButton(0, _gamepadButtonsAxes, hasAxisButtonPressed, "GetKey",  projectSettings.AxisButtonValues[0])) && projectSettings.ButtonsActivityStatuses[0])
+					Sprint(true, "press");
+				else Sprint(false, "press");
+			}
+			else
+			{
+				if ((Input.GetKeyDown(_gamepadCodes[0]) || Input.GetKeyDown(_keyboardCodes[0]) ||
+				     Helper.CheckGamepadAxisButton(0, _gamepadButtonsAxes, hasAxisButtonPressed, "GetKeyDown", projectSettings.AxisButtonValues[0])) && projectSettings.ButtonsActivityStatuses[0])
+				{
+//					if(isCrouch)
+//						DeactivateCrouch();
+					
+					Sprint(true, "click");
+				}
+			}
+			
+			if (projectSettings.PressCrouchButton)
+			{
+				if (projectSettings.ButtonsActivityStatuses[1] && (Input.GetKey(_gamepadCodes[1]) || Input.GetKey(_keyboardCodes[1]) || Helper.CheckGamepadAxisButton(1, _gamepadButtonsAxes, hasAxisButtonPressed, "GetKey",  projectSettings.AxisButtonValues[1])))
+				{
+					if (!activateCrouch)
+					{
+						if(isSprint)
+							DeactivateSprint();
+						
+						Crouch(true, "press");
+						deactivateCrouch = false;
+						activateCrouch = true;
+						crouchTimeOut = false;
+						StartCoroutine("CrouchTimeout");
+					}
+				}
+				else
+				{
+					if (!deactivateCrouch && crouchTimeOut)
+					{
+						Crouch(false, "press");
+					}
+				}
+			}
+			else
+			{
+				if (projectSettings.ButtonsActivityStatuses[1] && (Input.GetKeyDown(_gamepadCodes[1]) || Input.GetKeyDown(_keyboardCodes[1]) || Helper.CheckGamepadAxisButton(1, _gamepadButtonsAxes, hasAxisButtonPressed, "GetKeyDown", projectSettings.AxisButtonValues[1])))
+				{
+					if (crouchTimeOut)
+					{
+						if(isSprint)
+							DeactivateSprint();
+						
+						Crouch(true, "click");
+						crouchTimeOut = false;
+						StartCoroutine("CrouchTimeout");
+					}
+				}
+			}
+			
+			GetLocomotionInput();
+			SnapAlignCharacterWithCamera();
+			ProcessMotion();
+			
+			if (TypeOfCamera == CharacterHelper.CameraType.FirstPerson || MovementType == CharacterHelper.MovementType.FastAndAccurate) JumpingProcess();
+			
+			HeightDetection();
+
+			checkOnNavMeshTimer += Time.deltaTime;
+
+			if (checkOnNavMeshTimer > 2)
+			{
+				checkOnNavMeshTimer = 0;
+				
+				NavMeshHit hit;
+				if (NavMesh.SamplePosition(new Vector3(transform.position.x, transform.position.y, transform.position.z), out hit, 1000, NavMesh.AllAreas))
+				{
+					onNavMesh = hit.distance <= 7;
+				}
+				else
+				{
+					onNavMesh = false;
+				}
+			}
+		}
+
+		void HeightDetection()
+		{
+			if (defaultHeight == -1)
+				return;
+
+			RaycastHit info;
+			RaycastHit info2;
+//			Debug.DrawRay(BodyObjects.Hips.position - transform.forward, Vector3.down * 10, anim.GetBool("OnFloor") ? Color.green : Color.red);
+//			Debug.DrawRay(BodyObjects.Hips.position + transform.forward * 2, Vector3.down * 10, anim.GetBool("OnFloorForward") ? Color.green : Color.red);
+			
+			if (Physics.Raycast(BodyObjects.Hips.position - transform.forward, Vector3.down, out info, 100, Helper.layerMask()))
+			{
+				anim.SetBool("OnFloor", !(defaultHeight + 1 < info.distance));
+			}
+
+			if (Physics.Raycast(BodyObjects.Hips.position + transform.forward * 2, Vector3.down, out info2, 100, Helper.layerMask()))
+			{
+				if (defaultHeight + 1 < info2.distance)
+				{
+					if (anim.GetBool("OnFloorForward"))
+						anim.SetFloat("FallingHeight", info2.distance);
+					
+					anim.SetBool("OnFloorForward", false);
+				}
+				else
+				{
+					anim.SetBool("OnFloorForward", true);
+				}
+			}
+		}
+
+		IEnumerator SetDefaultHeight()
+		{
+			yield return new WaitForSeconds(0.1f);
+			RaycastHit info;
+			
+			if (Physics.Raycast(BodyObjects.Hips.position, Vector3.down, out info, 100, Helper.layerMask()))
+				defaultHeight = info.distance;
+			
+			if (Physics.Raycast(BodyObjects.Head.position, Vector3.down, out info, 100, Helper.layerMask()))
+				headHeight = info.distance;
+
+			onGround = true;
+			
+			StopCoroutine("SetDefaultHeight");
+		}
+
+		void GetLocomotionInput()
+		{
+			directionVector = Vector3.zero;
+
+			if (!isPause)
+			{
+				hasMoveButtonPressed = false;
+				
+				if (Application.isMobilePlatform || projectSettings.mobileDebug)
+				{
+					InputHelper.CheckMobileJoystick(UIManager.moveStick, UIManager.moveStickOutline, ref touchId, projectSettings, ref MobileTouchjPointA, ref MobileTouchjPointB, ref MobileMoveStickDirection, this);
+					directionVector = new Vector3(MobileMoveStickDirection.x, 0, MobileMoveStickDirection.y);
+				}
+				else
+				{
+					if (Mathf.Abs(Input.GetAxis(_gamepadAxes[0])) > 0.1f || Mathf.Abs(Input.GetAxis(_gamepadAxes[1])) > 0.1f)
+					{
+						hasMoveButtonPressed = false;
+
+						var Horizontal = Input.GetAxis(_gamepadAxes[0]);
+						var Vertical = Input.GetAxis(_gamepadAxes[1]);
+
+						if (projectSettings.invertAxes[0])
+							Horizontal *= -1;
+
+						if (projectSettings.invertAxes[1])
+							Vertical *= -1;
+
+						if (Mathf.Abs(Horizontal) > 0.1f || Mathf.Abs(Vertical) > 0.1f)
+						{
+							if(!anim.GetBool("Move"))
+								anim.SetBool("MoveButtonHasPressed", true);
+							
+							hasMoveButtonPressed = true;
+						}
+
+						directionVector = new Vector3(Horizontal, 0, Vertical);
+					}
+					else
+					{
+						hasMoveButtonPressed = false;
+
+//						CharacterHelper.CheckButton(this, _keyboardCodes[12], "forward");
+//						CharacterHelper.CheckButton(this, _keyboardCodes[13], "backward");
+//						CharacterHelper.CheckButton(this, _keyboardCodes[14], "right");
+//						CharacterHelper.CheckButton(this, _keyboardCodes[15], "left");
+//						
+						if (Input.GetKeyDown(_keyboardCodes[12]))
+						{
+							anim.SetBool("MoveButtonHasPressed", false);
+							clickMoveButton = true;
+						}
+						if (Input.GetKey(_keyboardCodes[12]))
+						{
+							directionVector += Vector3.forward;
+							hasMoveButtonPressed = true;
+						}
+						if (Input.GetKeyUp(_keyboardCodes[12]))
+						{
+							clickMoveButton = false;
+							directionVector += Vector3.forward;
+							
+							if(!anim.GetBool("Move"))
+								anim.SetBool("MoveButtonHasPressed", true);
+						}
+						
+						if (Input.GetKeyDown(_keyboardCodes[14]))
+						{
+							clickMoveButton = true;
+							anim.SetBool("MoveButtonHasPressed", false);
+						}
+						if (Input.GetKey(_keyboardCodes[14]))
+						{
+							directionVector += Vector3.right;
+							hasMoveButtonPressed = true;
+						}
+						if (Input.GetKeyUp(_keyboardCodes[14]))
+						{
+							clickMoveButton = false;
+							directionVector += Vector3.right;
+
+							if(!anim.GetBool("Move"))
+								anim.SetBool("MoveButtonHasPressed", true);
+						}
+
+						if (Input.GetKeyDown(_keyboardCodes[13]))
+						{
+							clickMoveButton = true;
+							anim.SetBool("MoveButtonHasPressed", false);
+						}
+						if (Input.GetKey(_keyboardCodes[13]))
+						{
+							directionVector -= Vector3.forward;
+							hasMoveButtonPressed = true;
+						}
+						if (Input.GetKeyUp(_keyboardCodes[13]))
+						{
+							clickMoveButton = false;
+							directionVector -= Vector3.forward;
+							if(!anim.GetBool("Move"))
+								anim.SetBool("MoveButtonHasPressed", true);
+						}
+
+						if (Input.GetKeyDown(_keyboardCodes[15]))
+						{
+							clickMoveButton = true;
+							anim.SetBool("MoveButtonHasPressed", false);
+						}
+						if (Input.GetKey(_keyboardCodes[15]))
+						{
+							directionVector -= Vector3.right;
+							hasMoveButtonPressed = true;
+						}
+						if (Input.GetKeyUp(_keyboardCodes[15]))
+						{
+							clickMoveButton = false;
+							directionVector -= Vector3.right;
+							
+							if(!anim.GetBool("Move"))
+								anim.SetBool("MoveButtonHasPressed", true);
+						}
+					}
+				}
+
+				anim.SetBool("PressMoveAxis", hasMoveButtonPressed);
+
+				if (!anim.GetCurrentAnimatorStateInfo(1).IsName("Attack") && !anim.GetCurrentAnimatorStateInfo(2).IsName("Attack"))
+				{
+					if (hasMoveButtonPressed)
+					{
+						if (isSprint)
+						{
+							noiseRadius = Mathf.Lerp(noiseRadius, SprintMovementNoise / (inGrass ? 2 : 1), 5 * Time.deltaTime);
+						}
+						else if (isCrouch)
+						{
+							noiseRadius = Mathf.Lerp(noiseRadius, CrouchMovementNoise/ (inGrass ? 2 : 1), 5 * Time.deltaTime);
+						}
+						else
+						{
+							noiseRadius = Mathf.Lerp(noiseRadius, MovementNoise/ (inGrass ? 2 : 1), 5 * Time.deltaTime);
+						}
+					}
+					else
+					{
+						noiseRadius = Mathf.Lerp(noiseRadius, !isCrouch ? IdleNoise : CrouchIdleNoise, 5 * Time.deltaTime);
+					}
+				}
+
+//				if(directionVector.magnitude > 0)
+					CheckCollisionVector = directionVector * 100;
+
+				if (CanMove)
+				{
+					if (hasMoveButtonPressed)
+					{
+						if (TypeOfCamera == CharacterHelper.CameraType.ThirdPerson)
+						{
+							anim.SetFloat("Horizontal", directionVector.x, 0.5f, Time.deltaTime);
+							anim.SetFloat("Vertical", directionVector.z, 0.5f, Time.deltaTime);
+						}
+						else
+						{
+							anim.SetFloat("Horizontal", directionVector.x);
+							anim.SetFloat("Vertical", directionVector.z);
+						}
+					}
+					else
+					{
+						anim.SetFloat("Horizontal", directionVector.x);
+						anim.SetFloat("Vertical", directionVector.z);
+					}
+				}
+				else
+				{
+					anim.SetFloat("Horizontal", 0);
+					anim.SetFloat("Vertical", 0);
+				}
+			}
+			else
+			{
+				anim.SetFloat("Horizontal", 0, 0.3f, Time.deltaTime);
+				anim.SetFloat("Vertical", 0, 0.3f, Time.deltaTime);
+
+				Sprint(false, "press");
+			}
+
+			if (!isPause)
+			{
+
+				if (clickMoveButton && WeaponManager.WeaponController && WeaponManager.WeaponController.isAimEnabled && isCrouch && TypeOfCamera == CharacterHelper.CameraType.ThirdPerson)
+				{
+					WeaponManager.WeaponController.Aim(true, false, false);
+				}
+
+				MoveVector = new Vector3(anim.GetFloat("Horizontal"), 0, anim.GetFloat("Vertical"));
+
+				angleBetweenCharacterAndCamera = Helper.AngleBetween(transform.TransformDirection(new Vector3(-directionVector.x, directionVector.y, directionVector.z)), thisCamera.transform.forward);
+
+				anim.SetFloat("Angle", angleBetweenCharacterAndCamera);
+
+				if (!hasMoveButtonPressed)
+				{
+					anim.SetBool("Move", false);
+				}
+				else
+				{
+					if (MovementType == CharacterHelper.MovementType.Realistic)
+					{
+						if (Mathf.Abs(MoveVector.x) > 0.5f || Math.Abs(MoveVector.z) > 0.5f)
+						{
+							anim.SetBool("MoveButtonHasPressed", false);
+//						pressButtonTimeout = 0;
+							anim.SetBool("Move", true);
+							clickMoveButton = false;
+						}
+					}
+					else
+					{
+						if (Mathf.Abs(MoveVector.x) > 0.2f || Math.Abs(MoveVector.z) > 0.2f)
+						{
+							anim.SetBool("MoveButtonHasPressed", false);
+							anim.SetBool("Move", true);
+//						pressButtonTimeout = 0;
+							clickMoveButton = false;
+						}
+					}
+				}
+
+//			if (clickMoveButton)
+//			{
+//				pressButtonTimeout += Time.deltaTime;
+//			}
+
+				if (SmoothCameraWhenMoving)
+				{
+					if (hasMoveButtonPressed)
+					{
+						if (!isSprint && !isCrouch)
+							CameraController.cameraMovementDistance = Mathf.Lerp(CameraController.cameraMovementDistance, 6, 3 * Time.deltaTime);
+						else if (isSprint)
+							CameraController.cameraMovementDistance = Mathf.Lerp(CameraController.cameraMovementDistance, 7, 3 * Time.deltaTime);
+						else if (isCrouch)
+							CameraController.cameraMovementDistance = Mathf.Lerp(CameraController.cameraMovementDistance, 6, 3 * Time.deltaTime);
+					}
+					else
+					{
+						if (!isCrouch && !isSprint)
+							CameraController.cameraMovementDistance = Mathf.Lerp(CameraController.cameraMovementDistance, 5, 3 * Time.deltaTime);
+
+						else if (isCrouch && !CameraController.CameraAim)
+						{
+							CameraController.cameraMovementDistance = Mathf.Lerp(CameraController.cameraMovementDistance, 5, 3 * Time.deltaTime);
+						}
+						else if (isCrouch && CameraController.CameraAim)
+						{
+							CameraController.cameraMovementDistance = Mathf.Lerp(CameraController.cameraMovementDistance, 5, 3 * Time.deltaTime);
+						}
+						else if (isSprint) CameraController.cameraMovementDistance = Mathf.Lerp(CameraController.cameraMovementDistance, 5.5f, 3 * Time.deltaTime);
+					}
+				}
+
+
+				CurrentMoveDirection();
+			}
+		}
+
+		public void GetDamageInBodyColliders()
+		{
+			var getAnyDamage = false;
+			
+			foreach (var bodyPart in BodyParts)
+			{
+				var bodyColliderScript = bodyPart.gameObject.GetComponent<BodyPartCollider>();
+
+				if (bodyColliderScript.gettingDamage)
+				{
+					if (bodyColliderScript.attackType == "Fire")
+					{
+						if (bodyColliderScript.attacking.GetComponent<EnemyController>())
+						{
+							PlayerHealth -= bodyColliderScript.attacking.GetComponent<EnemyController>().Attacks[0].Damage * Time.deltaTime;
+
+							if (PlayerHealth <= 0)
+							{
+								KillerName = "Enemy";
+							}
+							
+							break;
+						}
+						else if (bodyColliderScript.attacking.GetComponent<Controller>())
+						{
+							if (bodyColliderScript.attacking.GetComponent<Controller>().gameObject.GetInstanceID() == gameObject.GetInstanceID()) return;
+
+							switch (CanKillOthers)
+							{
+								case PUNHelper.CanKillOthers.OnlyOpponents:
+									if (MyTeam == bodyColliderScript.attacking.GetComponent<Controller>().MyTeam && MyTeam != PUNHelper.Teams.Null)
+										return;
+									break;
+								case PUNHelper.CanKillOthers.Everyone:
+									break;
+								case PUNHelper.CanKillOthers.NoOne:
+									return;
+							}
+
+							var weaponController = bodyColliderScript.attacking.GetComponent<Controller>().WeaponManager.WeaponController;
+
+							var deltaTime = Time.deltaTime;
 
 #if PHOTON_UNITY_NETWORKING
-                        if (CharacterSync)
-                            CharacterSync.ChangeTDMode();
+							if (CharacterSync)
+								CharacterSync.UpdateKillAssists(weaponController.Controller.CharacterName);
 #endif
-                    }
-                }
-            }
+							if (PlayerHealth - weaponController.Attacks[weaponController.currentAttack].weapon_damage * deltaTime <= 0 && !bodyColliderScript.registerDeath)
+							{
+#if PHOTON_UNITY_NETWORKING
+								if (weaponController.Controller.CharacterSync)
+									weaponController.Controller.CharacterSync.AddScore(PlayerPrefs.GetInt("FireKill"), "fire");
+#endif
 
-            if (projectSettings.ButtonsActivityStatuses[2] && (Input.GetKeyDown(_gamepadCodes[2]) || Input.GetKeyDown(_keyboardCodes[2]) || Helper.CheckGamepadAxisButton(2, _gamepadButtonsAxes, hasAxisButtonPressed, "GetKeyDown", projectSettings.AxisButtonValues[2])))
-                Jump();
-
-            if (projectSettings.PressSprintButton)
-            {
-                if ((Input.GetKey(_gamepadCodes[0]) || Input.GetKey(_keyboardCodes[0]) || Helper.CheckGamepadAxisButton(0, _gamepadButtonsAxes, hasAxisButtonPressed, "GetKey", projectSettings.AxisButtonValues[0])) && projectSettings.ButtonsActivityStatuses[0])
-                    Sprint(true, "press");
-                else Sprint(false, "press");
-            }
-            else
-            {
-                if ((Input.GetKeyDown(_gamepadCodes[0]) || Input.GetKeyDown(_keyboardCodes[0]) ||
-                     Helper.CheckGamepadAxisButton(0, _gamepadButtonsAxes, hasAxisButtonPressed, "GetKeyDown", projectSettings.AxisButtonValues[0])) && projectSettings.ButtonsActivityStatuses[0])
-                {
-                    //					if(isCrouch)
-                    //						DeactivateCrouch();
-
-                    Sprint(true, "click");
-                }
-            }
-
-            if (projectSettings.PressCrouchButton)
-            {
-                if (projectSettings.ButtonsActivityStatuses[1] && (Input.GetKey(_gamepadCodes[1]) || Input.GetKey(_keyboardCodes[1]) || Helper.CheckGamepadAxisButton(1, _gamepadButtonsAxes, hasAxisButtonPressed, "GetKey", projectSettings.AxisButtonValues[1])))
-                {
-                    if (!activateCrouch)
-                    {
-                        if (isSprint)
-                            DeactivateSprint();
-
-                        Crouch(true, "press");
-                        deactivateCrouch = false;
-                        activateCrouch = true;
-                        crouchTimeOut = false;
-                        StartCoroutine("CrouchTimeout");
-                    }
-                }
-                else
-                {
-                    if (!deactivateCrouch && crouchTimeOut)
-                    {
-                        Crouch(false, "press");
-                    }
-                }
-            }
-            else
-            {
-                if (projectSettings.ButtonsActivityStatuses[1] && (Input.GetKeyDown(_gamepadCodes[1]) || Input.GetKeyDown(_keyboardCodes[1]) || Helper.CheckGamepadAxisButton(1, _gamepadButtonsAxes, hasAxisButtonPressed, "GetKeyDown", projectSettings.AxisButtonValues[1])))
-                {
-                    if (crouchTimeOut)
-                    {
-                        if (isSprint)
-                            DeactivateSprint();
-
-                        Crouch(true, "click");
-                        crouchTimeOut = false;
-                        StartCoroutine("CrouchTimeout");
-                    }
-                }
-            }
-
-            GetLocomotionInput();
-            SnapAlignCharacterWithCamera();
-            ProcessMotion();
-
-            if (TypeOfCamera == CharacterHelper.CameraType.FirstPerson || MovementType == CharacterHelper.MovementType.FastAndAccurate) JumpingProcess();
-
-            HeightDetection();
-
-            checkOnNavMeshTimer += Time.deltaTime;
-
-            if (checkOnNavMeshTimer > 2)
-            {
-                checkOnNavMeshTimer = 0;
-
-                NavMeshHit hit;
-                if (NavMesh.SamplePosition(new Vector3(transform.position.x, transform.position.y, transform.position.z), out hit, 1000, NavMesh.AllAreas))
-                {
-                    onNavMesh = hit.distance <= 7;
-                }
-                else
-                {
-                    onNavMesh = false;
-                }
-            }
-        }
-
-        void HeightDetection()
-        {
-            if (defaultHeight == -1)
-                return;
-
-            RaycastHit info;
-            RaycastHit info2;
-            //			Debug.DrawRay(BodyObjects.Hips.position - transform.forward, Vector3.down * 10, anim.GetBool("OnFloor") ? Color.green : Color.red);
-            //			Debug.DrawRay(BodyObjects.Hips.position + transform.forward * 2, Vector3.down * 10, anim.GetBool("OnFloorForward") ? Color.green : Color.red);
-
-            if (Physics.Raycast(BodyObjects.Hips.position - transform.forward, Vector3.down, out info, 100, Helper.layerMask()))
-            {
-                anim.SetBool("OnFloor", !(defaultHeight + 1 < info.distance));
-            }
-
-            if (Physics.Raycast(BodyObjects.Hips.position + transform.forward * 2, Vector3.down, out info2, 100, Helper.layerMask()))
-            {
-                if (defaultHeight + 1 < info2.distance)
-                {
-                    if (anim.GetBool("OnFloorForward"))
-                        anim.SetFloat("FallingHeight", info2.distance);
-
-                    anim.SetBool("OnFloorForward", false);
-                }
-                else
-                {
-                    anim.SetBool("OnFloorForward", true);
-                }
-            }
-        }
-
-        IEnumerator SetDefaultHeight()
-        {
-            yield return new WaitForSeconds(0.1f);
-            RaycastHit info;
-
-            if (Physics.Raycast(BodyObjects.Hips.position, Vector3.down, out info, 100, Helper.layerMask()))
-                defaultHeight = info.distance;
-
-            if (Physics.Raycast(BodyObjects.Head.position, Vector3.down, out info, 100, Helper.layerMask()))
-                headHeight = info.distance;
-
-            onGround = true;
-
-            StopCoroutine("SetDefaultHeight");
-        }
-
-        void GetLocomotionInput()
-        {
-            directionVector = Vector3.zero;
-
-            if (!isPause)
-            {
-                hasMoveButtonPressed = false;
-
-                if (Application.isMobilePlatform || projectSettings.mobileDebug)
-                {
-                    InputHelper.CheckMobileJoystick(UIManager.moveStick, UIManager.moveStickOutline, ref touchId, projectSettings, ref MobileTouchjPointA, ref MobileTouchjPointB, ref MobileMoveStickDirection, this);
-                    directionVector = new Vector3(MobileMoveStickDirection.x, 0, MobileMoveStickDirection.y);
-                }
-                else
-                {
-                    if (Mathf.Abs(Input.GetAxis(_gamepadAxes[0])) > 0.1f || Mathf.Abs(Input.GetAxis(_gamepadAxes[1])) > 0.1f)
-                    {
-                        hasMoveButtonPressed = false;
-
-                        var Horizontal = Input.GetAxis(_gamepadAxes[0]);
-                        var Vertical = Input.GetAxis(_gamepadAxes[1]);
-
-                        if (projectSettings.invertAxes[0])
-                            Horizontal *= -1;
-
-                        if (projectSettings.invertAxes[1])
-                            Vertical *= -1;
-
-                        if (Mathf.Abs(Horizontal) > 0.1f || Mathf.Abs(Vertical) > 0.1f)
-                        {
-                            if (!anim.GetBool("Move"))
-                                anim.SetBool("MoveButtonHasPressed", true);
-
-                            hasMoveButtonPressed = true;
-                        }
-
-                        directionVector = new Vector3(Horizontal, 0, Vertical);
-                    }
-                    else
-                    {
-                        hasMoveButtonPressed = false;
-
-                        //						CharacterHelper.CheckButton(this, _keyboardCodes[12], "forward");
-                        //						CharacterHelper.CheckButton(this, _keyboardCodes[13], "backward");
-                        //						CharacterHelper.CheckButton(this, _keyboardCodes[14], "right");
-                        //						CharacterHelper.CheckButton(this, _keyboardCodes[15], "left");
-                        //						
-                        if (Input.GetKeyDown(_keyboardCodes[12]))
-                        {
-                            anim.SetBool("MoveButtonHasPressed", false);
-                            clickMoveButton = true;
-                        }
-                        if (Input.GetKey(_keyboardCodes[12]))
-                        {
-                            directionVector += Vector3.forward;
-                            hasMoveButtonPressed = true;
-                        }
-                        if (Input.GetKeyUp(_keyboardCodes[12]))
-                        {
-                            clickMoveButton = false;
-                            directionVector += Vector3.forward;
-
-                            if (!anim.GetBool("Move"))
-                                anim.SetBool("MoveButtonHasPressed", true);
-                        }
-
-                        if (Input.GetKeyDown(_keyboardCodes[14]))
-                        {
-                            clickMoveButton = true;
-                            anim.SetBool("MoveButtonHasPressed", false);
-                        }
-                        if (Input.GetKey(_keyboardCodes[14]))
-                        {
-                            directionVector += Vector3.right;
-                            hasMoveButtonPressed = true;
-                        }
-                        if (Input.GetKeyUp(_keyboardCodes[14]))
-                        {
-                            clickMoveButton = false;
-                            directionVector += Vector3.right;
-
-                            if (!anim.GetBool("Move"))
-                                anim.SetBool("MoveButtonHasPressed", true);
-                        }
-
-                        if (Input.GetKeyDown(_keyboardCodes[13]))
-                        {
-                            clickMoveButton = true;
-                            anim.SetBool("MoveButtonHasPressed", false);
-                        }
-                        if (Input.GetKey(_keyboardCodes[13]))
-                        {
-                            directionVector -= Vector3.forward;
-                            hasMoveButtonPressed = true;
-                        }
-                        if (Input.GetKeyUp(_keyboardCodes[13]))
-                        {
-                            clickMoveButton = false;
-                            directionVector -= Vector3.forward;
-                            if (!anim.GetBool("Move"))
-                                anim.SetBool("MoveButtonHasPressed", true);
-                        }
-
-                        if (Input.GetKeyDown(_keyboardCodes[15]))
-                        {
-                            clickMoveButton = true;
-                            anim.SetBool("MoveButtonHasPressed", false);
-                        }
-                        if (Input.GetKey(_keyboardCodes[15]))
-                        {
-                            directionVector -= Vector3.right;
-                            hasMoveButtonPressed = true;
-                        }
-                        if (Input.GetKeyUp(_keyboardCodes[15]))
-                        {
-                            clickMoveButton = false;
-                            directionVector -= Vector3.right;
-
-                            if (!anim.GetBool("Move"))
-                                anim.SetBool("MoveButtonHasPressed", true);
-                        }
-                    }
-                }
-
-                anim.SetBool("PressMoveAxis", hasMoveButtonPressed);
-
-                if (!anim.GetCurrentAnimatorStateInfo(1).IsName("Attack") && !anim.GetCurrentAnimatorStateInfo(2).IsName("Attack"))
-                {
-                    if (hasMoveButtonPressed)
-                    {
-                        if (isSprint)
-                        {
-                            noiseRadius = Mathf.Lerp(noiseRadius, SprintMovementNoise / (inGrass ? 2 : 1), 5 * Time.deltaTime);
-                        }
-                        else if (isCrouch)
-                        {
-                            noiseRadius = Mathf.Lerp(noiseRadius, CrouchMovementNoise / (inGrass ? 2 : 1), 5 * Time.deltaTime);
-                        }
-                        else
-                        {
-                            noiseRadius = Mathf.Lerp(noiseRadius, MovementNoise / (inGrass ? 2 : 1), 5 * Time.deltaTime);
-                        }
-                    }
-                    else
-                    {
-                        noiseRadius = Mathf.Lerp(noiseRadius, !isCrouch ? IdleNoise : CrouchIdleNoise, 5 * Time.deltaTime);
-                    }
-                }
-
-                //				if(directionVector.magnitude > 0)
-                CheckCollisionVector = directionVector * 100;
-
-                if (CanMove)
-                {
-                    if (hasMoveButtonPressed)
-                    {
-                        if (TypeOfCamera == CharacterHelper.CameraType.ThirdPerson)
-                        {
-                            anim.SetFloat("Horizontal", directionVector.x, 0.5f, Time.deltaTime);
-                            anim.SetFloat("Vertical", directionVector.z, 0.5f, Time.deltaTime);
-                        }
-                        else
-                        {
-                            anim.SetFloat("Horizontal", directionVector.x);
-                            anim.SetFloat("Vertical", directionVector.z);
-                        }
-                    }
-                    else
-                    {
-                        anim.SetFloat("Horizontal", directionVector.x);
-                        anim.SetFloat("Vertical", directionVector.z);
-                    }
-                }
-                else
-                {
-                    anim.SetFloat("Horizontal", 0);
-                    anim.SetFloat("Vertical", 0);
-                }
-            }
-            else
-            {
-                anim.SetFloat("Horizontal", 0, 0.3f, Time.deltaTime);
-                anim.SetFloat("Vertical", 0, 0.3f, Time.deltaTime);
-
-                Sprint(false, "press");
-            }
-
-            if (!isPause)
-            {
-
-                if (clickMoveButton && WeaponManager.WeaponController && WeaponManager.WeaponController.isAimEnabled && isCrouch && TypeOfCamera == CharacterHelper.CameraType.ThirdPerson)
-                {
-                    WeaponManager.WeaponController.Aim(true, false, false);
-                }
-
-                MoveVector = new Vector3(anim.GetFloat("Horizontal"), 0, anim.GetFloat("Vertical"));
-
-                angleBetweenCharacterAndCamera = Helper.AngleBetween(transform.TransformDirection(new Vector3(-directionVector.x, directionVector.y, directionVector.z)), thisCamera.transform.forward);
-
-                anim.SetFloat("Angle", angleBetweenCharacterAndCamera);
-
-                if (!hasMoveButtonPressed)
-                {
-                    anim.SetBool("Move", false);
-                }
-                else
-                {
-                    if (MovementType == CharacterHelper.MovementType.Realistic)
-                    {
-                        if (Mathf.Abs(MoveVector.x) > 0.5f || Math.Abs(MoveVector.z) > 0.5f)
-                        {
-                            anim.SetBool("MoveButtonHasPressed", false);
-                            //						pressButtonTimeout = 0;
-                            anim.SetBool("Move", true);
-                            clickMoveButton = false;
-                        }
-                    }
-                    else
-                    {
-                        if (Mathf.Abs(MoveVector.x) > 0.2f || Math.Abs(MoveVector.z) > 0.2f)
-                        {
-                            anim.SetBool("MoveButtonHasPressed", false);
-                            anim.SetBool("Move", true);
-                            //						pressButtonTimeout = 0;
-                            clickMoveButton = false;
-                        }
-                    }
-                }
-
-                //			if (clickMoveButton)
-                //			{
-                //				pressButtonTimeout += Time.deltaTime;
-                //			}
-
-                if (SmoothCameraWhenMoving)
-                {
-                    if (hasMoveButtonPressed)
-                    {
-                        if (!isSprint && !isCrouch)
-                            CameraController.cameraMovementDistance = Mathf.Lerp(CameraController.cameraMovementDistance, 6, 3 * Time.deltaTime);
-                        else if (isSprint)
-                            CameraController.cameraMovementDistance = Mathf.Lerp(CameraController.cameraMovementDistance, 7, 3 * Time.deltaTime);
-                        else if (isCrouch)
-                            CameraController.cameraMovementDistance = Mathf.Lerp(CameraController.cameraMovementDistance, 6, 3 * Time.deltaTime);
-                    }
-                    else
-                    {
-                        if (!isCrouch && !isSprint)
-                            CameraController.cameraMovementDistance = Mathf.Lerp(CameraController.cameraMovementDistance, 5, 3 * Time.deltaTime);
-
-                        else if (isCrouch && !CameraController.CameraAim)
-                        {
-                            CameraController.cameraMovementDistance = Mathf.Lerp(CameraController.cameraMovementDistance, 5, 3 * Time.deltaTime);
-                        }
-                        else if (isCrouch && CameraController.CameraAim)
-                        {
-                            CameraController.cameraMovementDistance = Mathf.Lerp(CameraController.cameraMovementDistance, 5, 3 * Time.deltaTime);
-                        }
-                        else if (isSprint) CameraController.cameraMovementDistance = Mathf.Lerp(CameraController.cameraMovementDistance, 5.5f, 3 * Time.deltaTime);
-                    }
-                }
-
-
-                CurrentMoveDirection();
-            }
-        }
-
-        public void GetDamageInBodyColliders()
-        {
-            var getAnyDamage = false;
-
-            foreach (var bodyPart in BodyParts)
-            {
-                var bodyColliderScript = bodyPart.gameObject.GetComponent<BodyPartCollider>();
-
-                if (bodyColliderScript.gettingDamage)
-                {
-                    if (bodyColliderScript.attackType == "Fire")
-                    {
-                        if (!bodyColliderScript) return;
-                        if (bodyColliderScript.attacking.GetComponent<EnemyController>())
-                        {
-                            PlayerHealth -= bodyColliderScript.attacking.GetComponent<EnemyController>().Attacks[0].Damage * Time.deltaTime;
-
-                            if (PlayerHealth <= 0)
-                            {
-                                KillerName = "Enemy";
-                            }
-
-                            break;
-                        }
-                        else if (bodyColliderScript.attacking.GetComponent<Controller>())
-                        {
-                            if (bodyColliderScript.attacking.GetComponent<Controller>().gameObject.GetInstanceID() == gameObject.GetInstanceID()) return;
-
-                            switch (CanKillOthers)
-                            {
-                                case PUNHelper.CanKillOthers.OnlyOpponents:
-                                    if (MyTeam == bodyColliderScript.attacking.GetComponent<Controller>().MyTeam && MyTeam != PUNHelper.Teams.Null)
-                                        return;
-                                    break;
-                                case PUNHelper.CanKillOthers.Everyone:
-                                    break;
-                                case PUNHelper.CanKillOthers.NoOne:
-                                    return;
-                            }
-
-                            var weaponController = bodyColliderScript.attacking.GetComponent<Controller>().WeaponManager.WeaponController;
-
-                            var deltaTime = Time.deltaTime;
+								KillerName = weaponController.Controller.CharacterName;
+								KilledWeaponImage = (Texture2D) weaponController.WeaponImage;
 
 #if PHOTON_UNITY_NETWORKING
-                            if (CharacterSync)
-                                CharacterSync.UpdateKillAssists(weaponController.Controller.CharacterName);
-#endif
-                            if (PlayerHealth - weaponController.Attacks[weaponController.currentAttack].weapon_damage * deltaTime <= 0 && !bodyColliderScript.registerDeath)
-                            {
-#if PHOTON_UNITY_NETWORKING
-                                if (weaponController.Controller.CharacterSync)
-                                    weaponController.Controller.CharacterSync.AddScore(PlayerPrefs.GetInt("FireKill"), "fire");
+								if (CharacterSync)
+									CharacterSync.AddScoreToAssistants();
 #endif
 
-                                KillerName = weaponController.Controller.CharacterName;
-                                KilledWeaponImage = (Texture2D)weaponController.WeaponImage;
+								bodyColliderScript.registerDeath = true;
+							}
+							
+							PlayerHealth -= weaponController.Attacks[weaponController.currentAttack].weapon_damage * deltaTime;
+							
+							break;
+						}
+					}
+					else if (bodyColliderScript.attackType == "Melee")
+					{
+						getAnyDamage = true;
+						
+						if (!meleeDamage)
+						{
+							if (bodyColliderScript.attacking.GetComponent<EnemyController>())
+							{
+								PlayerHealth -= bodyColliderScript.attacking.GetComponent<EnemyController>().Attacks[0].Damage;
+								if (PlayerHealth <= 0)
+								{
+									KillerName = "Enemy";
+								}
 
-#if PHOTON_UNITY_NETWORKING
-                                if (CharacterSync)
-                                    CharacterSync.AddScoreToAssistants();
-#endif
+								meleeDamage = true;
 
-                                bodyColliderScript.registerDeath = true;
-                            }
+								break;
+							}
+							else if (bodyColliderScript.attacking.GetComponent<Controller>())
+							{
+								if (bodyColliderScript.attacking.GetComponent<Controller>().gameObject.GetInstanceID() == gameObject.GetInstanceID()) return;
 
-                            PlayerHealth -= weaponController.Attacks[weaponController.currentAttack].weapon_damage * deltaTime;
+								switch (CanKillOthers)
+								{
+									case PUNHelper.CanKillOthers.OnlyOpponents:
+										if (MyTeam == bodyColliderScript.attacking.gameObject.GetComponent<Controller>().MyTeam && MyTeam != PUNHelper.Teams.Null)
+											return;
 
-                            break;
-                        }
-                    }
-                    else if (bodyColliderScript.attackType == "Melee")
-                    {
-                        getAnyDamage = true;
+										break;
+									case PUNHelper.CanKillOthers.Everyone:
+										break;
+									case PUNHelper.CanKillOthers.NoOne:
+										return;
+								}
 
-                        if (!meleeDamage)
-                        {
-                            if (bodyColliderScript.attacking.GetComponent<EnemyController>())
-                            {
-                                PlayerHealth -= bodyColliderScript.attacking.GetComponent<EnemyController>().Attacks[0].Damage;
-                                if (PlayerHealth <= 0)
-                                {
-                                    KillerName = "Enemy";
-                                }
+								var inventoryManager = bodyColliderScript.attacking.GetComponent<Controller>().WeaponManager;
+								var damage = 0;
+								var hasWeapon = false;
 
-                                meleeDamage = true;
-
-                                break;
-                            }
-                            else if (bodyColliderScript.attacking.GetComponent<Controller>())
-                            {
-                                if (bodyColliderScript.attacking.GetComponent<Controller>().gameObject.GetInstanceID() == gameObject.GetInstanceID()) return;
-
-                                switch (CanKillOthers)
-                                {
-                                    case PUNHelper.CanKillOthers.OnlyOpponents:
-                                        if (MyTeam == bodyColliderScript.attacking.gameObject.GetComponent<Controller>().MyTeam && MyTeam != PUNHelper.Teams.Null)
-                                            return;
-
-                                        break;
-                                    case PUNHelper.CanKillOthers.Everyone:
-                                        break;
-                                    case PUNHelper.CanKillOthers.NoOne:
-                                        return;
-                                }
-
-                                var inventoryManager = bodyColliderScript.attacking.GetComponent<Controller>().WeaponManager;
-                                var damage = 0;
-                                var hasWeapon = false;
-
-                                if (inventoryManager.slots[inventoryManager.currentSlot].weaponSlotInGame.Count > 0)
-                                {
-                                    if (inventoryManager.slots[inventoryManager.currentSlot].weaponSlotInGame[inventoryManager.slots[inventoryManager.currentSlot].currentWeaponInSlot].fistAttack)
-                                    {
-                                        damage = (int)inventoryManager.FistDamage;
-                                    }
-                                    else if (inventoryManager.slots[inventoryManager.currentSlot].weaponSlotInGame[inventoryManager.slots[inventoryManager.currentSlot].currentWeaponInSlot].weapon)
-                                    {
-                                        var weaponController = inventoryManager.WeaponController;
-                                        damage = weaponController.Attacks[weaponController.currentAttack].weapon_damage;
-                                        hasWeapon = true;
-                                    }
-                                }
-
-                                if (oneShotOneKill)
-                                    damage = (int)PlayerHealth + 50;
+								if (inventoryManager.slots[inventoryManager.currentSlot].weaponSlotInGame.Count > 0)
+								{
+									if (inventoryManager.slots[inventoryManager.currentSlot].weaponSlotInGame[inventoryManager.slots[inventoryManager.currentSlot].currentWeaponInSlot].fistAttack)
+									{
+										damage = (int) inventoryManager.FistDamage;
+									}
+									else if (inventoryManager.slots[inventoryManager.currentSlot].weaponSlotInGame[inventoryManager.slots[inventoryManager.currentSlot].currentWeaponInSlot].weapon)
+									{
+										var weaponController = inventoryManager.WeaponController;
+										damage = weaponController.Attacks[weaponController.currentAttack].weapon_damage;
+										hasWeapon = true;
+									}
+								}
+								
+								if (oneShotOneKill)
+									damage = (int) PlayerHealth + 50;
 
 #if PHOTON_UNITY_NETWORKING
-                                if (CharacterSync)
-                                    CharacterSync.UpdateKillAssists(inventoryManager.Controller.CharacterName);
+								if (CharacterSync)
+									CharacterSync.UpdateKillAssists(inventoryManager.Controller.CharacterName);
 #endif
 
-                                if (PlayerHealth - damage <= 0)
-                                {
+								if (PlayerHealth - damage <= 0)
+								{
 #if PHOTON_UNITY_NETWORKING
-                                    if (inventoryManager.Controller.CharacterSync)
-                                        inventoryManager.Controller.CharacterSync.AddScore(PlayerPrefs.GetInt("MeleeKill"), "melee");
+									if (inventoryManager.Controller.CharacterSync)
+										inventoryManager.Controller.CharacterSync.AddScore(PlayerPrefs.GetInt("MeleeKill"), "melee");
 #endif
 
-                                    KillerName = bodyColliderScript.attacking.GetComponent<Controller>().CharacterName;
+									KillerName = bodyColliderScript.attacking.GetComponent<Controller>().CharacterName;
 
-                                    if (hasWeapon && inventoryManager.WeaponController.WeaponImage)
-                                        KilledWeaponImage = (Texture2D)inventoryManager.WeaponController.WeaponImage;
-                                    else
-                                    {
-                                        if (inventoryManager.FistIcon)
-                                            KilledWeaponImage = (Texture2D)inventoryManager.FistIcon;
-                                    }
+									if (hasWeapon && inventoryManager.WeaponController.WeaponImage)
+										KilledWeaponImage = (Texture2D) inventoryManager.WeaponController.WeaponImage;
+									else
+									{
+										if (inventoryManager.FistIcon)
+											KilledWeaponImage = (Texture2D) inventoryManager.FistIcon;
+									}
 
 #if PHOTON_UNITY_NETWORKING
-                                    if (CharacterSync)
-                                        CharacterSync.AddScoreToAssistants();
+									if (CharacterSync)
+										CharacterSync.AddScoreToAssistants();
 #endif
-                                }
+								}
 
-                                PlayerHealth -= damage;
+								PlayerHealth -= damage;
 
-                                meleeDamage = true;
+								meleeDamage = true;
 
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
+								break;
+							}
+						}
+					}
+				}
+			}
+			
+			if(!getAnyDamage)
+				meleeDamage = false;
+		}
 
-            if (!getAnyDamage)
-                meleeDamage = false;
-        }
+		void CheckHealth()
+		{
+			if (UIManager.CharacterUI.Health)
+			{
+				UIManager.CharacterUI.Health.text = PlayerHealth < 0 ? "0" : PlayerHealth.ToString("F0");
+			}
 
-        void CheckHealth()
-        {
-            if (UIManager.CharacterUI.Health)
-            {
-                UIManager.CharacterUI.Health.text = PlayerHealth < 0 ? "0" : PlayerHealth.ToString("F0");
-            }
+			if (UIManager.CharacterUI.bloodSplatter)
+			{
+				if(!UIManager.CharacterUI.bloodSplatter.gameObject.activeSelf)
+					UIManager.CharacterUI.bloodSplatter.gameObject.SetActive(true);
+				
+				if (PlayerHealth < 40)
+				{
+					var healthPercentage = 100 - (PlayerHealth / 30 * 100);
+					
+					UIManager.CharacterUI.bloodSplatter.color = new Color(1, 1, 1, healthPercentage / 100);
+				}
+				else
+				{
+					UIManager.CharacterUI.bloodSplatter.color = new Color(1, 1, 1, 0);
+				}
+			}
 
-            if (UIManager.CharacterUI.bloodSplatter)
-            {
-                if (!UIManager.CharacterUI.bloodSplatter.gameObject.activeSelf)
-                    UIManager.CharacterUI.bloodSplatter.gameObject.SetActive(true);
+			if (UIManager.CharacterUI.HealthBar)
+			{
+				if (PlayerHealth >= 75)
+					UIManager.CharacterUI.HealthBar.color = Color.green;
+				if (PlayerHealth >= 50 & PlayerHealth < 75)
+					UIManager.CharacterUI.HealthBar.color = Color.yellow;
+				if (PlayerHealth >= 25 & PlayerHealth < 50)
+					UIManager.CharacterUI.HealthBar.color = new Color32(255, 140, 0, 255);
+				if (PlayerHealth < 25)
+					UIManager.CharacterUI.HealthBar.color = Color.red;
 
-                if (PlayerHealth < 40)
-                {
-                    var healthPercentage = 100 - (PlayerHealth / 30 * 100);
+				UIManager.CharacterUI.HealthBar.fillAmount = PlayerHealth / healthPercent;
+			}
 
-                    UIManager.CharacterUI.bloodSplatter.color = new Color(1, 1, 1, healthPercentage / 100);
-                }
-                else
-                {
-                    UIManager.CharacterUI.bloodSplatter.color = new Color(1, 1, 1, 0);
-                }
-            }
+			if (PlayerHealth <=0)
+			{
+				foreach (var part in BodyParts)
+				{
+					part.GetComponent<Rigidbody>().isKinematic = false;
+				}
 
-            if (UIManager.CharacterUI.HealthBar)
-            {
-                if (PlayerHealth >= 75)
-                    UIManager.CharacterUI.HealthBar.color = Color.green;
-                if (PlayerHealth >= 50 & PlayerHealth < 75)
-                    UIManager.CharacterUI.HealthBar.color = Color.yellow;
-                if (PlayerHealth >= 25 & PlayerHealth < 50)
-                    UIManager.CharacterUI.HealthBar.color = new Color32(255, 140, 0, 255);
-                if (PlayerHealth < 25)
-                    UIManager.CharacterUI.HealthBar.color = Color.red;
+				for (int i = 0; i < 8; i++)
+				{
 
-                UIManager.CharacterUI.HealthBar.fillAmount = PlayerHealth / healthPercent;
-            }
+					switch (UIManager.CharacterUI.Inventory.WeaponsButtons[i].transition)
+					{
+						case Selectable.Transition.ColorTint:
+							
+							var colorBlock = UIManager.CharacterUI.Inventory.WeaponsButtons[i].colors;
+							colorBlock.normalColor = UIManager.CharacterUI.Inventory.normButtonsColors[i];
+							UIManager.CharacterUI.Inventory.WeaponsButtons[i].colors = colorBlock;
+							break;
+						
+						case Selectable.Transition.SpriteSwap:
+							UIManager.CharacterUI.Inventory.WeaponsButtons[i].GetComponent<Image>().sprite = UIManager.CharacterUI.Inventory.normButtonsSprites[i];
+							break;
+					}
+				}
 
-            if (PlayerHealth <= 0)
-            {
-                foreach (var part in BodyParts)
-                {
-                    part.GetComponent<Rigidbody>().isKinematic = false;
-                }
+				UIManager.CharacterUI.DisableAll();
+				
+				anim.enabled = false;
+				WeaponManager.enabled = false;
+				enabled = false;
+				
+				WeaponManager.StopAllCoroutines();
 
-                for (int i = 0; i < 8; i++)
-                {
+				Helper.CameraExtensions.LayerCullingShow(CameraController.Camera, "Head");
+				
+				if(WeaponManager.WeaponController)
+					Destroy(WeaponManager.WeaponController.gameObject);
 
-                    switch (UIManager.CharacterUI.Inventory.WeaponsButtons[i].transition)
-                    {
-                        case Selectable.Transition.ColorTint:
+				
+				var enemies = FindObjectsOfType<EnemyController>();
+				foreach (var enemy in enemies)
+				{
+					enemy.Players.Clear();
+				}
 
-                            var colorBlock = UIManager.CharacterUI.Inventory.WeaponsButtons[i].colors;
-                            colorBlock.normalColor = UIManager.CharacterUI.Inventory.normButtonsColors[i];
-                            UIManager.CharacterUI.Inventory.WeaponsButtons[i].colors = colorBlock;
-                            break;
-
-                        case Selectable.Transition.SpriteSwap:
-                            UIManager.CharacterUI.Inventory.WeaponsButtons[i].GetComponent<Image>().sprite = UIManager.CharacterUI.Inventory.normButtonsSprites[i];
-                            break;
-                    }
-                }
-
-                UIManager.CharacterUI.DisableAll();
-
-                UIManager.CharacterUI.PickupHUD.gameObject.SetActive(false);
-                UIManager.CharacterUI.PickupEggHUD.gameObject.SetActive(false);
-
-                anim.enabled = false;
-                WeaponManager.enabled = false;
-                enabled = false;
-
-                WeaponManager.StopAllCoroutines();
-
-                Helper.CameraExtensions.LayerCullingShow(CameraController.Camera, "Head");
-
-                if (WeaponManager.WeaponController)
-                    Destroy(WeaponManager.WeaponController.gameObject);
-
-
-                var enemies = FindObjectsOfType<EnemyController>();
-                foreach (var enemy in enemies)
-                {
-                    enemy.Players.Clear();
-                }
-
-
-                if (CharacterSync)
-                {
+				
+				if (CharacterSync)
+				{
 #if PHOTON_UNITY_NETWORKING
-                    CharacterSync.Destroy();
+					CharacterSync.Destroy();
 #endif
-                }
-                else
-                {
-                    CameraController.enabled = false;
-                }
+				}
+				else
+				{
+					CameraController.enabled = false;
+				}
 
-                if (GetComponent<EggBag>())
-                {
-                    GetComponent<EggBag>().DropEgg();
-                }
+				if (!Application.isMobilePlatform && !projectSettings.mobileDebug)
+				{
+					Cursor.visible = true;
+					Cursor.lockState = CursorLockMode.None;
+				}
+			}
+		}
+		
 
-                if (!Application.isMobilePlatform && !projectSettings.mobileDebug)
-                {
-                    Cursor.visible = true;
-                    Cursor.lockState = CursorLockMode.None;
-                }
-            }
-        }
+		void ProcessMotion()
+		{
+			if(isPause)
+				return;
+			
+			if (TypeOfCamera != CharacterHelper.CameraType.TopDown)
+			{
+				MoveVector = !isJump ? transform.TransformDirection(MoveVector) : thisCamera.transform.TransformDirection(MoveVector);
+			}
+			else
+			{
+				if(!CameraParameters.lockCamera)
+					MoveVector = transform.TransformDirection(MoveVector);
+			}
 
+			if (TypeOfCamera != CharacterHelper.CameraType.TopDown)
+			{
+				CheckCollisionVector = thisCamera.transform.TransformDirection(CheckCollisionVector);
+			}
+			else
+			{
+				if(!CameraParameters.lockCamera)
+					CheckCollisionVector = transform.TransformDirection(CheckCollisionVector);
+				
+			}
+			
 
-        void ProcessMotion()
-        {
-            if (isPause)
-                return;
-
-            if (TypeOfCamera != CharacterHelper.CameraType.TopDown)
-            {
-                MoveVector = !isJump ? transform.TransformDirection(MoveVector) : thisCamera.transform.TransformDirection(MoveVector);
-            }
-            else
-            {
-                if (!CameraParameters.lockCamera)
-                    MoveVector = transform.TransformDirection(MoveVector);
-            }
-
-            if (TypeOfCamera != CharacterHelper.CameraType.TopDown)
-            {
-                CheckCollisionVector = thisCamera.transform.TransformDirection(CheckCollisionVector);
-            }
-            else
-            {
-                if (!CameraParameters.lockCamera)
-                    CheckCollisionVector = transform.TransformDirection(CheckCollisionVector);
-
-            }
-
-
-            if (MoveVector.magnitude > 1)
-                MoveVector = MoveVector.normalized;
+			if (MoveVector.magnitude > 1)
+				MoveVector = MoveVector.normalized;
 
 
-            //			if (CheckCollisionVector.magnitude > 1)
-            CheckCollisionVector = CheckCollisionVector.normalized;
+//			if (CheckCollisionVector.magnitude > 1)
+				CheckCollisionVector = CheckCollisionVector.normalized;
 
-            if (TypeOfCamera == CharacterHelper.CameraType.FirstPerson || MovementType == CharacterHelper.MovementType.FastAndAccurate)
-            {
-                float speed = 0;
+			if (TypeOfCamera == CharacterHelper.CameraType.FirstPerson || MovementType == CharacterHelper.MovementType.FastAndAccurate)
+			{
+				float speed = 0;
 
-                switch (TypeOfCamera)
-                {
-                    case CharacterHelper.CameraType.ThirdPerson:
-                        speed = MoveSpeed(TPSpeed);
-                        break;
-                    case CharacterHelper.CameraType.FirstPerson:
-                        speed = MoveSpeed(FPSpeed);
-                        break;
-                    case CharacterHelper.CameraType.TopDown:
-                        speed = MoveSpeed(TDSpeed);
-                        break;
-                }
+				switch (TypeOfCamera)
+				{
+					case CharacterHelper.CameraType.ThirdPerson:
+						speed = MoveSpeed(TPSpeed);
+						break;
+					case CharacterHelper.CameraType.FirstPerson:
+						speed = MoveSpeed(FPSpeed);
+						break;
+					case CharacterHelper.CameraType.TopDown:
+						speed = MoveSpeed(TDSpeed);
+						break;
+				}
 
-                CurrentSpeed = MoveDirection == Direction.Stationary ? Mathf.Lerp(CurrentSpeed, speed, 0.5f * Time.deltaTime) : Mathf.Lerp(CurrentSpeed, speed, 3 * Time.deltaTime);
+				CurrentSpeed = MoveDirection == Direction.Stationary ? Mathf.Lerp(CurrentSpeed, speed, 0.5f * Time.deltaTime) : Mathf.Lerp(CurrentSpeed, speed, 3 * Time.deltaTime);
 
-                if (!onGround || isJump)
-                {
-                    CurrentSpeed = Mathf.Lerp(CurrentSpeed, 2, 3 * Time.deltaTime);
-                }
+				if (!onGround || isJump)
+				{
+					CurrentSpeed = Mathf.Lerp(CurrentSpeed, 2, 3 * Time.deltaTime);
+				}
 
-                if (CurrentSpeed < 0)
-                    CurrentSpeed = 0;
-            }
+				if (CurrentSpeed < 0)
+					CurrentSpeed = 0;
+			}
 
-            var checkCollisionPoint1 = Vector3.zero;
-            var checkCollisionPoint2 = Vector3.zero;
-            Vector3 checkDir;
-            RaycastHit hit;
-            RaycastHit hit2;
-
-            if (Physics.Raycast(BodyObjects.Hips.position, Vector3.down, out hit, 100, (Helper.layerMask())))
+			var checkCollisionPoint1 = Vector3.zero;
+			var checkCollisionPoint2 = Vector3.zero;
+			Vector3 checkDir;
+			RaycastHit hit;
+			RaycastHit hit2;
+			
+			if (Physics.Raycast(BodyObjects.Hips.position, Vector3.down, out hit, 100, Helper.layerMask()))
 			{
 				if(Physics.Raycast(BodyObjects.Hips.position + BodyObjects.Hips.forward, Vector3.down, out hit2, 100, Helper.layerMask()))
 				{
@@ -1758,7 +1731,6 @@ namespace GercStudio.USK.Scripts
 
 		public void DeactivateCrouch()
 		{
-
 			if (!isMultiplayerCharacter)
 			{
 				RaycastHit hit;
@@ -1951,8 +1923,6 @@ namespace GercStudio.USK.Scripts
 
 		public void BodyLookAt(Transform bodyLookAt)
 		{
-            /*
-
 			if (!isMultiplayerCharacter)
 			{
 				if (WeaponManager.WeaponController)
@@ -2008,7 +1978,6 @@ namespace GercStudio.USK.Scripts
 
 			var direction = bodyLookAt.position - DirectionObject.position;
 
-            
 			var middleAngleX = Helper.AngleBetween(direction, DirectionObject).x;
 			var middleAngleY = Helper.AngleBetween(direction, DirectionObject).y;
 
@@ -2045,13 +2014,10 @@ namespace GercStudio.USK.Scripts
 				BodyObjects.TopBody.RotateAround(DirectionObject.position, DirectionObject.TransformDirection(Vector3.right), -middleAngleX);
 			}
 
-    */
-
 		}
 
 		public void TopBodyOffset()
 		{
-
 			if (!AdjustmentScene)
 			{
 				BodyObjects.TopBody.Rotate(Vector3.right, CharacterOffset.xRotationOffset);
@@ -2066,8 +2032,6 @@ namespace GercStudio.USK.Scripts
 
 		public void BodyRotate()
 		{
-            /*
-
 			if (DebugMode) return;
 
 			BodyLocalEulerAngles = BodyObjects.TopBody.localEulerAngles;
@@ -2111,7 +2075,6 @@ namespace GercStudio.USK.Scripts
 //			{
 //				CameraController.minMouseAbsolute = CameraController._mouseAbsolute.y;
 //			}
-*/
 		}
 		
 
@@ -2505,8 +2468,8 @@ namespace GercStudio.USK.Scripts
 		void FixedUpdate()
 		{
 			if(isCharacterInLobby) return;
-
-            IKHelper.AdjustFeetTarget(this, "right");
+			
+			IKHelper.AdjustFeetTarget(this, "right");
 			IKHelper.AdjustFeetTarget(this, "left");
 
 			IKHelper.FeetPositionSolver(this, "right");

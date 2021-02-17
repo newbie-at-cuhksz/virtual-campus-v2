@@ -353,7 +353,7 @@ namespace GercStudio.USK.Scripts
             if (isMultiplayerWeapon || Controller && !Controller.ActiveCharacter)
                 return;
             
-            //CheckWall();
+            CheckWall();
 
             if (autoReload && Attacks[currentAttack].curAmmo <= 0 && !isReloadEnabled && !startReload)
             {
@@ -564,9 +564,7 @@ namespace GercStudio.USK.Scripts
             if (Controller.projectSettings.ButtonsActivityStatuses[4] && (Input.GetKeyDown(Controller._gamepadCodes[4]) || Input.GetKeyDown(Controller._keyboardCodes[4]) ||
                 Helper.CheckGamepadAxisButton(4, Controller._gamepadButtonsAxes, Controller.hasAxisButtonPressed, "GetKeyDown",
                     Controller.projectSettings.AxisButtonValues[4])))
-            {
                 Reload();
-            }
         }
 
         public void SwitchAttack(string type)
@@ -1246,7 +1244,6 @@ namespace GercStudio.USK.Scripts
             grenadeScript.isGrenade = true;
             if (WeaponImage) grenadeScript.WeaponImage = WeaponImage;
             grenadeScript.FlashExplosion = Attacks[currentAttack].FlashExplosion;
-            grenadeScript.isToxin = Attacks[currentAttack].isToxin;
             grenadeScript.ApplyForce = Attacks[currentAttack].ApplyForce;
             grenadeScript.stickOnObject = Attacks[currentAttack].StickToObject;
 
@@ -1403,40 +1400,30 @@ namespace GercStudio.USK.Scripts
                 pause = Controller.isPause && Controller.CameraController.cameraPause;
 
             reloadVoidHasBeenActivated = true;
-
-            if (Attacks[currentAttack].inventoryAmmo > 0 && !pause && !DetectObject || isMultiplayerWeapon)
+            
+            if (Attacks[currentAttack].inventoryAmmo > 0 && Attacks[currentAttack].curAmmo < Attacks[currentAttack].maxAmmo && !pause && !DetectObject || isMultiplayerWeapon)
             {
-                if(Attacks[currentAttack].curAmmo < Attacks[currentAttack].maxAmmo)
-                {
-                    if (Controller.TypeOfCamera == CharacterHelper.CameraType.FirstPerson && isAimEnabled)
-                    { 
-                        Aim(false, true, false);
+                if (Controller.TypeOfCamera == CharacterHelper.CameraType.FirstPerson && isAimEnabled)
+                { 
+                    Aim(false, true, false);
                     
-                        StartCoroutine(ReloadTimeout());
-                    }
-                    else
-                    {
-                        isReloadEnabled = true;
-
-                        Controller.anim.SetBool("Reload", true);
-                    
-                        if(!isMultiplayerWeapon)
-                            MultiplayerReload = true;
-                    
-                        PlayReloadAudio();
-                        StartCoroutine(DisableAnimation());
-                        StartCoroutine(ReloadProcess());
-                    }
-
+                    StartCoroutine(ReloadTimeout());
                 }
-                //make sure the reload works when the ammo is full
-                else if(Attacks[currentAttack].curAmmo == Attacks[currentAttack].maxAmmo)
+                else
                 {
-                    reloadVoidHasBeenActivated = false;
+                    isReloadEnabled = true;
+
+                    Controller.anim.SetBool("Reload", true);
+                    
+                    if(!isMultiplayerWeapon)
+                        MultiplayerReload = true;
+                    
+                    PlayReloadAudio();
+                    StartCoroutine(DisableAnimation());
+                    StartCoroutine(ReloadProcess());
                 }
 
             }
-
         }
         
         void PlayReloadAudio()
@@ -1630,9 +1617,6 @@ namespace GercStudio.USK.Scripts
             
             if (DetectObject)
             {
-                
-                //UNDERTAKERW_MARK
-
                 var nearObject = false;
 
                 foreach (var col in hitColliders)

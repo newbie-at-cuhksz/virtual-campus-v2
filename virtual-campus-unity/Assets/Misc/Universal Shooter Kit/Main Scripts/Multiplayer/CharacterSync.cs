@@ -98,16 +98,7 @@ namespace GercStudio.USK.Scripts
             private void Awake()
             {
                 controller = GetComponent<Controller>();
-
-            /*
-            gameObject.layer = LayerMask.NameToLayer("Enemy");
-
-            foreach (Transform tran in GetComponentsInChildren<Transform>())
-            {
-                tran.gameObject.layer = LayerMask.NameToLayer("Enemy");
-            }
-            */
-
+                
                 if (FindObjectOfType<Lobby>())
                 {
                     if(controller.PlayerHealthBarBackground)
@@ -140,7 +131,6 @@ namespace GercStudio.USK.Scripts
 
             void Start()
             {
-
                 if(FindObjectOfType<Lobby>()) return;
                 
                 controller.MyTeam = (PUNHelper.Teams) photonView.Controller.CustomProperties["pt"];
@@ -579,8 +569,6 @@ namespace GercStudio.USK.Scripts
         {
             if (RoomManager.currentUIManager.MultiplayerGameRoom.MatchStats.AddScorePopup)
             {
-                return;
-
                 RoomManager.currentUIManager.MultiplayerGameRoom.MatchStats.AddScorePopup.gameObject.SetActive(true);
                 
                 switch (type)
@@ -793,11 +781,9 @@ namespace GercStudio.USK.Scripts
         {
             var stringValue =  (string)photonView.Owner.CustomProperties["wi"];
             var selectedWeapons = new List<int>();
-
-            if (stringValue != "")
+            
+            if(stringValue != "")
                 selectedWeapons.AddRange(Array.ConvertAll(stringValue.Split(','), int.Parse));
-            else
-                selectedWeapons.Add(9);
 
             return selectedWeapons;
         }

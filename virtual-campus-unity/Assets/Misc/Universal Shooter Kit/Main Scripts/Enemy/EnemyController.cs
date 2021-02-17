@@ -55,16 +55,11 @@ namespace GercStudio.USK.Scripts
         public bool UseCovers;
         public bool UseStates = true;
         public bool UseHealthBar = true;
-
-        
-
         public bool InSmoke;
         public bool setCoverPoint;
         public bool HasIndex;
         public bool inGrass;
         public bool allSidesMovement;
-
-        
 
         public List<Transform> checkPositions;
         public List<Transform> BodyParts = new List<Transform> {null, null, null, null, null, null, null, null, null, null, null};
@@ -847,7 +842,6 @@ namespace GercStudio.USK.Scripts
                 {
                     if (colliderScript.attackType == "Fire")
                     {
-                        if (!colliderScript.gameObject) return;
                         if (colliderScript.attacking.GetComponent<Controller>())
                         {
                             var weaponController = colliderScript.attacking.GetComponent<Controller>().WeaponManager.WeaponController;
@@ -1516,12 +1510,6 @@ namespace GercStudio.USK.Scripts
                 currentCheckPointNumber = 0;
                 createPointsForCheck = true;
                 checkedPoint = false;
-                //Debug.Log(gameObject);
-                //Debug.Log(EnemyHealth);
-                if (EnemyHealth <= 0)
-                {
-                    return;
-                }
                 agent.SetDestination(checkPositions[0].position);
                 StartCoroutine(AttackVision());
                 seeCheckPointTimeout = 0;
@@ -1643,7 +1631,6 @@ namespace GercStudio.USK.Scripts
 
             agent.updateRotation = true;
             agentIsStopped = false;
-
             agent.SetDestination(currentWaypointPosition);
 
             anim.SetBool("Move", true);
@@ -1677,7 +1664,6 @@ namespace GercStudio.USK.Scripts
                 if (currentCheckPointNumber < checkPositions.Count - 1)
                 {
                     currentCheckPointNumber += 1;
-
                     agent.SetDestination(checkPositions[currentCheckPointNumber].position);
                 }
                 else
@@ -1800,8 +1786,6 @@ namespace GercStudio.USK.Scripts
             if (EnemyHealth <= 0)
             {
                 CreateRagdoll();
-                StopAllCoroutines();
-                GetComponent<EnemyCocontroller>().TurnOffLights();
             }
         }
         

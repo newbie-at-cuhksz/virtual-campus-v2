@@ -185,11 +185,9 @@ namespace GercStudio.USK.Scripts
                     
                     if(Application.isMobilePlatform || projectSettings.mobileDebug)
                         controllerScript.UIManager.UIButtonsMainObject.SetActive(true);
-
+                    
                     if (controllerScript.thisCamera.GetComponent<AudioListener>())
-                        //controllerScript.thisCamera.GetComponent<AudioListener>().enabled = i == 0;
-                        controllerScript.thisCamera.GetComponent<AudioListener>().enabled = false;
-
+                        controllerScript.thisCamera.GetComponent<AudioListener>().enabled = i == 0;
                 }
             }
             else
@@ -282,13 +280,10 @@ namespace GercStudio.USK.Scripts
                         
                         if(currentControllerScript.UIManager.CharacterUI.crosshairMainObject)
                             currentControllerScript.UIManager.CharacterUI.crosshairMainObject.gameObject.SetActive(false);
+                        
 
-                        //
-                        //
-                        if (CurrentUIManager.CharacterUI.PickupHUD)
-                            CurrentUIManager.CharacterUI.PickupHUD.gameObject.SetActive(false);
-                        //
-                        //
+                        if(CurrentUIManager.CharacterUI.PickupImage)
+                            CurrentUIManager.CharacterUI.PickupImage.gameObject.SetActive(false);
 
                         cameraFlyingStep1 = Helper.ReachedPositionAndRotation(cameraForSwitching.transform.position,
                             controllers[LastCharacter].transform.position + Vector3.up * dist / 3);
@@ -334,7 +329,7 @@ namespace GercStudio.USK.Scripts
                             switchingCamera = false;
                             
                             if(controllers[CurrentCharacter].thisCamera.GetComponent<AudioListener>())
-                                //controllers[CurrentCharacter].thisCamera.GetComponent<AudioListener>().enabled = true;
+                                controllers[CurrentCharacter].thisCamera.GetComponent<AudioListener>().enabled = true;
                             
                             StopCoroutine(FlyCamera());
                             break;

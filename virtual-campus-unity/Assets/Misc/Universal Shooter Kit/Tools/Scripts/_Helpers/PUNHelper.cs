@@ -13,7 +13,6 @@ using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
@@ -40,9 +39,8 @@ namespace GercStudio.USK.Scripts
 			Kills,
 			Domination,
 			Survive, 
-			WithoutTarget,
-            Robbery
-        }
+			WithoutTarget
+		}
 
 		public enum Teams
 		{
@@ -85,7 +83,7 @@ namespace GercStudio.USK.Scripts
 		};
 
 		public static List<string> SpawnMethods = new List<string> {"Random", "On Bases"};
-		public static List<string> MatchTargets = new List<string> {"Without Purpose", "Kills", "Score", "Point Retention", "Robbery"};
+		public static List<string> MatchTargets = new List<string> {"Without Purpose", "Kills", "Score", "Point Retention"};
 		public static List<string> CanKillOther = new List<string> {"Everyone", "No One", "Only Opponents"};
 
 		public static string EmptyLine = "                                                                        ";
@@ -138,8 +136,6 @@ namespace GercStudio.USK.Scripts
 			public int weaponsLimit = 100;
 			public int KillMethod;
 			public string Description = "\n\n\n";
-
-            public int targetEgg = 2;
 			
 			public WeaponsToUse WeaponsToUse;
 			public List<WeaponSlot> WeaponsForThisMode;
@@ -190,8 +186,6 @@ namespace GercStudio.USK.Scripts
 			public Image C_CapturedFill;
 			public Image HardPoint_CurrentFill;
 			public Image HardPoint_CapturedFill;
-
-            public RawImage TeamLOGO;
 			
 
 			public Texture A_ScreenTargetTexture;
@@ -312,8 +306,8 @@ namespace GercStudio.USK.Scripts
 				if (MatchTimer)
 					Helper.EnableAllParents(MatchTimer.gameObject);
 				
-				//if(TargetText)
-					//Helper.EnableAllParents(TargetText.gameObject);
+				if(TargetText)
+					Helper.EnableAllParents(TargetText.gameObject);
 
 				if (type != "survival")
 				{
@@ -709,31 +703,11 @@ namespace GercStudio.USK.Scripts
 			public GameObject MainObject;
 			
 			public Transform PlayersContent;
-
-			public Transform TeamListContent;
-
-			public Transform MapsMenuRoom;
-
-			public Transform MapMenuContent;
-
-			public Transform ChangeCharacter;
 			
 			public Text FindPlayersStatsText;
 			public Text FindPlayersTimer;
 
 			public Button ExitButton;
-			public Button StartButton;
-			public Button ChooseMapButton;
-			public Button SwitchButton;
-			public Button ChangeButton;
-			public Button ExitCharacterButton;
-			public Button LeftCharacterButton;
-			public GameObject IconTypeShwon;
-			public Button RightCharacterButton;
-			public Teamlist TeamList;
-
-			//map menu in room
-			public Button ExitButtonMapMenu;
 
 			public void DisableAll()
 			{
@@ -743,19 +717,7 @@ namespace GercStudio.USK.Scripts
 				if(PlayersContent)
 					PlayersContent.gameObject.SetActive(false);
 				
-				if(TeamListContent)
-					TeamListContent.gameObject.SetActive(false);
-
-				if (MapsMenuRoom)
-					MapsMenuRoom.gameObject.SetActive(false);
-
-				if (ChangeCharacter)
-					ChangeCharacter.gameObject.SetActive(false);
-
-				if (IconTypeShwon)
-					IconTypeShwon.gameObject.SetActive(false);
-
-				if (FindPlayersTimer)
+				if(FindPlayersTimer)
 					FindPlayersTimer.gameObject.SetActive(false);
 				
 				if(FindPlayersStatsText)
@@ -763,21 +725,7 @@ namespace GercStudio.USK.Scripts
 				
 				if(ExitButton)
 					ExitButton.gameObject.SetActive(false);
-
-				if (StartButton)
-					StartButton.gameObject.SetActive(false);
-
-				if (ChooseMapButton)
-					ChooseMapButton.gameObject.SetActive(false);
-
-				if (SwitchButton)
-					SwitchButton.gameObject.SetActive(false);
-
-				if (ChangeButton)
-					ChangeButton.gameObject.SetActive(false);
-
-				if (TeamList)
-					TeamList.gameObject.SetActive(false);
+				
 			}
 
 			public void ActivateScreen()
@@ -788,10 +736,7 @@ namespace GercStudio.USK.Scripts
 				if(PlayersContent)
 					Helper.EnableAllParents(PlayersContent.gameObject);
 				
-				if(TeamListContent)
-					Helper.EnableAllParents(TeamListContent.gameObject);
-
-				if (FindPlayersTimer)
+				if(FindPlayersTimer)
 					Helper.EnableAllParents(FindPlayersTimer.gameObject);
 				
 				if(FindPlayersStatsText)
@@ -799,19 +744,6 @@ namespace GercStudio.USK.Scripts
 				
 				if(ExitButton)
 					Helper.EnableAllParents(ExitButton.gameObject);
-				
-				if(SwitchButton)
-					Helper.EnableAllParents(SwitchButton.gameObject);
-
-				if (ChangeButton)
-					Helper.EnableAllParents(ChangeButton.gameObject);
-
-				//buttons only available to master client/host
-				if (PhotonNetwork.IsMasterClient && StartButton)
-					Helper.EnableAllParents(StartButton.gameObject);
-
-				if (PhotonNetwork.IsMasterClient && ChooseMapButton)
-					Helper.EnableAllParents(ChooseMapButton.gameObject);
 			}
 		}
 
@@ -941,35 +873,9 @@ namespace GercStudio.USK.Scripts
 			}
 		}
 
-        [Serializable]
-        public class LoadingScreen
-        {
-            public GameObject MainObject;
+		#endregion
 
-            public GameObject Status;
-
-            public void DisableAll()
-            {
-                if (MainObject)
-                    MainObject.SetActive(false);
-
-                if (Status)
-                    Status.gameObject.SetActive(false);
-            }
-
-            public void ActivateAll()
-            {
-                if (MainObject)
-                    Helper.EnableAllParents(MainObject);
-
-                if (Status)
-                    Helper.EnableAllParents(Status.gameObject);
-            }
-        }
-
-        #endregion
-
-        public static string FormatTime(double time)
+		public static string FormatTime(double time)
 		{
 			int minutes = (int) time / 60;
 			int seconds = (int) time - 60 * minutes;
@@ -1277,19 +1183,6 @@ namespace GercStudio.USK.Scripts
 					break;
 			}
 			
-            if (redPlayers.Count > 0 && bluePlayers.Count == 0)
-            {
-                CapturePoint(Teams.Red, ref lastCapturedTeam, currentFill, capturedFill, 1, capturedTeam, immediately, redPlayers, bluePlayers, manager, realPoint, screentTarget);
-            }
-            else if (bluePlayers.Count > 0 && redPlayers.Count == 0)
-            {
-                CapturePoint(Teams.Blue, ref lastCapturedTeam, currentFill, capturedFill, 1, capturedTeam, immediately, redPlayers, bluePlayers, manager, realPoint, screentTarget);
-            }
-            else
-            {
-            }
-            /*
-
 			if (redPlayers.Count > bluePlayers.Count)
 			{
 				if (capturedTeam == "hpct" && bluePlayers.Count == 0 || capturedTeam != "hpct")
@@ -1315,10 +1208,9 @@ namespace GercStudio.USK.Scripts
 					ZeroizeHardPoint(currentUIManager, ref lastCapturedTeam, realPoint, screentTarget);
 				}    
 			}
-            */
+			
 
-
-            if (capturingPlayers.Count == 0)
+			if (capturingPlayers.Count == 0)
 			{
 				currentFill.fillAmount -= 1 * Time.deltaTime;
 			}
