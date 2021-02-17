@@ -28429,7 +28429,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 737916218}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -35507,7 +35507,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1994204359}
   m_HandleRect: {fileID: 1994204358}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -49304,6 +49304,34 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550349191}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1551692325 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1085472564530202342, guid: c87b1439f9dccb046bd58ce99449c001,
+    type: 3}
+  m_PrefabInstance: {fileID: 1978754647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1551692326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551692325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1558017713
 GameObject:
   m_ObjectHideFlags: 0
@@ -62963,7 +62991,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1978754647}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1551692325}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 133d53039920f3b4daa66414e58a9803, type: 3}
