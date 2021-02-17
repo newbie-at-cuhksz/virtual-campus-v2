@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - NPC
+  - Car
+  - PhotoTarget
+  - Water
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - PostEffect
+  - Minimap
+  - Hidden
+  - Building
+  - NPC
+  - SkinPreview
+  - CurrentRegion
+  - Boundary
+  - VoxWorld
+  - BigMap
+  - SkinIcon
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: NPC Name
+    uniqueID: 995537357
+    locked: 0
