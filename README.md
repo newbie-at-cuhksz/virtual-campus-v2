@@ -14,3 +14,5 @@
 ## 开发环境
 - Unity 2019.4.5f1
 - Magicavoxel 0.99.5.1
+
+该分支是PUN tut的Unity工程，已经实现PC联机功能。
