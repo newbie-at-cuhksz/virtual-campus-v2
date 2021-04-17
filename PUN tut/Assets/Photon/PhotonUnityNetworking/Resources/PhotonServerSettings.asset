@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AppSettings:
     AppIdRealtime: 4a64efca-f802-424b-a12a-f427194a8ea9
-    AppIdChat: 
+    AppIdChat: 92574bd0-575d-47cb-887b-8be077eaf0ce
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
     FixedRegion: CN
-    Server: 
+    Server: ns.photonengine.cn
     Port: 0
     ProxyServer: 
     Protocol: 0

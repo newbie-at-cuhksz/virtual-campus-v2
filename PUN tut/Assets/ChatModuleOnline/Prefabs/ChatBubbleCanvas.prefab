@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6681789430754224918}
   - component: {fileID: 5872867988643347412}
   - component: {fileID: 6465322740773103903}
-  - component: {fileID: 5376121136056960270}
   - component: {fileID: 6440003946203209601}
   m_Layer: 0
   m_Name: ChatBubbleCanvas
@@ -28,7 +27,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026718070396197946}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.031000018}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
@@ -101,19 +100,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5376121136056960270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1026718070396197946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fcdbe33ea12c8e48998abd07d85ee00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: {fileID: 0}
 --- !u!114 &6440003946203209601
 MonoBehaviour:
   m_ObjectHideFlags: 0

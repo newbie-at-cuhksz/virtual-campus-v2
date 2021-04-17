@@ -35,7 +35,7 @@ namespace Com.MyCompany.MyGame
         public Text UpdatedText;
 
         private InputField ChatInputField;
-        private Button SendButton;
+        private SendButton sendButton;
         private bool DisableSend;
 
 
@@ -43,7 +43,7 @@ namespace Com.MyCompany.MyGame
         {
             ChatInputField = GameObject.Find("ChatInputField").GetComponent<InputField>();
 
-            SendButton = ChatInputField.transform.Find("SendButton").gameObject.GetComponent<Button>();
+            sendButton = GameObject.Find("SendButton").GetComponent<Button>().GetComponent<SendButton>();
         }
 
         private void Update()
@@ -55,7 +55,7 @@ namespace Com.MyCompany.MyGame
                 if (!DisableSend)
                 {
                     //if (ChatInputField.text != "" && ChatInputField.text.Length > 0 && Input.GetKeyDown(KeyCode.Slash))
-                    if (ChatInputField.text != "" && ChatInputField.text.Length > 0 && (SendButton.GetComponent<SendButton>().ToSendBubble) )
+                    if (ChatInputField.text != "" && ChatInputField.text.Length > 0 && (sendButton.ToSendBubble) )
                     {
                         photonView.RPC("SendMessage", Photon.Pun.RpcTarget.AllBuffered, ChatInputField.text);
                         BubbleSpeechObject.SetActive(true);

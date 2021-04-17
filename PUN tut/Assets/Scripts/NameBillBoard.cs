@@ -6,14 +6,13 @@ using Photon.Pun;
 
 public class NameBillBoard : MonoBehaviour
 {
-    public Text name;
-    private GameObject thisPlayer;
+    public Text PlayerName;
+
     private GameObject mainCamera;
     void Start()
     {
-        thisPlayer = transform.parent.gameObject;
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        name.text = thisPlayer.GetComponent<PhotonView>().Owner.NickName;
+        PlayerName.text = transform.parent.gameObject.GetComponent<PhotonView>().Owner.NickName;
     }
 
     void LateUpdate()

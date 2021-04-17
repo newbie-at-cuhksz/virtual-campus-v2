@@ -1,6 +1,6 @@
 # How to use ChatModuleOnline
 
-1. 将`ChatInputField.prefab`拖入Scene。Scene中会出现聊天输入框和Send按钮
+1. 将`Chat Panel.prefab`拖入Scene。Scene中会出现聊天输入框和Send按钮等UI
 
 2. 将`ChatBubbleCanvas.prefab`拖入player prefab
 
