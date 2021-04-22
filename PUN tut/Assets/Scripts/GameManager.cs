@@ -19,8 +19,25 @@ namespace Com.MyCompany.MyGame
         public static GameManager Instance;
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
+        [Tooltip("The instance of info panel")]
+        public GameObject InfoPanel;
+
+        public GameObject ChatPanel;
+
+        #endregion
+
+
+        #region Private Field
+        private GameObject playerInstance;
+
+        #endregion
+
+        #region Unity callbacks
         void Start()
         {
+            InfoPanel.SetActive(false);
+            ChatPanel.SetActive(false);
+
             Instance = this;
             if (playerPrefab == null)
             {
@@ -32,8 +49,9 @@ namespace Com.MyCompany.MyGame
                 {
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                    PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
-                    
+                    playerInstance=PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+                    // Initialize player instance using scene infomation
+                    playerInstance.GetComponent<InfoPanelOnClick>().InfoPanel = this.InfoPanel;
                 }
                 else
                 {
@@ -41,6 +59,29 @@ namespace Com.MyCompany.MyGame
                 }
             }
         }
+
+        private void Update()
+        {
+            // 鼠标左键按下, 若未点到物体则消除info panel
+            if(Input.GetMouseButtonDown(0))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if(Physics.Raycast(ray,out hit))
+                {
+                    if(hit.collider.gameObject.GetComponent<HighlightableObject>()==null)
+                    {
+                        InfoPanel.SetActive(false);
+                    }
+                }
+                else
+                {
+                    InfoPanel.SetActive(false);
+                }
+            }
+        }
+
+
         #endregion
 
         #region Photon Callbacks

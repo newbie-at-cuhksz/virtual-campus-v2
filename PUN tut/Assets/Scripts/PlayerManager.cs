@@ -69,7 +69,6 @@ namespace Com.MyCompany.MyGame
         {
             CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
 
-
             if (_cameraWork != null)
             {
                 if (photonView.IsMine)
@@ -81,6 +80,7 @@ namespace Com.MyCompany.MyGame
             {
                 Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
             }
+
         }
 
         /// <summary>

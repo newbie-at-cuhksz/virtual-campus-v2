@@ -244,4 +244,18 @@ public class WorldChatManager : MonoBehaviour, IChatClientListener
         this.CurrentChannelText.text = channel.ToStringMessages();
     }
 
+
+    #region UI control
+
+    public void ShowPanel()
+    {
+        this.gameObject.SetActive(true);
+    }
+
+    public void HidePanel()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    #endregion
 }
