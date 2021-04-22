@@ -22,7 +22,7 @@ namespace Com.MyCompany.MyGame
         [Tooltip("The instance of info panel")]
         public GameObject InfoPanel;
 
-        public GameObject ChatPanel;
+        
 
         #endregion
 
@@ -36,7 +36,7 @@ namespace Com.MyCompany.MyGame
         void Start()
         {
             InfoPanel.SetActive(false);
-            ChatPanel.SetActive(false);
+            
 
             Instance = this;
             if (playerPrefab == null)
