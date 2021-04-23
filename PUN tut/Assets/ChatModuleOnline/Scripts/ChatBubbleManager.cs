@@ -41,9 +41,11 @@ namespace Com.MyCompany.MyGame
 
         private void Awake()
         {
-            ChatInputField = GameObject.Find("ChatInputField").GetComponent<InputField>();
+            //Inorder to find gameobject which is not active, use tranform.find instead of GameObject.find
+            GameObject mainCanvas = GameObject.Find("Canvas");
+            ChatInputField = mainCanvas.transform.Find("Chat Panel").Find("ChatInputField").GetComponent<InputField>();
 
-            sendButton = GameObject.Find("SendButton").GetComponent<Button>().GetComponent<SendButton>();
+            sendButton = mainCanvas.transform.Find("Chat Panel").Find("SendButton").GetComponent<Button>().GetComponent<SendButton>();
         }
 
         private void Update()

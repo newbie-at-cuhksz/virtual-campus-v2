@@ -11,6 +11,7 @@ namespace Com.MyCompany.MyGame
         [SerializeField]
         private float directionDampTime = .25f;
         private Animator animator;
+        private FloatingJoystick floatingJoystick;
 
         #endregion
 
@@ -20,6 +21,8 @@ namespace Com.MyCompany.MyGame
         void Start()
         {
             animator = GetComponent<Animator>();
+            GameObject mainCanvas = GameObject.Find("Canvas");
+            floatingJoystick = mainCanvas.transform.Find("Floating Joystick").GetComponent<FloatingJoystick>();
             if (!animator)
             {
                 Debug.LogError("PlayerAnimatorManager is Missing Animator Component", this);
@@ -49,8 +52,8 @@ namespace Com.MyCompany.MyGame
                     animator.SetTrigger("Jump");
                 }
             }
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
+            float h = floatingJoystick.Horizontal;
+            float v = floatingJoystick.Vertical;
             if (v < 0)
             {
                 v = 0;

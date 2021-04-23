@@ -49,7 +49,7 @@ namespace Com.MyCompany.MyGame
             }
             else
             {
-                
+                this.transform.GetComponent<PlayerController>().enabled = false;
             }
             // #Critical
             // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
@@ -181,7 +181,7 @@ namespace Com.MyCompany.MyGame
             {
                 if (!IsFiring)
                 {
-                    IsFiring = true;
+                    IsFiring = false;
                 }
             }
             if (Input.GetButtonUp("Fire1"))

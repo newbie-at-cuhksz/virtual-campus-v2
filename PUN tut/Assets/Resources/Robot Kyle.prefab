@@ -617,6 +617,7 @@ GameObject:
   - component: {fileID: 1759443501478457266}
   - component: {fileID: 5266717858142655761}
   - component: {fileID: 3577906014207844786}
+  - component: {fileID: -6395250942624652715}
   m_Layer: 0
   m_Name: Robot Kyle
   m_TagString: Untagged
@@ -854,6 +855,22 @@ MonoBehaviour:
   InfoPanel: {fileID: 0}
   ChildPanelPrefab: {fileID: 1355122600444325481, guid: d8307f8d4f3f902469b14f737bc0edf0,
     type: 3}
+--- !u!114 &-6395250942624652715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5590059226819965364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87875fbdc7e5d5541b9725dec8c40701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  jumpSpeed: 5
+  gravity: 20
+  isWalking: 0
 --- !u!1 &5590059226819965366
 GameObject:
   m_ObjectHideFlags: 0
@@ -2305,6 +2322,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChatBubbleCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6862892287606550247, guid: 18cdd1a8aac0f504e8bf9da8528c5604,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7170013300523076034, guid: 18cdd1a8aac0f504e8bf9da8528c5604,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8957268714178627289, guid: 18cdd1a8aac0f504e8bf9da8528c5604,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2412,18 +2439,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18cdd1a8aac0f504e8bf9da8528c5604, type: 3}
---- !u!114 &5970708869236944566 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7170013300523076034, guid: 18cdd1a8aac0f504e8bf9da8528c5604,
-    type: 3}
-  m_PrefabInstance: {fileID: 3557062016686712692}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7953600082084563347 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6862892287606550247, guid: 18cdd1a8aac0f504e8bf9da8528c5604,
@@ -2436,3 +2451,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3557062016686712692}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5970708869236944566 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7170013300523076034, guid: 18cdd1a8aac0f504e8bf9da8528c5604,
+    type: 3}
+  m_PrefabInstance: {fileID: 3557062016686712692}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
