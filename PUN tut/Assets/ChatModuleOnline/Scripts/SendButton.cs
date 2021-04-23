@@ -16,6 +16,7 @@ public class SendButton : MonoBehaviour
 
     private bool IsWorldChatMode;
     private bool IsBubbleChatMode;
+    private bool EnableSendBubble = true;
 
 
     private void Update()
@@ -30,14 +31,16 @@ public class SendButton : MonoBehaviour
     {
         if (IsWorldChatMode)
         {
-            worldChatManager.WorldChatSend(IsBubbleChatMode);
+            bool notToClearChatInputField = IsBubbleChatMode && EnableSendBubble;
+            worldChatManager.WorldChatSend(notToClearChatInputField);
         }
 
         if (IsBubbleChatMode)
         {
-            if (!ToSendBubble)
+            if (EnableSendBubble)
             {
                 ToSendBubble = true;
+                EnableSendBubble = false;
 
                 StartCoroutine("DisableToSendBubble");
             }
@@ -48,5 +51,8 @@ public class SendButton : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         ToSendBubble = false;
+
+        yield return new WaitForSeconds(3.9f); //  0.1 + 3.9 = 4.0 (The time which the bubble will remain. See `ChatBubbleManager.cs` => `Remove()`)
+        EnableSendBubble = true;
     }
 }

@@ -46,6 +46,8 @@ public class WorldChatManager : MonoBehaviour, IChatClientListener
         DontDestroyOnLoad(this.gameObject);
 
         // `UserName` should be set when the player join the game!!!!!! Wait for the API!!!
+        //this.UserName = Com.MyCompany.MyGame.PlayerManager.LocalPlayerInstance.GetComponent<PhotonView>().Owner.NickName; // dependence: `Com.MyCompany.MyGame.PlayerManager.LocalPlayerInstance`
+        this.UserName = PlayerPrefs.GetString("PlayerName"); // later `this.UserName` should be set by getting the player's nickname from database
         if (string.IsNullOrEmpty(this.UserName))
         {
             this.UserName = "user" + Environment.TickCount % 99; //made-up username
@@ -114,13 +116,13 @@ public class WorldChatManager : MonoBehaviour, IChatClientListener
     //    }
     //}
 
-    public void WorldChatSend(bool IsBubbleChatMode)
+    public void WorldChatSend(bool notToClearChatInputField)
     {
         if (this.InputFieldChat != null)
         {
             this.SendChatMessage(this.InputFieldChat.text);
             
-            if (!IsBubbleChatMode) // if we do not need to send a bubble chat, clear the InputFieldChat (see `SendButton.cs` => OnClickSend() method to see the reason why we need this if-statement )
+            if (!notToClearChatInputField)
             {
                 this.InputFieldChat.text = "";
             }

@@ -27,10 +27,6 @@ namespace Com.MyCompany.MyGame
         #endregion
 
 
-        #region Private Field
-        private GameObject playerInstance;
-
-        #endregion
 
         #region Unity callbacks
         void Start()
@@ -49,9 +45,9 @@ namespace Com.MyCompany.MyGame
                 {
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                    playerInstance=PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+                    PlayerManager.LocalPlayerInstance=PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
                     // Initialize player instance using scene infomation
-                    playerInstance.GetComponent<InfoPanelOnClick>().InfoPanel = this.InfoPanel;
+                    PlayerManager.LocalPlayerInstance.GetComponent<InfoPanelOnClick>().InfoPanel = this.InfoPanel;
                 }
                 else
                 {
