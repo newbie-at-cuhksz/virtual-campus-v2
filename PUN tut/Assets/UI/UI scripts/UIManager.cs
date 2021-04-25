@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public GameObject ChatPanel;
     public GameObject StopPanel;
     public GameObject FriendPanel;
+    public GameObject InventoryPanel;
     #endregion
 
     // Start is called before the first frame update
@@ -16,6 +17,8 @@ public class UIManager : MonoBehaviour
         ChatPanel.SetActive(false);
         StopPanel.SetActive(false);
         FriendPanel.SetActive(false);
+        InventoryPanel.SetActive(false);
+
     }
 
     // Update is called once per frame

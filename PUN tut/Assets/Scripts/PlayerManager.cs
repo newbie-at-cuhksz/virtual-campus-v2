@@ -30,6 +30,11 @@ namespace Com.MyCompany.MyGame
         public static GameObject LocalPlayerInstance;
         #endregion
 
+        #region Inventory Fields
+        //private Inventory inventory;
+        #endregion
+
+
 
         #region MonoBehaviour CallBacks
 
@@ -46,6 +51,12 @@ namespace Com.MyCompany.MyGame
                 GameObject myCamera = transform.Find("Camera").gameObject;
                 myCamera.SetActive(true);
                 myCamera.tag = "MainCamera";
+
+                // for inventory test
+                //inventory = new Inventory();
+                //Debug.Log("the inventory item 1:" + inventory.GetItemList()[0].itemType);
+                //Debug.Log("the inventory item 2:" + inventory.GetItemList()[1].itemType);
+                //Debug.Log("the inventory item 3:" + inventory.GetItemList()[2].itemType);
             }
             else
             {

@@ -43,6 +43,7 @@ public class InfoPanelOnClick : MonoBehaviour
             ChildPanel.transform.parent = InfoPanel.transform;
         }
 
+
         // update panel infomation
         
     }
