@@ -229,7 +229,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9136088161516083847}
+      - m_Target: {fileID: 0}
         m_MethodName: HidePanel
         m_Mode: 1
         m_Arguments:
@@ -351,7 +351,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0, y: -3.14}
   m_SizeDelta: {x: 8.6657715, y: -12.2655945}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -806,7 +806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ToSendBubble: 0
   chatModeSwitchButton: {fileID: 3844955962223960336}
-  worldChatManager: {fileID: 9136088161516083847}
+  worldChatManager: {fileID: 0}
 --- !u!1 &4021495600454271743
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,14 +969,14 @@ GameObject:
   - component: {fileID: 4021495600455669333}
   - component: {fileID: 4021495600455669335}
   - component: {fileID: 4021495600455669332}
-  - component: {fileID: 9136088161516083847}
+  - component: {fileID: 522396189}
   m_Layer: 5
   m_Name: Chat Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4021495600455669333
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1040,7 +1040,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.3
---- !u!114 &9136088161516083847
+--- !u!114 &522396189
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1049,12 +1049,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4021495600455669338}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34eabd8cf56f66741b5f4fb9a87c4e80, type: 3}
+  m_Script: {fileID: 11500000, guid: d8e33cf263d1fd542b0e65e0c9a9ea10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HistoryLengthToFetch: 0
-  InputFieldChat: {fileID: 4021495600454271737}
-  CurrentChannelText: {fileID: 2935189410088559264}
 --- !u!1 &4021495600518419530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1673,7 +1670,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.0008544922, y: 0}
-  m_SizeDelta: {x: 609.2073, y: 0}
+  m_SizeDelta: {x: 609.2073, y: 73}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &6812143446597265318
 CanvasRenderer:

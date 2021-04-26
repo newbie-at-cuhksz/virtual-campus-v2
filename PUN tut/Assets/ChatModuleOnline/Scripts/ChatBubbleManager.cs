@@ -59,7 +59,7 @@ namespace Com.MyCompany.MyGame
                     //if (ChatInputField.text != "" && ChatInputField.text.Length > 0 && Input.GetKeyDown(KeyCode.Slash))
                     if (ChatInputField.text != "" && ChatInputField.text.Length > 0 && (sendButton.ToSendBubble) )
                     {
-                        photonView.RPC("SendMessage", Photon.Pun.RpcTarget.AllBuffered, ChatInputField.text);
+                        photonView.RPC("RPCSendMessage", Photon.Pun.RpcTarget.AllBuffered, ChatInputField.text);
                         BubbleSpeechObject.SetActive(true);
 
                         ChatInputField.text = "";
@@ -71,7 +71,7 @@ namespace Com.MyCompany.MyGame
 
 
         [PunRPC]
-        private void SendMessage(string message)
+        private void RPCSendMessage(string message)
         {
             UpdatedText.text = message;
 
@@ -90,7 +90,7 @@ namespace Com.MyCompany.MyGame
         {
             if (stream.IsWriting)
             {
-                stream.SendNext(BubbleSpeechObject.active);
+                stream.SendNext(BubbleSpeechObject.activeSelf);
             }
             else if (stream.IsReading)
             {

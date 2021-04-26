@@ -9,9 +9,9 @@ using UnityEngine;
 
 
 using System;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 
-using UnityEngine;
+//using UnityEngine;
 using UnityEngine.UI;
 
 using Photon.Chat;
@@ -245,19 +245,4 @@ public class WorldChatManager : MonoBehaviour, IChatClientListener
         //this.selectedChannelName = channelName;
         this.CurrentChannelText.text = channel.ToStringMessages();
     }
-
-
-    #region UI control
-
-    public void ShowPanel()
-    {
-        this.gameObject.SetActive(true);
-    }
-
-    public void HidePanel()
-    {
-        this.gameObject.SetActive(false);
-    }
-
-    #endregion
 }
