@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿// this script is a modified version of 陈秋鸿's infoPanelOnclick script
+// this script should be attached to the Board gameobject (prefabs)
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 namespace Com.MyCompany.MyGame
 {
@@ -48,7 +51,6 @@ namespace Com.MyCompany.MyGame
 
 
             // update panel infomation
-
         }
     }
 }

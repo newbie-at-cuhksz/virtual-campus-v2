@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 142639563757656753}
   - component: {fileID: 7365415640697307043}
   - component: {fileID: 1404535704718791135}
+  - component: {fileID: -6468236498843112254}
   m_Layer: 0
-  m_Name: Board
+  m_Name: Board1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,8 +111,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc6bcd733e1146549b3b87faca1b4565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChildPanelPrefab: {fileID: 1355122600444325481, guid: d8307f8d4f3f902469b14f737bc0edf0,
+  ChildPanelPrefab: {fileID: 1355122600444325481, guid: 2fd83a266e7543242b571de248b8ada6,
     type: 3}
+--- !u!114 &-6468236498843112254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4093058154648969135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd29e0d64bab2b44f98cc9ddbf170cbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoardText: 
 --- !u!1 &4575794562807697562
 GameObject:
   m_ObjectHideFlags: 0

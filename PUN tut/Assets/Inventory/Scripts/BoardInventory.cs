@@ -38,5 +38,5 @@ public class BoardInventory
     public int GetClothesNumber() {
         return countClothes;
     }
-    
+
 }
