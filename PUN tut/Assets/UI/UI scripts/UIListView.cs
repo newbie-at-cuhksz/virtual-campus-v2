@@ -30,7 +30,7 @@ public class UIListView : MonoBehaviour
 
         // 显示
 
-        List<string> textlist = new List<string>() { "chh", "hyy", "lyy", "lzh", "rz", "ct", "ynj", "cw" };
+        List<string> textlist = new List<string>() {"cqh", "chh", "hyy", "lyy", "lzh", "rz", "ct", "ynj", "cw" ,"test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test" };
         for(int i=0;i<textlist.Count;++i)
         {
             GameObject go = Instantiate(FriendItemPrefab) as GameObject;
