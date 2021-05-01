@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 
 namespace Com.MyCompany.MyGame
@@ -47,6 +48,7 @@ namespace Com.MyCompany.MyGame
                 // 实例化child object
                 GameObject ChildPanel = Instantiate(ChildPanelPrefab) as GameObject;
                 ChildPanel.transform.parent = InfoPanel.transform;
+                ChildPanel.transform.Find("Text").GetComponent<Text>().text = this.GetComponent<BoardContent>().BoardText;
             }
 
 
