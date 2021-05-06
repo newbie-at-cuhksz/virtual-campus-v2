@@ -14,7 +14,6 @@ public class UIListView : MonoBehaviour
     void Start()
     {
         content = this.gameObject.transform.Find("Viewport").Find("Content").gameObject;
-        Debug.Log("test");
         LoadFriendList();
     }
 
@@ -36,6 +35,7 @@ public class UIListView : MonoBehaviour
             GameObject go = Instantiate(FriendItemPrefab) as GameObject;
             go.transform.Find("Text").gameObject.GetComponent<Text>().text = textlist[i];
             go.transform.parent = content.transform;
+            go.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 }

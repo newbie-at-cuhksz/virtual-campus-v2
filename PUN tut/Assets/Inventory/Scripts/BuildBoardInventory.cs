@@ -41,6 +41,7 @@ public class BuildBoardInventory:MonoBehaviour
                 int index = boardList[i].ItemIndex;
                 boardTemp.transform.Find("Text").gameObject.GetComponent<Text>().text = "Board" + index.ToString();
                 boardTemp.transform.parent = BoardContent.transform;
+                boardTemp.transform.localScale = new Vector3(1, 1, 1);
             }
         }
 
