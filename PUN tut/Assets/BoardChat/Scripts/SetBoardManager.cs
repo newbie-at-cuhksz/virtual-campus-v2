@@ -1,4 +1,4 @@
-﻿// this script is attached to the setBoardButton in the upper right of the UI.
+﻿// this script is attached to the setBoardController
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,14 +34,17 @@ namespace Com.MyCompany.MyGame
         
         }
 
-        public void placeBoard(string input)
+        /*public void placeBoard(string input)
         {
             Debug.Log("the input is: " + input);
             Quaternion rotation = PlayerManager.LocalPlayerInstance.transform.rotation;
-            BoardSetted = PhotonNetwork.InstantiateRoomObject("Board1", PlayerManager.LocalPlayerInstance.transform.position + rotation * (new Vector3(0f, 0f, 2f)), rotation);
-            BoardSetted.gameObject.GetComponent<BoardContent>().BoardText = input;
-            Debug.Log("the Board text is:" + BoardSetted.gameObject.GetComponent<BoardContent>().BoardText);
-        }
+            object [] instanceData = new object[1];
+            instanceData[0] = input;
+            BoardSetted = PhotonNetwork.InstantiateRoomObject("Board1", PlayerManager.LocalPlayerInstance.transform.position + rotation * (new Vector3(0f, 0f, 2f)), rotation, 0, instanceData);
+            //BoardSetted.gameObject.GetComponent<BoardContent>().BoardText = input;
+            Debug.Log("the Board text is:" + instanceData[0]);
+            Debug.Log("the board should be set");
+        }*/
     }
 
 }

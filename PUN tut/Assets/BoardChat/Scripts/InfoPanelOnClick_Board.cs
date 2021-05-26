@@ -36,6 +36,7 @@ namespace Com.MyCompany.MyGame
 
         private void OnMouseDown()
         {
+            
             InfoPanel.SetActive(true);
             if (_CurrentGameObject != gameObject)
             {
@@ -48,7 +49,10 @@ namespace Com.MyCompany.MyGame
                 // 实例化child object
                 GameObject ChildPanel = Instantiate(ChildPanelPrefab) as GameObject;
                 ChildPanel.transform.parent = InfoPanel.transform;
-                ChildPanel.transform.Find("Text").GetComponent<Text>().text = this.GetComponent<BoardContent>().BoardText;
+                PhotonView PV = transform.GetComponent<PhotonView>();
+                object[] data = PV.InstantiationData;
+                Debug.Log("the text is: "+ (string)data[0]);
+                ChildPanel.transform.Find("Text").GetComponent<Text>().text = (string)data[0];
             }
 
 
