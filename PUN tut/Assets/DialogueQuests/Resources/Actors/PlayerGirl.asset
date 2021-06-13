@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ea64a65dc7f514d84608bd9fa6b23b, type: 3}
+  m_Name: PlayerGirl
+  m_EditorClassIdentifier: 
+  actor_id: player
+  is_player: 1
+  title: Player
+  portrait: {fileID: 21300000, guid: 8ec885b969cb4b840adf5b2bb2664612, type: 3}
+  portrait_mini: {fileID: 21300000, guid: 8ec885b969cb4b840adf5b2bb2664612, type: 3}
+  animation: {fileID: 9100000, guid: c67eb23f50d3f3741a44fcb6fc1e7412, type: 2}
+  show_bubble: 0
+  bubble_offset: {x: 0, y: 2, z: 0}
+  bubble_size: 1
+  load_dialogue: {fileID: 0}
