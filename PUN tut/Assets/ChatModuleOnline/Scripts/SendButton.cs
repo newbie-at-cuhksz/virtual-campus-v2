@@ -8,51 +8,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SendButton : MonoBehaviour
+
+namespace ChatModuleOnline
 {
-    public bool ToSendBubble = false;                    // This is a signal for `ChatBubbleManager.cs` to use
-    public ChatModeSwitchButton chatModeSwitchButton;    // set in inspector (used to chat the Chat Mode)
-    public WorldChatManager worldChatManager;            // set in inspector
-
-    private bool IsWorldChatMode;
-    private bool IsBubbleChatMode;
-    private bool EnableSendBubble = true;
-
-
-    private void Update()
+    public class SendButton : MonoBehaviour
     {
-        // get current chat mode
-        IsWorldChatMode = chatModeSwitchButton.IsWorldChatMode;
-        IsBubbleChatMode = chatModeSwitchButton.IsBubbleChatMode;
-    }
+        public bool ToSendBubble = false;                    // This is a signal for `ChatBubbleManager.cs` to use
+        public string BubbleText = "";                       // `ChatBubbleManager.cs` read text from here
+        public ChatModeSwitchButton chatModeSwitchButton;    // set in inspector (used to chat the Chat Mode)
+        public WorldChatManager worldChatManager;            // set in inspector
+        public InputField ChatInputField;                    // set in inspector
+
+        public bool IsWorldChatMode;                         // This is also a signal for `ChatBubbleManager.cs` to use
+        private bool IsBubbleChatMode;
 
 
-    public void OnClickSend() // This method is also used in `ChatInputField` > Input Field > On End Edit, so that we can use "Enter" key to send the message.
-    {
-        if (IsWorldChatMode)
+        private void Update()
         {
-            bool notToClearChatInputField = IsBubbleChatMode && EnableSendBubble;
-            worldChatManager.WorldChatSend(notToClearChatInputField);
+            // get current chat mode
+            IsWorldChatMode = chatModeSwitchButton.IsWorldChatMode;
+            IsBubbleChatMode = chatModeSwitchButton.IsBubbleChatMode;
         }
 
-        if (IsBubbleChatMode)
+
+        public void OnClickSend() // This method is also used in `ChatInputField` > Input Field > On End Edit, so that we can use "Enter" key to send the message.
         {
-            if (EnableSendBubble)
+            BubbleText = "";
+
+            if (IsBubbleChatMode)
             {
-                ToSendBubble = true;
-                EnableSendBubble = false;
-
-                StartCoroutine("DisableToSendBubble");
+                if (ChatInputField.text != "" && ChatInputField.text.Length > 0)
+                {
+                    BubbleText = ChatInputField.text;
+                    ToSendBubble = true;
+                }
             }
+
+            if (IsWorldChatMode)
+                worldChatManager.WorldChatSend( false ); // always clear the input field
+            else
+                ChatInputField.text = "";
+
+            // The input field will always be cleared after a SEND button press,
+            // although sometimes bubble chat will not be sent successfully.
         }
-    }
-
-    IEnumerator DisableToSendBubble()
-    {
-        yield return new WaitForSeconds(0.1f);
-        ToSendBubble = false;
-
-        yield return new WaitForSeconds(3.9f); //  0.1 + 3.9 = 4.0 (The time which the bubble will remain. See `ChatBubbleManager.cs` => `Remove()`)
-        EnableSendBubble = true;
     }
 }

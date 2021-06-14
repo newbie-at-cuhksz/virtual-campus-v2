@@ -13,49 +13,53 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChatModeSwitchButton : MonoBehaviour
+
+namespace ChatModuleOnline
 {
-    public bool IsWorldChatMode = true;
-    public bool IsBubbleChatMode = true;
-
-    private string chatMode = "All";
-    private Text buttonText;
-
-
-    private void Start()
+    public class ChatModeSwitchButton : MonoBehaviour
     {
-        buttonText = GetComponentInChildren<Text>();
-        buttonText.text = chatMode;
-    }
+        public bool IsWorldChatMode = true;
+        public bool IsBubbleChatMode = true;
+
+        private string chatMode = "All";
+        private Text buttonText;
 
 
-    public void SwitchChatMode()
-    {
-        // All ==> Bubble ==> World ==> All ==> ...
-
-        if (IsWorldChatMode == true && IsBubbleChatMode == true) // currently in "All" mode
+        private void Start()
         {
-            // switch to "Bubble" mode
-            chatMode = "Bubble";
+            buttonText = GetComponentInChildren<Text>();
             buttonText.text = chatMode;
-            IsWorldChatMode = false;
-            IsBubbleChatMode = true;
-        } 
-        else if (IsWorldChatMode == false && IsBubbleChatMode == true) // currently in "Bubble" mode
-        {
-            // switch to "World" mode
-            chatMode = "World";
-            buttonText.text = chatMode;
-            IsWorldChatMode = true;
-            IsBubbleChatMode = false;
         }
-        else if (IsWorldChatMode == true && IsBubbleChatMode == false) // currently in "World" mode
+
+
+        public void SwitchChatMode()
         {
-            // switch to "All" mode
-            chatMode = "All";
-            buttonText.text = chatMode;
-            IsWorldChatMode = true;
-            IsBubbleChatMode = true;
+            // All ==> Bubble ==> World ==> All ==> ...
+
+            if (IsWorldChatMode == true && IsBubbleChatMode == true) // currently in "All" mode
+            {
+                // switch to "Bubble" mode
+                chatMode = "Bubble";
+                buttonText.text = chatMode;
+                IsWorldChatMode = false;
+                IsBubbleChatMode = true;
+            } 
+            else if (IsWorldChatMode == false && IsBubbleChatMode == true) // currently in "Bubble" mode
+            {
+                // switch to "World" mode
+                chatMode = "World";
+                buttonText.text = chatMode;
+                IsWorldChatMode = true;
+                IsBubbleChatMode = false;
+            }
+            else if (IsWorldChatMode == true && IsBubbleChatMode == false) // currently in "World" mode
+            {
+                // switch to "All" mode
+                chatMode = "All";
+                buttonText.text = chatMode;
+                IsWorldChatMode = true;
+                IsBubbleChatMode = true;
+            }
         }
     }
 }

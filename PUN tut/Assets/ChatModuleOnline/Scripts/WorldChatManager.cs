@@ -21,228 +21,230 @@ using AuthenticationValues = Photon.Chat.AuthenticationValues;
 using Photon.Pun;
 #endif
 
-
-public class WorldChatManager : MonoBehaviour, IChatClientListener
+namespace ChatModuleOnline
 {
-    public int HistoryLengthToFetch; // set in inspector. Up to a certain degree, previously sent messages can be fetched for context
-
-    public string UserName { get; set; }
-
-    private string selectedChannelName = "World"; // Note that in this `WorldChatManager` class, there is only one Channel, named "World"
-
-    public ChatClient chatClient;
-
-    #if !PHOTON_UNITY_NETWORKING
-    [SerializeField]
-    #endif
-    protected internal ChatAppSettings chatAppSettings;
-
-    public InputField InputFieldChat;   // set in inspector
-    public Text CurrentChannelText;     // set in inspector
-
-
-    public void Start()
+    public class WorldChatManager : MonoBehaviour, IChatClientListener
     {
-        DontDestroyOnLoad(this.gameObject);
+        public int HistoryLengthToFetch; // set in inspector. Up to a certain degree, previously sent messages can be fetched for context
 
-        // `UserName` should be set when the player join the game!!!!!! Wait for the API!!!
-        //this.UserName = Com.MyCompany.MyGame.PlayerManager.LocalPlayerInstance.GetComponent<PhotonView>().Owner.NickName; // dependence: `Com.MyCompany.MyGame.PlayerManager.LocalPlayerInstance`
-        this.UserName = PlayerPrefs.GetString("PlayerName"); // later `this.UserName` should be set by getting the player's nickname from database
-        if (string.IsNullOrEmpty(this.UserName))
-        {
-            this.UserName = "user" + Environment.TickCount % 99; //made-up username
-        }
+        public string UserName { get; set; }
 
-        #if PHOTON_UNITY_NETWORKING
-        this.chatAppSettings = PhotonNetwork.PhotonServerSettings.AppSettings.GetChatSettings();
+        private string selectedChannelName = "World"; // Note that in this `WorldChatManager` class, there is only one Channel, named "World"
+
+        public ChatClient chatClient;
+
+        #if !PHOTON_UNITY_NETWORKING
+        [SerializeField]
         #endif
+        protected internal ChatAppSettings chatAppSettings;
+
+        public InputField InputFieldChat;   // set in inspector
+        public Text CurrentChannelText;     // set in inspector
 
 
-        // code in `Connect()` in the demo script
-        this.chatClient = new ChatClient(this);
-        #if !UNITY_WEBGL
-        this.chatClient.UseBackgroundWorkerForSending = true;
-        #endif
-        this.chatClient.AuthValues = new AuthenticationValues(this.UserName);
-        this.chatClient.ConnectUsingSettings(this.chatAppSettings);
-    }
-
-
-    /// <summary>To avoid that the Editor becomes unresponsive, disconnect all Photon connections in OnDestroy.</summary>
-    public void OnDestroy()
-    {
-        if (this.chatClient != null)
+        public void Start()
         {
-            this.chatClient.Disconnect();
-        }
-    }
+            DontDestroyOnLoad(this.gameObject);
 
-
-    /// <summary>To avoid that the Editor becomes unresponsive, disconnect all Photon connections in OnApplicationQuit.</summary>
-    public void OnApplicationQuit()
-    {
-        if (this.chatClient != null)
-        {
-            this.chatClient.Disconnect();
-        }
-    }
-
-
-    public void Update()
-    {
-        if (this.chatClient != null)
-        {
-            this.chatClient.Service(); // make sure to call this regularly! it limits effort internally, so calling often is ok!
-        }
-    }
-
-
-    //public void OnEnterSend()
-    //{
-    //    if (Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.KeypadEnter))
-    //    {
-    //        this.SendChatMessage(this.InputFieldChat.text);
-    //        this.InputFieldChat.text = "";
-    //    }
-    //}
-
-
-    //public void OnClickSend()
-    //{
-    //    if (this.InputFieldChat != null)
-    //    {
-    //        this.SendChatMessage(this.InputFieldChat.text);
-    //        this.InputFieldChat.text = "";
-    //    }
-    //}
-
-    public void WorldChatSend(bool notToClearChatInputField)
-    {
-        if (this.InputFieldChat != null)
-        {
-            this.SendChatMessage(this.InputFieldChat.text);
-            
-            if (!notToClearChatInputField)
+            // `UserName` should be set when the player join the game!!!!!! Wait for the API!!!
+            //this.UserName = Com.MyCompany.MyGame.PlayerManager.LocalPlayerInstance.GetComponent<PhotonView>().Owner.NickName; // dependence: `Com.MyCompany.MyGame.PlayerManager.LocalPlayerInstance`
+            this.UserName = PlayerPrefs.GetString("PlayerName"); // later `this.UserName` should be set by getting the player's nickname from database
+            if (string.IsNullOrEmpty(this.UserName))
             {
-                this.InputFieldChat.text = "";
+                this.UserName = "user" + Environment.TickCount % 99; //made-up username
+            }
+
+            #if PHOTON_UNITY_NETWORKING
+            this.chatAppSettings = PhotonNetwork.PhotonServerSettings.AppSettings.GetChatSettings();
+            #endif
+
+
+            // code in `Connect()` in the demo script
+            this.chatClient = new ChatClient(this);
+            #if !UNITY_WEBGL
+            this.chatClient.UseBackgroundWorkerForSending = true;
+            #endif
+            this.chatClient.AuthValues = new AuthenticationValues(this.UserName);
+            this.chatClient.ConnectUsingSettings(this.chatAppSettings);
+        }
+
+
+        /// <summary>To avoid that the Editor becomes unresponsive, disconnect all Photon connections in OnDestroy.</summary>
+        public void OnDestroy()
+        {
+            if (this.chatClient != null)
+            {
+                this.chatClient.Disconnect();
             }
         }
-    }
 
 
-    private void SendChatMessage(string inputLine)
-    {
-        if (string.IsNullOrEmpty(inputLine))
+        /// <summary>To avoid that the Editor becomes unresponsive, disconnect all Photon connections in OnApplicationQuit.</summary>
+        public void OnApplicationQuit()
         {
-            return;
+            if (this.chatClient != null)
+            {
+                this.chatClient.Disconnect();
+            }
         }
 
 
-        // Send public (world) message
-        // Private chat feature will be add later
-        this.chatClient.PublishMessage(this.selectedChannelName, inputLine);
-    }
-
-
-    public void DebugReturn(ExitGames.Client.Photon.DebugLevel level, string message)
-    {
-        if (level == ExitGames.Client.Photon.DebugLevel.ERROR)
+        public void Update()
         {
-            Debug.LogError(message);
-        }
-        else if (level == ExitGames.Client.Photon.DebugLevel.WARNING)
-        {
-            Debug.LogWarning(message);
-        }
-        else
-        {
-            Debug.Log(message);
-        }
-    }
-
-    public void OnConnected()
-    {
-        this.chatClient.Subscribe(this.selectedChannelName, this.HistoryLengthToFetch); // Subscribe the channel "World"
-
-        this.chatClient.SetOnlineStatus(ChatUserStatus.Online); // You can set your online state (without a mesage).
-    }
-
-
-    public void OnDisconnected()
-    {
-        // Do nothing
-    }
-
-
-    public void OnChatStateChange(ChatState state)
-    {
-        // Do nothing.
-    }
-
-
-    public void OnSubscribed(string[] channels, bool[] results)
-    {
-        // Do nothing.
-    }
-
-
-    public void OnUnsubscribed(string[] channels)
-    {
-        // Do nothing.
-    }
-
-
-    public void OnGetMessages(string channelName, string[] senders, object[] messages)
-    {
-        if (channelName.Equals(this.selectedChannelName))
-        {
-            // update text
-            this.ShowChannel(this.selectedChannelName);
-        }
-    }
-
-
-    public void OnPrivateMessage(string sender, object message, string channelName)
-    {
-        // Do nothing at this stage.
-        // Add codes when the private chat feature is added!!!!
-    }
-
-
-    public void OnStatusUpdate(string user, int status, bool gotMessage, object message)
-    {
-        // Do nothing.
-    }
-
-
-    public void OnUserSubscribed(string channel, string user)
-    {
-        // Do nothing.
-    }
-
-
-    public void OnUserUnsubscribed(string channel, string user)
-    {
-        // Do nothing.
-    }
-
-
-    public void ShowChannel(string channelName)
-    {
-        if (string.IsNullOrEmpty(channelName))
-        {
-            return;
+            if (this.chatClient != null)
+            {
+                this.chatClient.Service(); // make sure to call this regularly! it limits effort internally, so calling often is ok!
+            }
         }
 
-        ChatChannel channel = null;
-        bool found = this.chatClient.TryGetChannel(channelName, out channel);
-        if (!found)
+
+        //public void OnEnterSend()
+        //{
+        //    if (Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.KeypadEnter))
+        //    {
+        //        this.SendChatMessage(this.InputFieldChat.text);
+        //        this.InputFieldChat.text = "";
+        //    }
+        //}
+
+
+        //public void OnClickSend()
+        //{
+        //    if (this.InputFieldChat != null)
+        //    {
+        //        this.SendChatMessage(this.InputFieldChat.text);
+        //        this.InputFieldChat.text = "";
+        //    }
+        //}
+
+        public void WorldChatSend(bool notToClearChatInputField)
         {
-            Debug.Log("ShowChannel failed to find channel: " + channelName);
-            return;
+            if (this.InputFieldChat != null)
+            {
+                this.SendChatMessage(this.InputFieldChat.text);
+            
+                if (!notToClearChatInputField)
+                {
+                    this.InputFieldChat.text = "";
+                }
+            }
         }
 
-        //this.selectedChannelName = channelName;
-        this.CurrentChannelText.text = channel.ToStringMessages();
+
+        private void SendChatMessage(string inputLine)
+        {
+            if (string.IsNullOrEmpty(inputLine))
+            {
+                return;
+            }
+
+
+            // Send public (world) message
+            // Private chat feature will be add later
+            this.chatClient.PublishMessage(this.selectedChannelName, inputLine);
+        }
+
+
+        public void DebugReturn(ExitGames.Client.Photon.DebugLevel level, string message)
+        {
+            if (level == ExitGames.Client.Photon.DebugLevel.ERROR)
+            {
+                Debug.LogError(message);
+            }
+            else if (level == ExitGames.Client.Photon.DebugLevel.WARNING)
+            {
+                Debug.LogWarning(message);
+            }
+            else
+            {
+                Debug.Log(message);
+            }
+        }
+
+        public void OnConnected()
+        {
+            this.chatClient.Subscribe(this.selectedChannelName, this.HistoryLengthToFetch); // Subscribe the channel "World"
+
+            this.chatClient.SetOnlineStatus(ChatUserStatus.Online); // You can set your online state (without a mesage).
+        }
+
+
+        public void OnDisconnected()
+        {
+            // Do nothing
+        }
+
+
+        public void OnChatStateChange(ChatState state)
+        {
+            // Do nothing.
+        }
+
+
+        public void OnSubscribed(string[] channels, bool[] results)
+        {
+            // Do nothing.
+        }
+
+
+        public void OnUnsubscribed(string[] channels)
+        {
+            // Do nothing.
+        }
+
+
+        public void OnGetMessages(string channelName, string[] senders, object[] messages)
+        {
+            if (channelName.Equals(this.selectedChannelName))
+            {
+                // update text
+                this.ShowChannel(this.selectedChannelName);
+            }
+        }
+
+
+        public void OnPrivateMessage(string sender, object message, string channelName)
+        {
+            // Do nothing at this stage.
+            // Add codes when the private chat feature is added!!!!
+        }
+
+
+        public void OnStatusUpdate(string user, int status, bool gotMessage, object message)
+        {
+            // Do nothing.
+        }
+
+
+        public void OnUserSubscribed(string channel, string user)
+        {
+            // Do nothing.
+        }
+
+
+        public void OnUserUnsubscribed(string channel, string user)
+        {
+            // Do nothing.
+        }
+
+
+        public void ShowChannel(string channelName)
+        {
+            if (string.IsNullOrEmpty(channelName))
+            {
+                return;
+            }
+
+            ChatChannel channel = null;
+            bool found = this.chatClient.TryGetChannel(channelName, out channel);
+            if (!found)
+            {
+                Debug.Log("ShowChannel failed to find channel: " + channelName);
+                return;
+            }
+
+            //this.selectedChannelName = channelName;
+            this.CurrentChannelText.text = channel.ToStringMessages();
+        }
     }
 }

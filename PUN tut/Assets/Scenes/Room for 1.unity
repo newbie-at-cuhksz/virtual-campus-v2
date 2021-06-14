@@ -7044,6 +7044,11 @@ PrefabInstance:
       propertyPath: worldChatManager
       value: 
       objectReference: {fileID: 147499278}
+    - target: {fileID: 2539353662618492413, guid: 7cfad87c821177e47bd01d51a59f6fdb,
+        type: 3}
+      propertyPath: ChatInputField
+      value: 
+      objectReference: {fileID: 4021495600103858400}
     - target: {fileID: 2539353663575019696, guid: 7cfad87c821177e47bd01d51a59f6fdb,
         type: 3}
       propertyPath: m_AnchoredPosition.x

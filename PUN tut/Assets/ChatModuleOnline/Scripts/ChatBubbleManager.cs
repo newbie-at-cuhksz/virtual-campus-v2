@@ -25,7 +25,8 @@ using UnityEngine.UI;
 using Photon.Pun;
 
 
-namespace Com.MyCompany.MyGame
+//namespace Com.MyCompany.MyGame // who add this??
+namespace ChatModuleOnline
 {
     public class ChatBubbleManager : MonoBehaviour, IPunObservable
     {
@@ -34,36 +35,33 @@ namespace Com.MyCompany.MyGame
         public GameObject BubbleSpeechObject;
         public Text UpdatedText;
 
-        private InputField ChatInputField;
         private SendButton sendButton;
-        private bool DisableSend;
+        private bool ableToShowBubble = true;
 
 
         private void Awake()
         {
             //Inorder to find gameobject which is not active, use tranform.find instead of GameObject.find
             GameObject mainCanvas = GameObject.Find("Canvas");
-            ChatInputField = mainCanvas.transform.Find("Chat Panel").Find("ChatInputField").GetComponent<InputField>();
 
             sendButton = mainCanvas.transform.Find("Chat Panel").Find("SendButton").GetComponent<Button>().GetComponent<SendButton>();
         }
 
         private void Update()
         {
-
             if (photonView.IsMine)
             {
-                //if (!DisableSend && ChatInputField.isFocused)
-                if (!DisableSend)
+                if (sendButton.ToSendBubble)
                 {
-                    //if (ChatInputField.text != "" && ChatInputField.text.Length > 0 && Input.GetKeyDown(KeyCode.Slash))
-                    if (ChatInputField.text != "" && ChatInputField.text.Length > 0 && (sendButton.ToSendBubble) )
-                    {
-                        photonView.RPC("RPCSendMessage", Photon.Pun.RpcTarget.AllBuffered, ChatInputField.text);
-                        BubbleSpeechObject.SetActive(true);
+                    sendButton.ToSendBubble = false;
 
-                        ChatInputField.text = "";
-                        DisableSend = true;
+                    string tmpbubbleText = sendButton.BubbleText;
+                    if (tmpbubbleText != "" && tmpbubbleText.Length > 0 && ableToShowBubble)
+                    {
+                        ableToShowBubble = false;
+
+                        photonView.RPC("RPCSendMessage", Photon.Pun.RpcTarget.AllBuffered, tmpbubbleText);
+                        BubbleSpeechObject.SetActive(true);
                     }
                 }
             }
@@ -83,7 +81,7 @@ namespace Com.MyCompany.MyGame
         {
             yield return new WaitForSeconds(4f);
             BubbleSpeechObject.SetActive(false);
-            DisableSend = false;
+            ableToShowBubble = true;
         }
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -97,6 +95,5 @@ namespace Com.MyCompany.MyGame
                 BubbleSpeechObject.SetActive((bool)stream.ReceiveNext());
             }
         }
-
     }
 }
