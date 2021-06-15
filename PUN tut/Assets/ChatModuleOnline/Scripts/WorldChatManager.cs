@@ -38,8 +38,11 @@ namespace ChatModuleOnline
         #endif
         protected internal ChatAppSettings chatAppSettings;
 
-        //public InputField InputFieldChat;   // set in inspector (for world chat)
-        public Text CurrentChannelText;     // set in inspector (for world chat)
+        //public InputField InputFieldChat;     // set in inspector (for world chat)
+        public Text CurrentChannelText;         // set in inspector (for world chat)
+        public Text CurrentPrivateChannelText;  // set in inspector (for private chat)
+
+        public PrivateChatSendButton privateChatSendButton;   // set in inspector (for private chat)
 
 
         public void Start()
@@ -169,8 +172,8 @@ namespace ChatModuleOnline
 
         public void OnPrivateMessage(string sender, object message, string channelName)
         {
-            // Do nothing at this stage.
-            // Add codes when the private chat feature is added!!!!
+            if (channelName.Equals(this.chatClient.GetPrivateChannelNameByUser(privateChatSendButton.privateChatTarget)))
+                privateChatSendButton.UpdatePrivateChatChannel();
         }
 
 
@@ -203,12 +206,51 @@ namespace ChatModuleOnline
             bool found = this.chatClient.TryGetChannel(channelName, out channel);
             if (!found)
             {
-                Debug.Log("ShowChannel failed to find channel: " + channelName);
+                Debug.Log("ShowWorldChannel failed to find channel: " + channelName);
                 return;
             }
 
             //this.selectedChannelName = channelName;
             this.CurrentChannelText.text = channel.ToStringMessages(); // update text 
+        }
+
+
+        // the following methods are for private chat
+
+        /// <summary> send private `message` to `privateChatTarget`, return true if send successfully
+        public bool PrivateChatSend(string privateChatTarget, string message)
+        {
+            bool sendPrivateSuccess = false;
+            if (!string.IsNullOrEmpty(message))
+            {
+                sendPrivateSuccess = this.chatClient.SendPrivateMessage(privateChatTarget, message);
+
+                if (!sendPrivateSuccess)
+                    Debug.Log("WorldChatManager.PrivateChatSend(): fail to send private message");
+            }
+            return sendPrivateSuccess;
+        }
+
+
+        public void ShowPrivateChatChannel(string privateChatTarget)
+        {
+            string currentPrivateChannelName = this.chatClient.GetPrivateChannelNameByUser(privateChatTarget);
+
+            if (string.IsNullOrEmpty(currentPrivateChannelName))
+            {
+                return;
+            }
+
+            ChatChannel channel = null;
+            bool found = this.chatClient.TryGetChannel(currentPrivateChannelName, out channel);
+            if (!found)
+            {
+                Debug.Log("ShowPrivateChatChannel failed to find channel: " + currentPrivateChannelName + "\n(It is OK is see this message if it is the first time to try to chat with this friend.)");
+                this.CurrentPrivateChannelText.text = "No messages. \nStart to chat now!";
+                return;
+            }
+
+            this.CurrentPrivateChannelText.text = channel.ToStringMessages();
         }
     }
 }

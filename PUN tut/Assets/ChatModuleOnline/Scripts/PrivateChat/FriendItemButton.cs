@@ -24,11 +24,16 @@ namespace ChatModuleOnline
         private Text NickNameUI;               // set in inspector (edit "Friend List Item" prefab)
 
         private WorldChatManager worldChatManager;
+        private PrivateChatSendButton privateChatSendButton;
 
 
         private void Start()
         {
             worldChatManager = GameObject.Find("WorldChatManagerScript").GetComponent<WorldChatManager>();
+
+            // find privateChatSendButton
+            GameObject mainCanvas = GameObject.Find("Canvas");
+            privateChatSendButton = mainCanvas.transform.Find("Friend Panel").Find("Private Chat Panel").Find("Private Chat Send Button").GetComponent<PrivateChatSendButton>();
         }
 
         public void UpdateNickNameUI()
@@ -39,14 +44,16 @@ namespace ChatModuleOnline
 
         /// <summary>
         /// When the friend item button is clicked, 
-        ///   1. show corresponding private chat channel
-        ///   2. update privateChatTarget
+        ///   1. update privateChatTarget
+        ///   2. show corresponding private chat channel
         /// </summary>
         public void OnClickShowPrivateChatChannel()
         {
-            // 1. show corresponding private chat channel
+            // 1. update privateChatTarget
+            privateChatSendButton.privateChatTarget = NickName;         // player's uid may be used later
 
-            // 2. update privateChatTarget
+            // 2. show corresponding private chat channel
+            privateChatSendButton.UpdatePrivateChatChannel();
         }
 
     }

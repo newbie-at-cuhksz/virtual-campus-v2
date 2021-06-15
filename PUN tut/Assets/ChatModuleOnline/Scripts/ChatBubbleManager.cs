@@ -44,7 +44,7 @@ namespace ChatModuleOnline
             //Inorder to find gameobject which is not active, use tranform.find instead of GameObject.find
             GameObject mainCanvas = GameObject.Find("Canvas");
 
-            sendButton = mainCanvas.transform.Find("Chat Panel").Find("SendButton").GetComponent<Button>().GetComponent<SendButton>();
+            sendButton = mainCanvas.transform.Find("Chat Panel").Find("SendButton").GetComponent<SendButton>();
         }
 
         private void Update()

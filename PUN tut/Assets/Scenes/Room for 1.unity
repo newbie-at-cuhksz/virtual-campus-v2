@@ -513,7 +513,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 92584275}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 92584277}
+        m_MethodName: OnClickSendPrivateChat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &92584275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,6 +574,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c6c8db9be1c39b45a2e6acf7b294f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  privateChatInputField: {fileID: 311196250}
+  privateChatTarget: 
 --- !u!1 &96695132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,7 +1595,18 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 92584277}
+        m_MethodName: OnClickSendPrivateChat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1919,7 +1943,7 @@ GameObject:
   - component: {fileID: 377697051}
   - component: {fileID: 377697050}
   m_Layer: 5
-  m_Name: Selected Channel Text
+  m_Name: Selected Private Channel Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8597,6 +8621,16 @@ PrefabInstance:
       propertyPath: CurrentChannelText
       value: 
       objectReference: {fileID: 2935189409805500601}
+    - target: {fileID: 6011117361954368279, guid: 57bce3707fbb11b4da66878d97f45655,
+        type: 3}
+      propertyPath: CurrentPrivateChannelText
+      value: 
+      objectReference: {fileID: 377697051}
+    - target: {fileID: 6011117361954368279, guid: 57bce3707fbb11b4da66878d97f45655,
+        type: 3}
+      propertyPath: privateChatSendButton
+      value: 
+      objectReference: {fileID: 92584277}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57bce3707fbb11b4da66878d97f45655, type: 3}
 --- !u!1001 &6774118192626012611
