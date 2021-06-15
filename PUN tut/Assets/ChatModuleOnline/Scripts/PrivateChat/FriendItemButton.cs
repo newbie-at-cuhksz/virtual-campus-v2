@@ -23,10 +23,30 @@ namespace ChatModuleOnline
         [SerializeField]
         private Text NickNameUI;               // set in inspector (edit "Friend List Item" prefab)
 
+        private WorldChatManager worldChatManager;
+
+
+        private void Start()
+        {
+            worldChatManager = GameObject.Find("WorldChatManagerScript").GetComponent<WorldChatManager>();
+        }
 
         public void UpdateNickNameUI()
         {
             NickNameUI.text = NickName;
+        }
+
+
+        /// <summary>
+        /// When the friend item button is clicked, 
+        ///   1. show corresponding private chat channel
+        ///   2. update privateChatTarget
+        /// </summary>
+        public void OnClickShowPrivateChatChannel()
+        {
+            // 1. show corresponding private chat channel
+
+            // 2. update privateChatTarget
         }
 
     }
