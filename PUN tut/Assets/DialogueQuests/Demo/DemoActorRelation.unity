@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 11400000, guid: 5e4f6bbf226f55948b6e9ce12afd55bc, type: 2}
-  text: I expected that!
+  text: You choose B!
   audio_clip: {fileID: 0}
   anim: 
   duration: 3
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 11400000, guid: 1037792111251f442853e5d45ad40b10, type: 2}
-  text: Hate you!
+  text: B!
   audio_clip: {fileID: 0}
   anim: 
   duration: 3
@@ -294,6 +294,106 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 44303871}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &57139123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 57139124}
+  - component: {fileID: 57139126}
+  - component: {fileID: 57139125}
+  m_Layer: 0
+  m_Name: NextScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &57139124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57139123}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.0673599, y: -1.2906151, z: 11.174149}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 764105305}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &57139125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57139123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8263f36b72f674c9f1ef61dcf4cbac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 99
+  target_id: 
+  oper: 0
+  value_object: {fileID: 0}
+  value_data: {fileID: 0}
+  value_audio: {fileID: 0}
+  value_custom: {fileID: 0}
+  value_int: 0
+  value_float: 1
+  value_string: 
+  callfunc_evt:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2135255178}
+        m_MethodName: JumpToScene_Single
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: DemoActorRelationPart2
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2135255178}
+        m_MethodName: Debug_Log
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: active!
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &57139126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57139123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2b7a1972166b924db4a047a1f9a9064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  event_id: 
+  trigger_type: 2
+  trigger_target: {fileID: 341756416}
+  trigger_actor: {fileID: 0}
+  trigger_limit: 1
+  dialogue_type: 0
+  pause_gameplay: 0
+  skipable: 0
+  comment: 
 --- !u!1001 &61772150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -713,7 +813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 11400000, guid: 5e4f6bbf226f55948b6e9ce12afd55bc, type: 2}
-  text: Hi! What do you think of me?
+  text: Hello!
   audio_clip: {fileID: 8300000, guid: 66ad3bfb620d70248be3e7769c1f5582, type: 3}
   anim: 
   duration: 4
@@ -1167,7 +1267,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.0599e-41, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 2.196e-42, y: 1.04e-43, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -3806,6 +3906,7 @@ Transform:
   - {fileID: 1236261599}
   - {fileID: 1346531420}
   - {fileID: 469880401}
+  - {fileID: 57139124}
   m_Father: {fileID: 1200155068}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5546,7 +5647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 11400000, guid: 5e4f6bbf226f55948b6e9ce12afd55bc, type: 2}
-  text: Ohh! Thats a bit much but thanks!
+  text: You choose A.
   audio_clip: {fileID: 0}
   anim: 
   duration: 3
@@ -6587,7 +6688,7 @@ GameObject:
   - component: {fileID: 1236261600}
   - component: {fileID: 1236261601}
   m_Layer: 0
-  m_Name: FirstLove
+  m_Name: A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7653,7 +7754,7 @@ GameObject:
   - component: {fileID: 1346531421}
   - component: {fileID: 1346531422}
   m_Layer: 0
-  m_Name: FirstHate
+  m_Name: B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8945,7 +9046,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 11400000, guid: 1037792111251f442853e5d45ad40b10, type: 2}
-  text: Love you!
+  text: A!
   audio_clip: {fileID: 0}
   anim: 
   duration: 3
@@ -12153,7 +12254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 11400000, guid: 5e4f6bbf226f55948b6e9ce12afd55bc, type: 2}
-  text: Do you like me?
+  text: A or B?
   audio_clip: {fileID: 0}
   anim: 
   duration: 4
@@ -12170,7 +12271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf71fc5ba6320346a395a9475321b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: I love you!
+  text: A
   go_to: {fileID: 1236261600}
   choice_index: 0
 --- !u!114 &2033157322
@@ -12185,7 +12286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf71fc5ba6320346a395a9475321b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: I hate you!
+  text: B
   go_to: {fileID: 1346531421}
   choice_index: 0
 --- !u!1001 &2039826810
@@ -12938,6 +13039,49 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2123879751}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2135255176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2135255177}
+  - component: {fileID: 2135255178}
+  m_Layer: 0
+  m_Name: SceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2135255177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135255176}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.1223674, y: 1.7467041, z: 24.312859}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2135255178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135255176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce53bfb166edac74e9bbb8a45ab944a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2137100913
 GameObject:
   m_ObjectHideFlags: 0
