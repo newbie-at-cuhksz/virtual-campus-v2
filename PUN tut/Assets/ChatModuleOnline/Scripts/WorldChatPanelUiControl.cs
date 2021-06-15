@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldChatPanelUiControl : MonoBehaviour
+
+namespace ChatModuleOnline
 {
-    #region UI control
-
-    public void ShowPanel()
+    public class WorldChatPanelUiControl : MonoBehaviour
     {
-        this.gameObject.SetActive(true);
-    }
+        #region UI control
 
-    public void HidePanel()
-    {
-        this.gameObject.SetActive(false);
-    }
+        public void ShowPanel()
+        {
+            this.gameObject.SetActive(true);
+        }
 
-    #endregion
+        public void HidePanel()
+        {
+            this.gameObject.SetActive(false);
+        }
+
+        #endregion
+    }
 }

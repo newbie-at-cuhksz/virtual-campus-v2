@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3479614214824156578}
   - component: {fileID: 3146511978564763852}
   - component: {fileID: 6584828478045968159}
+  - component: {fileID: 8358295877056791536}
   m_Layer: 5
   m_Name: Friend List Item
   m_TagString: Untagged
@@ -118,7 +119,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3146511978564763852}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8358295877056791536}
+        m_MethodName: OnClickShowPrivateChatChannel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8358295877056791536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259452304658092186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7eb0e7e2b3ca344b9657ebd1c554a9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NickNameUI: {fileID: 475839057357081293}
 --- !u!1 &1920135501838240168
 GameObject:
   m_ObjectHideFlags: 0

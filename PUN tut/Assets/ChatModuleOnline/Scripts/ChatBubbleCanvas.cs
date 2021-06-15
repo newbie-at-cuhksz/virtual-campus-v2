@@ -9,16 +9,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class ChatBubbleCanvas : MonoBehaviour
-{
-    private GameObject mainCamera;
-    void Start()
-    {
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-    }
 
-    void LateUpdate()
+namespace ChatModuleOnline
+{
+    public class ChatBubbleCanvas : MonoBehaviour
     {
-        transform.LookAt(transform.position + mainCamera.transform.forward);
+        private GameObject mainCamera;
+        void Start()
+        {
+            mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        }
+
+        void LateUpdate()
+        {
+            transform.LookAt(transform.position + mainCamera.transform.forward);
+        }
     }
 }
