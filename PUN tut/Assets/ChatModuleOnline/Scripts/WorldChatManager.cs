@@ -98,45 +98,14 @@ namespace ChatModuleOnline
         }
 
 
-        //public void OnEnterSend()
-        //{
-        //    if (Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.KeypadEnter))
-        //    {
-        //        this.SendChatMessage(this.InputFieldChat.text);
-        //        this.InputFieldChat.text = "";
-        //    }
-        //}
-
-
-        //public void OnClickSend()
-        //{
-        //    if (this.InputFieldChat != null)
-        //    {
-        //        this.SendChatMessage(this.InputFieldChat.text);
-        //        this.InputFieldChat.text = "";
-        //    }
-        //}
-
+        /// <summary> Send out message to the channel named "World"
         public void WorldChatSend(string message)
         {
             if (message != "" && message.Length > 0)
             {
-                this.SendChatMessage(message);
+                // Send public (world) message
+                this.chatClient.PublishMessage(this.selectedChannelName, message);
             }
-        }
-
-
-        private void SendChatMessage(string inputLine)
-        {
-            if (string.IsNullOrEmpty(inputLine))
-            {
-                return;
-            }
-
-
-            // Send public (world) message
-            // Private chat feature will be add later
-            this.chatClient.PublishMessage(this.selectedChannelName, inputLine);
         }
 
 
@@ -190,10 +159,10 @@ namespace ChatModuleOnline
 
         public void OnGetMessages(string channelName, string[] senders, object[] messages)
         {
-            if (channelName.Equals(this.selectedChannelName))
+            if (channelName.Equals(this.selectedChannelName)) // if the channel "World" receive new message
             {
                 // update text
-                this.ShowChannel(this.selectedChannelName);
+                this.ShowWorldChannel(this.selectedChannelName);
             }
         }
 
@@ -223,7 +192,7 @@ namespace ChatModuleOnline
         }
 
 
-        public void ShowChannel(string channelName)
+        public void ShowWorldChannel(string channelName)
         {
             if (string.IsNullOrEmpty(channelName))
             {
@@ -239,7 +208,7 @@ namespace ChatModuleOnline
             }
 
             //this.selectedChannelName = channelName;
-            this.CurrentChannelText.text = channel.ToStringMessages();
+            this.CurrentChannelText.text = channel.ToStringMessages(); // update text 
         }
     }
 }
