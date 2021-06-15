@@ -1,5 +1,5 @@
 ﻿/*
- * This script should be attached to `Chat Pannel` as a component.
+ * This script should be attached to `WorldChatManagerScript`, which is an empty gameobject or script-holder.
  */
 
 
@@ -38,17 +38,17 @@ namespace ChatModuleOnline
         #endif
         protected internal ChatAppSettings chatAppSettings;
 
-        public InputField InputFieldChat;   // set in inspector
-        public Text CurrentChannelText;     // set in inspector
+        //public InputField InputFieldChat;   // set in inspector (for world chat)
+        public Text CurrentChannelText;     // set in inspector (for world chat)
 
 
         public void Start()
         {
             DontDestroyOnLoad(this.gameObject);
 
-            // `UserName` should be set when the player join the game!!!!!! Wait for the API!!!
+            // `UserName` should be set when the player join the game
             //this.UserName = Com.MyCompany.MyGame.PlayerManager.LocalPlayerInstance.GetComponent<PhotonView>().Owner.NickName; // dependence: `Com.MyCompany.MyGame.PlayerManager.LocalPlayerInstance`
-            this.UserName = PlayerPrefs.GetString("PlayerName"); // later `this.UserName` should be set by getting the player's nickname from database
+            this.UserName = PlayerPrefs.GetString("PlayerName"); // later `this.UserName` should be set by getting the player's nickname (and UID if needed) from database
             if (string.IsNullOrEmpty(this.UserName))
             {
                 this.UserName = "user" + Environment.TickCount % 99; //made-up username
@@ -117,16 +117,11 @@ namespace ChatModuleOnline
         //    }
         //}
 
-        public void WorldChatSend(bool notToClearChatInputField)
+        public void WorldChatSend(string message)
         {
-            if (this.InputFieldChat != null)
+            if (message != "" && message.Length > 0)
             {
-                this.SendChatMessage(this.InputFieldChat.text);
-            
-                if (!notToClearChatInputField)
-                {
-                    this.InputFieldChat.text = "";
-                }
+                this.SendChatMessage(message);
             }
         }
 

@@ -1,5 +1,7 @@
 ﻿/*
  * This script should be attach to ChatInputField > SendButton
+ * 
+ * This "SendButton" refer to send world chat message button.
  */
 
 
@@ -14,7 +16,7 @@ namespace ChatModuleOnline
     public class SendButton : MonoBehaviour
     {
         public bool ToSendBubble = false;                    // This is a signal for `ChatBubbleManager.cs` to use
-        public string BubbleText = "";                       // `ChatBubbleManager.cs` read text from here
+        public string BubbleText = "";                       // `ChatBubbleManager.cs` read text from here; it is also used in world chat (this var is like a buffer)
         public ChatModeSwitchButton chatModeSwitchButton;    // set in inspector (used to chat the Chat Mode)
         public WorldChatManager worldChatManager;            // set in inspector
         public InputField ChatInputField;                    // set in inspector
@@ -33,24 +35,24 @@ namespace ChatModuleOnline
 
         public void OnClickSend() // This method is also used in `ChatInputField` > Input Field > On End Edit, so that we can use "Enter" key to send the message.
         {
-            BubbleText = "";
+            BubbleText = ""; // this var is like a buffer
 
-            if (IsBubbleChatMode)
+            // check the input field
+            if (ChatInputField.text != "" && ChatInputField.text.Length > 0)
             {
-                if (ChatInputField.text != "" && ChatInputField.text.Length > 0)
-                {
-                    BubbleText = ChatInputField.text;
+                BubbleText = ChatInputField.text; // buffer the message
+
+                if (IsBubbleChatMode)
                     ToSendBubble = true;
-                }
+
+                if (IsWorldChatMode)
+                    worldChatManager.WorldChatSend(BubbleText);
             }
-
-            if (IsWorldChatMode)
-                worldChatManager.WorldChatSend( false ); // always clear the input field
-            else
-                ChatInputField.text = "";
-
+            
+            // clear the input field
             // The input field will always be cleared after a SEND button press,
             // although sometimes bubble chat will not be sent successfully.
+            ChatInputField.text = "";
         }
     }
 }
