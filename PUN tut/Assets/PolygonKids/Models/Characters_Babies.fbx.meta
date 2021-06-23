@@ -1,0 +1,176 @@
+fileFormatVersion: 2
+guid: ff755f16c96122145a03b89206645f70
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Eye_Left
+    100004: Eye_Right
+    100006: Eyebrow_Left
+    100008: Eyebrow_Right
+    100010: Head
+    100012: Root_Baby
+    100014: SM_Chr_Baby_Alien_01
+    100016: SM_Chr_Baby_Alien_02
+    100018: SM_Chr_Baby_Alien_Crying_01
+    100020: SM_Chr_Baby_Alien_Crying_02
+    100022: SM_Chr_Baby_Demon_01
+    100024: SM_Chr_Baby_Demon_Crying_01
+    100026: SM_Chr_Baby_Goblin_01
+    100028: SM_Chr_Baby_Goblin_Crying_01
+    100030: SM_Chr_Baby_Human_01
+    100032: SM_Chr_Baby_Human_Crying_01
+    100034: SM_Chr_Baby_Pig_01
+    100036: SM_Chr_Baby_Pig_Crying_01
+    100038: SM_Chr_Baby_Troll_01
+    100040: SM_Chr_Baby_Troll_Crying_01
+    400000: //RootNode
+    400002: Eye_Left
+    400004: Eye_Right
+    400006: Eyebrow_Left
+    400008: Eyebrow_Right
+    400010: Head
+    400012: Root_Baby
+    400014: SM_Chr_Baby_Alien_01
+    400016: SM_Chr_Baby_Alien_02
+    400018: SM_Chr_Baby_Alien_Crying_01
+    400020: SM_Chr_Baby_Alien_Crying_02
+    400022: SM_Chr_Baby_Demon_01
+    400024: SM_Chr_Baby_Demon_Crying_01
+    400026: SM_Chr_Baby_Goblin_01
+    400028: SM_Chr_Baby_Goblin_Crying_01
+    400030: SM_Chr_Baby_Human_01
+    400032: SM_Chr_Baby_Human_Crying_01
+    400034: SM_Chr_Baby_Pig_01
+    400036: SM_Chr_Baby_Pig_Crying_01
+    400038: SM_Chr_Baby_Troll_01
+    400040: SM_Chr_Baby_Troll_Crying_01
+    2100000: KIds
+    2100002: lambert81
+    2100004: RedDemonGuy2SG1
+    2100006: lambert106
+    2100008: Rivals
+    2100010: Space
+    2100012: Crying
+    2300000: SM_Chr_Baby_Alien_Crying_01
+    2300002: SM_Chr_Baby_Alien_Crying_02
+    2300004: SM_Chr_Baby_Demon_Crying_01
+    2300006: SM_Chr_Baby_Goblin_Crying_01
+    2300008: SM_Chr_Baby_Human_Crying_01
+    2300010: SM_Chr_Baby_Pig_Crying_01
+    2300012: SM_Chr_Baby_Troll_Crying_01
+    3300000: SM_Chr_Baby_Alien_Crying_01
+    3300002: SM_Chr_Baby_Alien_Crying_02
+    3300004: SM_Chr_Baby_Demon_Crying_01
+    3300006: SM_Chr_Baby_Goblin_Crying_01
+    3300008: SM_Chr_Baby_Human_Crying_01
+    3300010: SM_Chr_Baby_Pig_Crying_01
+    3300012: SM_Chr_Baby_Troll_Crying_01
+    4300000: SM_Chr_Baby_Demon_01
+    4300002: SM_Chr_Baby_Pig_01
+    4300004: SM_Chr_Baby_Goblin_01
+    4300006: SM_Chr_Baby_Troll_01
+    4300008: SM_Chr_Baby_Human_01
+    4300010: SM_Chr_Baby_Alien_02
+    4300012: SM_Chr_Baby_Alien_01
+    4300014: SM_Chr_Baby_Human_Crying_01
+    4300016: SM_Chr_Baby_Alien_Crying_02
+    4300018: SM_Chr_Baby_Alien_Crying_01
+    4300020: SM_Chr_Baby_Troll_Crying_01
+    4300022: SM_Chr_Baby_Goblin_Crying_01
+    4300024: SM_Chr_Baby_Pig_Crying_01
+    4300026: SM_Chr_Baby_Demon_Crying_01
+    9500000: //RootNode
+    13700000: SM_Chr_Baby_Alien_01
+    13700002: SM_Chr_Baby_Alien_02
+    13700004: SM_Chr_Baby_Demon_01
+    13700006: SM_Chr_Baby_Goblin_01
+    13700008: SM_Chr_Baby_Human_01
+    13700010: SM_Chr_Baby_Pig_01
+    13700012: SM_Chr_Baby_Troll_01
+  externalObjects: {}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 0
+    keepQuads: 0
+    weldVertices: 0
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 0
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

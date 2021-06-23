@@ -1,0 +1,1739 @@
+fileFormatVersion: 2
+guid: a890656eebef5d94ab6c86843cebd735
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Ankle_L
+    100002: Ankle_R
+    100004: Ball_L
+    100006: Ball_R
+    100008: //RootNode
+    100010: Clavicle_L
+    100012: Clavicle_R
+    100014: Elbow_L
+    100016: Elbow_R
+    100018: Eyebrow_Left
+    100020: Eyebrow_Right
+    100022: Eyes_Left
+    100024: Eyes_Right
+    100026: Finger_01
+    100028: Finger_01 1
+    100030: Finger_02
+    100032: Finger_02 1
+    100034: Finger_03
+    100036: Finger_03 1
+    100038: Finger_04
+    100040: Finger_04 1
+    100042: Hand_L
+    100044: Hand_R
+    100046: Head
+    100048: Hips
+    100050: IndexFinger_01
+    100052: IndexFinger_01 1
+    100054: IndexFinger_02
+    100056: IndexFinger_02 1
+    100058: IndexFinger_03
+    100060: IndexFinger_03 1
+    100062: IndexFinger_04
+    100064: IndexFinger_04 1
+    100066: LowerLeg_L
+    100068: LowerLeg_R
+    100070: Neck
+    100072: Root
+    100074: Shoulder_L
+    100076: Shoulder_R
+    100078: SM_Chr_Kid_Adventure_01
+    100080: SM_Chr_Kid_Alien_01
+    100082: SM_Chr_Kid_Alien_02
+    100084: SM_Chr_Kid_Android_01
+    100086: SM_Chr_Kid_Ballerina_01
+    100088: SM_Chr_Kid_Cardboard_Robot_01
+    100090: SM_Chr_Kid_CargoShorts_01
+    100092: SM_Chr_Kid_Casual_04
+    100094: SM_Chr_Kid_Cheerleader_01
+    100096: SM_Chr_Kid_Cowboy_01
+    100098: SM_Chr_Kid_Cowboy_02
+    100100: SM_Chr_Kid_Demon_01
+    100102: SM_Chr_Kid_Doctor_01
+    100104: SM_Chr_Kid_Dress_01
+    100106: SM_Chr_Kid_Eastern_01
+    100108: SM_Chr_Kid_Eastern_Skirt_01
+    100110: SM_Chr_Kid_Elf_Warrior_01
+    100112: SM_Chr_Kid_Exercise_01
+    100114: SM_Chr_Kid_Exercise_02
+    100116: SM_Chr_Kid_Explorer_01
+    100118: SM_Chr_Kid_Face_01
+    100120: SM_Chr_Kid_Farmer_01
+    100122: SM_Chr_Kid_Fat_01
+    100124: SM_Chr_Kid_Fat_02
+    100126: SM_Chr_Kid_Footballer_01
+    100128: SM_Chr_Kid_Geisha_01
+    100130: SM_Chr_Kid_Ghost_01
+    100132: SM_Chr_Kid_Goblin_01
+    100134: SM_Chr_Kid_Goblin_02
+    100136: SM_Chr_Kid_HolidayElf_01
+    100138: SM_Chr_Kid_Hoodie_01
+    100140: SM_Chr_Kid_Hoodie_02
+    100142: SM_Chr_Kid_Hoodie_03
+    100144: SM_Chr_Kid_JungleKid_01
+    100146: SM_Chr_Kid_Karate_01
+    100148: SM_Chr_Kid_Knight_01
+    100150: SM_Chr_Kid_Magician_01
+    100152: SM_Chr_Kid_Maid_01
+    100154: SM_Chr_Kid_Mummy_01
+    100156: SM_Chr_Kid_Nerd_01
+    100158: SM_Chr_Kid_Ninja_01
+    100160: SM_Chr_Kid_Onesie_Bunny_01
+    100162: SM_Chr_Kid_Onesie_Cat_01
+    100164: SM_Chr_Kid_Onesie_Dino_01
+    100166: SM_Chr_Kid_Onesie_Tiger_01
+    100168: SM_Chr_Kid_Overalls_01
+    100170: SM_Chr_Kid_Overalls_02
+    100172: SM_Chr_Kid_Overalls_Dress_01
+    100174: SM_Chr_Kid_Pajamas_01
+    100176: SM_Chr_Kid_Peasant_01
+    100178: SM_Chr_Kid_Pig_01
+    100180: SM_Chr_Kid_Pilot_01
+    100182: SM_Chr_Kid_Pirate_01
+    100184: SM_Chr_Kid_Pirate_02
+    100186: SM_Chr_Kid_PlaidShirt_01
+    100188: SM_Chr_Kid_PoliceOfficer_01
+    100190: SM_Chr_Kid_Prince_01
+    100192: SM_Chr_Kid_Princess_01
+    100194: SM_Chr_Kid_PufferVest_01
+    100196: SM_Chr_Kid_Punk_01
+    100198: SM_Chr_Kid_Raincoat_01
+    100200: SM_Chr_Kid_Raincoat_02
+    100202: SM_Chr_Kid_Robber_01
+    100204: SM_Chr_Kid_Robot_01
+    100206: SM_Chr_Kid_Samurai_01
+    100208: SM_Chr_Kid_Schoolboy_01
+    100210: SM_Chr_Kid_Schoolboy_02
+    100212: SM_Chr_Kid_Schoolgirl_01
+    100214: SM_Chr_Kid_Schoolgirl_02
+    100216: SM_Chr_Kid_Scifi_Casual_01
+    100218: SM_Chr_Kid_Scifi_Spacesuit_01
+    100220: SM_Chr_Kid_Scout_Shorts_01
+    100222: SM_Chr_Kid_Scout_Skirt_01
+    100224: SM_Chr_Kid_ShirtDress_01
+    100226: SM_Chr_Kid_Skater_01
+    100228: SM_Chr_Kid_Skeleton_01
+    100230: SM_Chr_Kid_SnowJacket_01
+    100232: SM_Chr_Kid_Spacesuit_01
+    100234: SM_Chr_Kid_Summer_01
+    100236: SM_Chr_Kid_Superhero_01
+    100238: SM_Chr_Kid_Superhero_02
+    100240: SM_Chr_Kid_Survivor_01
+    100242: SM_Chr_Kid_Survivor_Armoured_01
+    100244: SM_Chr_Kid_Survivor_Vest_01
+    100246: SM_Chr_Kid_Sweater_01
+    100248: SM_Chr_Kid_Sweater_02
+    100250: SM_Chr_Kid_Sweater_Dress_01
+    100252: SM_Chr_Kid_Swimwear_01
+    100254: SM_Chr_Kid_Swimwear_02
+    100256: SM_Chr_Kid_Tracksuit_01
+    100258: SM_Chr_Kid_Troll_01
+    100260: SM_Chr_Kid_Trucker_01
+    100262: SM_Chr_Kid_Viking_01
+    100264: SM_Chr_Kid_Viking_02
+    100266: SM_Chr_Kid_Werewolf_01
+    100268: SM_Chr_Kid_Wetsuit_01
+    100270: SM_Chr_Kid_WinterCoat_01
+    100272: SM_Chr_Kid_Witch_01
+    100274: SM_Chr_Kid_Wizard_01
+    100276: SM_Chr_Kid_Zombie_01
+    100278: SM_Chr_Kid_Zombie_Dress_01
+    100280: Spine_01
+    100282: Spine_02
+    100284: Spine_03
+    100286: Thumb_01
+    100288: Thumb_01 1
+    100290: Thumb_02
+    100292: Thumb_02 1
+    100294: Thumb_03
+    100296: Thumb_03 1
+    100298: Toes_L
+    100300: Toes_R
+    100302: UpperLeg_L
+    100304: UpperLeg_R
+    100306: SM_Chr_Kid_Eyebrows_01
+    100308: SM_Chr_Kid_Eyes_Female_01
+    100310: SM_Chr_Kid_Eyes_Male_01
+    100312: SM_Chr_Eyebrows_01
+    100314: SM_Chr_Eyes_Female_01
+    100316: SM_Chr_Eyes_Male_01
+    100318: SM_Chr_Kid_Robot_Face_01
+    100320: SM_Chr_Kid_Face_Freckles_01
+    400000: Ankle_L
+    400002: Ankle_R
+    400004: Ball_L
+    400006: Ball_R
+    400008: //RootNode
+    400010: Clavicle_L
+    400012: Clavicle_R
+    400014: Elbow_L
+    400016: Elbow_R
+    400018: Eyebrow_Left
+    400020: Eyebrow_Right
+    400022: Eyes_Left
+    400024: Eyes_Right
+    400026: Finger_01
+    400028: Finger_01 1
+    400030: Finger_02
+    400032: Finger_02 1
+    400034: Finger_03
+    400036: Finger_03 1
+    400038: Finger_04
+    400040: Finger_04 1
+    400042: Hand_L
+    400044: Hand_R
+    400046: Head
+    400048: Hips
+    400050: IndexFinger_01
+    400052: IndexFinger_01 1
+    400054: IndexFinger_02
+    400056: IndexFinger_02 1
+    400058: IndexFinger_03
+    400060: IndexFinger_03 1
+    400062: IndexFinger_04
+    400064: IndexFinger_04 1
+    400066: LowerLeg_L
+    400068: LowerLeg_R
+    400070: Neck
+    400072: Root
+    400074: Shoulder_L
+    400076: Shoulder_R
+    400078: SM_Chr_Kid_Adventure_01
+    400080: SM_Chr_Kid_Alien_01
+    400082: SM_Chr_Kid_Alien_02
+    400084: SM_Chr_Kid_Android_01
+    400086: SM_Chr_Kid_Ballerina_01
+    400088: SM_Chr_Kid_Cardboard_Robot_01
+    400090: SM_Chr_Kid_CargoShorts_01
+    400092: SM_Chr_Kid_Casual_04
+    400094: SM_Chr_Kid_Cheerleader_01
+    400096: SM_Chr_Kid_Cowboy_01
+    400098: SM_Chr_Kid_Cowboy_02
+    400100: SM_Chr_Kid_Demon_01
+    400102: SM_Chr_Kid_Doctor_01
+    400104: SM_Chr_Kid_Dress_01
+    400106: SM_Chr_Kid_Eastern_01
+    400108: SM_Chr_Kid_Eastern_Skirt_01
+    400110: SM_Chr_Kid_Elf_Warrior_01
+    400112: SM_Chr_Kid_Exercise_01
+    400114: SM_Chr_Kid_Exercise_02
+    400116: SM_Chr_Kid_Explorer_01
+    400118: SM_Chr_Kid_Face_01
+    400120: SM_Chr_Kid_Farmer_01
+    400122: SM_Chr_Kid_Fat_01
+    400124: SM_Chr_Kid_Fat_02
+    400126: SM_Chr_Kid_Footballer_01
+    400128: SM_Chr_Kid_Geisha_01
+    400130: SM_Chr_Kid_Ghost_01
+    400132: SM_Chr_Kid_Goblin_01
+    400134: SM_Chr_Kid_Goblin_02
+    400136: SM_Chr_Kid_HolidayElf_01
+    400138: SM_Chr_Kid_Hoodie_01
+    400140: SM_Chr_Kid_Hoodie_02
+    400142: SM_Chr_Kid_Hoodie_03
+    400144: SM_Chr_Kid_JungleKid_01
+    400146: SM_Chr_Kid_Karate_01
+    400148: SM_Chr_Kid_Knight_01
+    400150: SM_Chr_Kid_Magician_01
+    400152: SM_Chr_Kid_Maid_01
+    400154: SM_Chr_Kid_Mummy_01
+    400156: SM_Chr_Kid_Nerd_01
+    400158: SM_Chr_Kid_Ninja_01
+    400160: SM_Chr_Kid_Onesie_Bunny_01
+    400162: SM_Chr_Kid_Onesie_Cat_01
+    400164: SM_Chr_Kid_Onesie_Dino_01
+    400166: SM_Chr_Kid_Onesie_Tiger_01
+    400168: SM_Chr_Kid_Overalls_01
+    400170: SM_Chr_Kid_Overalls_02
+    400172: SM_Chr_Kid_Overalls_Dress_01
+    400174: SM_Chr_Kid_Pajamas_01
+    400176: SM_Chr_Kid_Peasant_01
+    400178: SM_Chr_Kid_Pig_01
+    400180: SM_Chr_Kid_Pilot_01
+    400182: SM_Chr_Kid_Pirate_01
+    400184: SM_Chr_Kid_Pirate_02
+    400186: SM_Chr_Kid_PlaidShirt_01
+    400188: SM_Chr_Kid_PoliceOfficer_01
+    400190: SM_Chr_Kid_Prince_01
+    400192: SM_Chr_Kid_Princess_01
+    400194: SM_Chr_Kid_PufferVest_01
+    400196: SM_Chr_Kid_Punk_01
+    400198: SM_Chr_Kid_Raincoat_01
+    400200: SM_Chr_Kid_Raincoat_02
+    400202: SM_Chr_Kid_Robber_01
+    400204: SM_Chr_Kid_Robot_01
+    400206: SM_Chr_Kid_Samurai_01
+    400208: SM_Chr_Kid_Schoolboy_01
+    400210: SM_Chr_Kid_Schoolboy_02
+    400212: SM_Chr_Kid_Schoolgirl_01
+    400214: SM_Chr_Kid_Schoolgirl_02
+    400216: SM_Chr_Kid_Scifi_Casual_01
+    400218: SM_Chr_Kid_Scifi_Spacesuit_01
+    400220: SM_Chr_Kid_Scout_Shorts_01
+    400222: SM_Chr_Kid_Scout_Skirt_01
+    400224: SM_Chr_Kid_ShirtDress_01
+    400226: SM_Chr_Kid_Skater_01
+    400228: SM_Chr_Kid_Skeleton_01
+    400230: SM_Chr_Kid_SnowJacket_01
+    400232: SM_Chr_Kid_Spacesuit_01
+    400234: SM_Chr_Kid_Summer_01
+    400236: SM_Chr_Kid_Superhero_01
+    400238: SM_Chr_Kid_Superhero_02
+    400240: SM_Chr_Kid_Survivor_01
+    400242: SM_Chr_Kid_Survivor_Armoured_01
+    400244: SM_Chr_Kid_Survivor_Vest_01
+    400246: SM_Chr_Kid_Sweater_01
+    400248: SM_Chr_Kid_Sweater_02
+    400250: SM_Chr_Kid_Sweater_Dress_01
+    400252: SM_Chr_Kid_Swimwear_01
+    400254: SM_Chr_Kid_Swimwear_02
+    400256: SM_Chr_Kid_Tracksuit_01
+    400258: SM_Chr_Kid_Troll_01
+    400260: SM_Chr_Kid_Trucker_01
+    400262: SM_Chr_Kid_Viking_01
+    400264: SM_Chr_Kid_Viking_02
+    400266: SM_Chr_Kid_Werewolf_01
+    400268: SM_Chr_Kid_Wetsuit_01
+    400270: SM_Chr_Kid_WinterCoat_01
+    400272: SM_Chr_Kid_Witch_01
+    400274: SM_Chr_Kid_Wizard_01
+    400276: SM_Chr_Kid_Zombie_01
+    400278: SM_Chr_Kid_Zombie_Dress_01
+    400280: Spine_01
+    400282: Spine_02
+    400284: Spine_03
+    400286: Thumb_01
+    400288: Thumb_01 1
+    400290: Thumb_02
+    400292: Thumb_02 1
+    400294: Thumb_03
+    400296: Thumb_03 1
+    400298: Toes_L
+    400300: Toes_R
+    400302: UpperLeg_L
+    400304: UpperLeg_R
+    400306: SM_Chr_Kid_Eyebrows_01
+    400308: SM_Chr_Kid_Eyes_Female_01
+    400310: SM_Chr_Kid_Eyes_Male_01
+    400312: SM_Chr_Eyebrows_01
+    400314: SM_Chr_Eyes_Female_01
+    400316: SM_Chr_Eyes_Male_01
+    400318: SM_Chr_Kid_Robot_Face_01
+    400320: SM_Chr_Kid_Face_Freckles_01
+    2100000: Default_Material
+    2100002: lambert2
+    2300000: SM_Chr_Kid_Face_01
+    2300002: SM_Chr_Kid_Robot_Face_01
+    2300004: SM_Chr_Kid_Face_Freckles_01
+    3300000: SM_Chr_Kid_Face_01
+    3300002: SM_Chr_Kid_Robot_Face_01
+    3300004: SM_Chr_Kid_Face_Freckles_01
+    4300000: SM_Chr_Kid_Face_01
+    4300002: SM_Chr_Kid_Schoolgirl_02
+    4300004: SM_Chr_Kid_Raincoat_01
+    4300006: SM_Chr_Kid_Schoolgirl_01
+    4300008: SM_Chr_Kid_Raincoat_02
+    4300010: SM_Chr_Kid_Maid_01
+    4300012: SM_Chr_Kid_Overalls_02
+    4300014: SM_Chr_Kid_Punk_01
+    4300016: SM_Chr_Kid_ShirtDress_01
+    4300018: SM_Chr_Kid_Superhero_02
+    4300020: SM_Chr_Kid_Geisha_01
+    4300022: SM_Chr_Kid_Ghost_01
+    4300024: SM_Chr_Kid_Zombie_Dress_01
+    4300026: SM_Chr_Kid_Eastern_Skirt_01
+    4300028: SM_Chr_Kid_Cheerleader_01
+    4300030: SM_Chr_Kid_Ballerina_01
+    4300032: SM_Chr_Kid_Overalls_Dress_01
+    4300034: SM_Chr_Kid_Dress_01
+    4300036: SM_Chr_Kid_Witch_01
+    4300038: SM_Chr_Kid_Princess_01
+    4300040: SM_Chr_Kid_Goblin_02
+    4300042: SM_Chr_Kid_Scout_Skirt_01
+    4300044: SM_Chr_Kid_PlaidShirt_01
+    4300046: SM_Chr_Kid_Pirate_01
+    4300048: SM_Chr_Kid_Pirate_02
+    4300050: SM_Chr_Kid_PoliceOfficer_01
+    4300052: SM_Chr_Kid_Farmer_01
+    4300054: SM_Chr_Kid_Fat_02
+    4300056: SM_Chr_Kid_Fat_01
+    4300058: SM_Chr_Kid_Footballer_01
+    4300060: SM_Chr_Kid_SnowJacket_01
+    4300062: SM_Chr_Kid_HolidayElf_01
+    4300064: SM_Chr_Kid_Goblin_01
+    4300066: SM_Chr_Kid_Hoodie_01
+    4300068: SM_Chr_Kid_Hoodie_02
+    4300070: SM_Chr_Kid_Hoodie_03
+    4300072: SM_Chr_Kid_Karate_01
+    4300074: SM_Chr_Kid_Knight_01
+    4300076: SM_Chr_Kid_Magician_01
+    4300078: SM_Chr_Kid_Nerd_01
+    4300080: SM_Chr_Kid_Onesie_Cat_01
+    4300082: SM_Chr_Kid_JungleKid_01
+    4300084: SM_Chr_Kid_Onesie_Dino_01
+    4300086: SM_Chr_Kid_Onesie_Tiger_01
+    4300088: SM_Chr_Kid_Onesie_Bunny_01
+    4300090: SM_Chr_Kid_Skeleton_01
+    4300092: SM_Chr_Kid_Robot_01
+    4300094: SM_Chr_Kid_Scout_Shorts_01
+    4300096: SM_Chr_Kid_Mummy_01
+    4300098: SM_Chr_Kid_Overalls_01
+    4300100: SM_Chr_Kid_Ninja_01
+    4300102: SM_Chr_Kid_Pilot_01
+    4300104: SM_Chr_Kid_Skater_01
+    4300106: SM_Chr_Kid_Pajamas_01
+    4300108: SM_Chr_Kid_Prince_01
+    4300110: SM_Chr_Kid_Peasant_01
+    4300112: SM_Chr_Kid_Scifi_Spacesuit_01
+    4300114: SM_Chr_Kid_Scifi_Casual_01
+    4300116: SM_Chr_Kid_Schoolboy_01
+    4300118: SM_Chr_Kid_Samurai_01
+    4300120: SM_Chr_Kid_PufferVest_01
+    4300122: SM_Chr_Kid_Robber_01
+    4300124: SM_Chr_Kid_Survivor_01
+    4300126: SM_Chr_Kid_Superhero_01
+    4300128: SM_Chr_Kid_Spacesuit_01
+    4300130: SM_Chr_Kid_Summer_01
+    4300132: SM_Chr_Kid_Survivor_Armoured_01
+    4300134: SM_Chr_Kid_Survivor_Vest_01
+    4300136: SM_Chr_Kid_Sweater_01
+    4300138: SM_Chr_Kid_Sweater_02
+    4300140: SM_Chr_Kid_Trucker_01
+    4300142: SM_Chr_Kid_Sweater_Dress_01
+    4300144: SM_Chr_Kid_Swimwear_02
+    4300146: SM_Chr_Kid_Tracksuit_01
+    4300148: SM_Chr_Kid_Viking_01
+    4300150: SM_Chr_Kid_Viking_02
+    4300152: SM_Chr_Kid_Werewolf_01
+    4300154: SM_Chr_Kid_Wetsuit_01
+    4300156: SM_Chr_Kid_WinterCoat_01
+    4300158: SM_Chr_Kid_Wizard_01
+    4300160: SM_Chr_Kid_Zombie_01
+    4300162: SM_Chr_Kid_Swimwear_01
+    4300164: SM_Chr_Kid_Cowboy_02
+    4300166: SM_Chr_Kid_Adventure_01
+    4300168: SM_Chr_Kid_Cardboard_Robot_01
+    4300170: SM_Chr_Kid_Alien_02
+    4300172: SM_Chr_Kid_Cowboy_01
+    4300174: SM_Chr_Kid_Alien_01
+    4300176: SM_Chr_Kid_CargoShorts_01
+    4300178: SM_Chr_Kid_Casual_04
+    4300180: SM_Chr_Kid_Android_01
+    4300182: SM_Chr_Kid_Demon_01
+    4300184: SM_Chr_Kid_Elf_Warrior_01
+    4300186: SM_Chr_Kid_Doctor_01
+    4300188: SM_Chr_Kid_Eastern_01
+    4300190: SM_Chr_Kid_Exercise_02
+    4300192: SM_Chr_Kid_Explorer_01
+    4300194: SM_Chr_Kid_Exercise_01
+    4300196: SM_Chr_Kid_Troll_01
+    4300198: SM_Chr_Kid_Pig_01
+    4300200: SM_Chr_Kid_Schoolboy_02
+    4300202: SM_Chr_Kid_Eyebrows_01
+    4300204: SM_Chr_Kid_Eyes_Female_01
+    4300206: SM_Chr_Kid_Eyes_Male_01
+    4300208: SM_Chr_Eyebrows_01
+    4300210: SM_Chr_Eyes_Female_01
+    4300212: SM_Chr_Eyes_Male_01
+    4300214: SM_Chr_Kid_Robot_Face_01
+    4300216: SM_Chr_Kid_Face_Freckles_01
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: SM_Chr_Kid_Adventure_01
+    13700002: SM_Chr_Kid_Alien_01
+    13700004: SM_Chr_Kid_Alien_02
+    13700006: SM_Chr_Kid_Android_01
+    13700008: SM_Chr_Kid_Ballerina_01
+    13700010: SM_Chr_Kid_Cardboard_Robot_01
+    13700012: SM_Chr_Kid_CargoShorts_01
+    13700014: SM_Chr_Kid_Casual_04
+    13700016: SM_Chr_Kid_Cheerleader_01
+    13700018: SM_Chr_Kid_Cowboy_01
+    13700020: SM_Chr_Kid_Cowboy_02
+    13700022: SM_Chr_Kid_Demon_01
+    13700024: SM_Chr_Kid_Doctor_01
+    13700026: SM_Chr_Kid_Dress_01
+    13700028: SM_Chr_Kid_Eastern_01
+    13700030: SM_Chr_Kid_Eastern_Skirt_01
+    13700032: SM_Chr_Kid_Elf_Warrior_01
+    13700034: SM_Chr_Kid_Exercise_01
+    13700036: SM_Chr_Kid_Exercise_02
+    13700038: SM_Chr_Kid_Explorer_01
+    13700040: SM_Chr_Kid_Farmer_01
+    13700042: SM_Chr_Kid_Fat_01
+    13700044: SM_Chr_Kid_Fat_02
+    13700046: SM_Chr_Kid_Footballer_01
+    13700048: SM_Chr_Kid_Geisha_01
+    13700050: SM_Chr_Kid_Ghost_01
+    13700052: SM_Chr_Kid_Goblin_01
+    13700054: SM_Chr_Kid_Goblin_02
+    13700056: SM_Chr_Kid_HolidayElf_01
+    13700058: SM_Chr_Kid_Hoodie_01
+    13700060: SM_Chr_Kid_Hoodie_02
+    13700062: SM_Chr_Kid_Hoodie_03
+    13700064: SM_Chr_Kid_JungleKid_01
+    13700066: SM_Chr_Kid_Karate_01
+    13700068: SM_Chr_Kid_Knight_01
+    13700070: SM_Chr_Kid_Magician_01
+    13700072: SM_Chr_Kid_Maid_01
+    13700074: SM_Chr_Kid_Mummy_01
+    13700076: SM_Chr_Kid_Nerd_01
+    13700078: SM_Chr_Kid_Ninja_01
+    13700080: SM_Chr_Kid_Onesie_Bunny_01
+    13700082: SM_Chr_Kid_Onesie_Cat_01
+    13700084: SM_Chr_Kid_Onesie_Dino_01
+    13700086: SM_Chr_Kid_Onesie_Tiger_01
+    13700088: SM_Chr_Kid_Overalls_01
+    13700090: SM_Chr_Kid_Overalls_02
+    13700092: SM_Chr_Kid_Overalls_Dress_01
+    13700094: SM_Chr_Kid_Pajamas_01
+    13700096: SM_Chr_Kid_Peasant_01
+    13700098: SM_Chr_Kid_Pig_01
+    13700100: SM_Chr_Kid_Pilot_01
+    13700102: SM_Chr_Kid_Pirate_01
+    13700104: SM_Chr_Kid_Pirate_02
+    13700106: SM_Chr_Kid_PlaidShirt_01
+    13700108: SM_Chr_Kid_PoliceOfficer_01
+    13700110: SM_Chr_Kid_Prince_01
+    13700112: SM_Chr_Kid_Princess_01
+    13700114: SM_Chr_Kid_PufferVest_01
+    13700116: SM_Chr_Kid_Punk_01
+    13700118: SM_Chr_Kid_Raincoat_01
+    13700120: SM_Chr_Kid_Raincoat_02
+    13700122: SM_Chr_Kid_Robber_01
+    13700124: SM_Chr_Kid_Robot_01
+    13700126: SM_Chr_Kid_Samurai_01
+    13700128: SM_Chr_Kid_Schoolboy_01
+    13700130: SM_Chr_Kid_Schoolboy_02
+    13700132: SM_Chr_Kid_Schoolgirl_01
+    13700134: SM_Chr_Kid_Schoolgirl_02
+    13700136: SM_Chr_Kid_Scifi_Casual_01
+    13700138: SM_Chr_Kid_Scifi_Spacesuit_01
+    13700140: SM_Chr_Kid_Scout_Shorts_01
+    13700142: SM_Chr_Kid_Scout_Skirt_01
+    13700144: SM_Chr_Kid_ShirtDress_01
+    13700146: SM_Chr_Kid_Skater_01
+    13700148: SM_Chr_Kid_Skeleton_01
+    13700150: SM_Chr_Kid_SnowJacket_01
+    13700152: SM_Chr_Kid_Spacesuit_01
+    13700154: SM_Chr_Kid_Summer_01
+    13700156: SM_Chr_Kid_Superhero_01
+    13700158: SM_Chr_Kid_Superhero_02
+    13700160: SM_Chr_Kid_Survivor_01
+    13700162: SM_Chr_Kid_Survivor_Armoured_01
+    13700164: SM_Chr_Kid_Survivor_Vest_01
+    13700166: SM_Chr_Kid_Sweater_01
+    13700168: SM_Chr_Kid_Sweater_02
+    13700170: SM_Chr_Kid_Sweater_Dress_01
+    13700172: SM_Chr_Kid_Swimwear_01
+    13700174: SM_Chr_Kid_Swimwear_02
+    13700176: SM_Chr_Kid_Tracksuit_01
+    13700178: SM_Chr_Kid_Troll_01
+    13700180: SM_Chr_Kid_Trucker_01
+    13700182: SM_Chr_Kid_Viking_01
+    13700184: SM_Chr_Kid_Viking_02
+    13700186: SM_Chr_Kid_Werewolf_01
+    13700188: SM_Chr_Kid_Wetsuit_01
+    13700190: SM_Chr_Kid_WinterCoat_01
+    13700192: SM_Chr_Kid_Witch_01
+    13700194: SM_Chr_Kid_Wizard_01
+    13700196: SM_Chr_Kid_Zombie_01
+    13700198: SM_Chr_Kid_Zombie_Dress_01
+    13700200: SM_Chr_Kid_Eyebrows_01
+    13700202: SM_Chr_Kid_Eyes_Female_01
+    13700204: SM_Chr_Kid_Eyes_Male_01
+    13700206: SM_Chr_Eyebrows_01
+    13700208: SM_Chr_Eyes_Female_01
+    13700210: SM_Chr_Eyes_Male_01
+  externalObjects: {}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 0
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 0
+    normalImportMode: 1
+    tangentImportMode: 2
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human:
+    - boneName: Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperLeg_L
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperLeg_R
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerLeg_L
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerLeg_R
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ankle_L
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ankle_R
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine_01
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine_02
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Clavicle_L
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Clavicle_R
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Shoulder_L
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Shoulder_R
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Elbow_L
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Elbow_R
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Hand_L
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Hand_R
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Toes_L
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Toes_R
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Eyes_Left
+      humanName: LeftEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Eyes_Right
+      humanName: RightEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Thumb_01
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Thumb_02
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Thumb_03
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: IndexFinger_01
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: IndexFinger_02
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: IndexFinger_03
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Thumb_01 1
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Thumb_02 1
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Thumb_03 1
+      humanName: Right Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: IndexFinger_01 1
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: IndexFinger_02 1
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: IndexFinger_03 1
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine_03
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Finger_01
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Finger_02
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Finger_03
+      humanName: Left Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Finger_01 1
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Finger_02 1
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Finger_03 1
+      humanName: Right Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Characters_Kids(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Root
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hips
+      parentName: Root
+      position: {x: -0, y: 0.5436814, z: 0}
+      rotation: {x: 0.46113664, y: -0.5360532, z: -0.46113664, w: 0.5360532}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine_01
+      parentName: Hips
+      position: {x: -0.079156466, y: -0.006564369, z: 4.597275e-16}
+      rotation: {x: 0.9950197, y: -0.09967895, z: 1.3238607e-15, w: 7.108273e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine_02
+      parentName: Spine_01
+      position: {x: -0.117628545, y: 0.018261915, z: 0.00000067333434}
+      rotation: {x: 0.99518615, y: -0.098002784, z: -6.0366487e-16, w: -1.2097554e-16}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine_03
+      parentName: Spine_02
+      position: {x: -0.09265974, y: 0.016740983, z: -0.0000015461391}
+      rotation: {x: 0.9938103, y: -0.11109032, z: -8.991473e-16, w: -1.6212238e-16}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Clavicle_L
+      parentName: Spine_03
+      position: {x: -0.04519994, y: -0.042139087, z: -0.0883045}
+      rotation: {x: -0.4845004, y: 0.5138043, z: -0.4714638, w: -0.5281916}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Shoulder_L
+      parentName: Clavicle_L
+      position: {x: -0.06828259, y: -0.0035110721, z: -0.021967895}
+      rotation: {x: 0.009272097, y: 0.03822524, z: 0.03821846, w: 0.998495}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Elbow_L
+      parentName: Shoulder_L
+      position: {x: -0.19590557, y: 0.009819135, z: -0.0031115436}
+      rotation: {x: -0.00046359922, y: -0.0012002138, z: -0.025956621, w: 0.9996622}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hand_L
+      parentName: Elbow_L
+      position: {x: -0.14811465, y: 0.0035030132, z: -0.00044094975}
+      rotation: {x: -2.4156162e-17, y: -0.035830766, z: 1.6679253e-15, w: 0.9993579}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Finger_01
+      parentName: Hand_L
+      position: {x: -0.07754445, y: -0.00090075267, z: -0.025505058}
+      rotation: {x: 0.000599802, y: -0.08457163, z: 0.038877107, w: 0.9956585}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Finger_02
+      parentName: Finger_01
+      position: {x: -0.033004887, y: 0.0000000579068, z: -0.0000000023344335}
+      rotation: {x: 0.0026372706, y: 0.019492026, z: 0.02126933, w: 0.99958026}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Finger_03
+      parentName: Finger_02
+      position: {x: -0.027291592, y: -0.000000058039962, z: -0.000000001577869}
+      rotation: {x: -0.018261544, y: -0.023078354, z: 0.029872118, w: 0.9991204}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Finger_04
+      parentName: Finger_03
+      position: {x: -0.023329243, y: 0.00000002210337, z: 0.0000000042991597}
+      rotation: {x: 0.01664637, y: 0.096525334, z: -0.16913006, w: 0.98071444}
+      scale: {x: 1, y: 1, z: 1}
+    - name: IndexFinger_01
+      parentName: Hand_L
+      position: {x: -0.080760695, y: 0.003097126, z: 0.0207612}
+      rotation: {x: 0.0009835127, y: -0.08288148, z: 0.0053075673, w: 0.99654484}
+      scale: {x: 1, y: 1, z: 1}
+    - name: IndexFinger_02
+      parentName: IndexFinger_01
+      position: {x: -0.031799406, y: -0.000000018133528, z: 0.000000002308931}
+      rotation: {x: -0.0011588207, y: -0.0041979314, z: 0.03843262, w: 0.9992517}
+      scale: {x: 1, y: 1, z: 1}
+    - name: IndexFinger_03
+      parentName: IndexFinger_02
+      position: {x: -0.029450044, y: 0.00000001595032, z: -0.0000000020581459}
+      rotation: {x: -0.0069200285, y: -0.016654566, z: 0.03691646, w: 0.99915564}
+      scale: {x: 1, y: 1, z: 1}
+    - name: IndexFinger_04
+      parentName: IndexFinger_03
+      position: {x: -0.029361526, y: 0.000000019077529, z: -7.302485e-10}
+      rotation: {x: -0.0045196484, y: -0.028039929, z: -0.15906802, w: 0.986859}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Thumb_01
+      parentName: Hand_L
+      position: {x: -0.027297186, y: -0.009093959, z: 0.03499913}
+      rotation: {x: 0.007544066, y: 0.3014676, z: 0.039526746, w: 0.95262694}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Thumb_02
+      parentName: Thumb_01
+      position: {x: -0.04948399, y: -0.000000015720941, z: -0.000000016759023}
+      rotation: {x: -0.040613834, y: -0.021913255, z: 0.026338186, w: 0.9985873}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Thumb_03
+      parentName: Thumb_02
+      position: {x: -0.04401023, y: 0.00000004321164, z: 0.000000004918233}
+      rotation: {x: -0.036403257, y: -0.15203467, z: -0.22999534, w: 0.9605532}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Clavicle_R
+      parentName: Spine_03
+      position: {x: -0.045193475, y: -0.04214805, z: 0.08830353}
+      rotation: {x: 0.51438355, y: 0.4851248, z: 0.5276651, w: -0.47077933}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Shoulder_R
+      parentName: Clavicle_R
+      position: {x: 0.06834309, y: 0.0035541616, z: 0.021771967}
+      rotation: {x: 0.009370773, y: 0.03332713, z: 0.037965696, w: 0.9986792}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Elbow_R
+      parentName: Shoulder_R
+      position: {x: 0.19593683, y: -0.009661942, z: 0.00070158095}
+      rotation: {x: -0.00017264391, y: 0.0016717983, z: -0.026377833, w: 0.99965066}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hand_R
+      parentName: Elbow_R
+      position: {x: 0.14811572, y: -0.0034368928, z: -0.00057731516}
+      rotation: {x: -9.685131e-17, y: -0.035830766, z: -1.0612489e-15, w: 0.9993579}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Finger_01 1
+      parentName: Hand_R
+      position: {x: 0.07774303, y: 0.0005216299, z: 0.024904096}
+      rotation: {x: -0.00011560897, y: -0.084107615, z: 0.040329058, w: 0.9956402}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Finger_02 1
+      parentName: Finger_01 1
+      position: {x: 0.033001285, y: -0.00039625878, z: -0.0002841275}
+      rotation: {x: 0.0026372706, y: 0.019492026, z: 0.02126933, w: 0.99958026}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Finger_03 1
+      parentName: Finger_02 1
+      position: {x: 0.027286293, y: -0.0004798213, z: -0.0002429156}
+      rotation: {x: -0.017923284, y: -0.023976484, z: 0.031928036, w: 0.9990418}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Finger_04 1
+      parentName: Finger_03 1
+      position: {x: 0.02332247, y: -0.00050194346, z: -0.0002529019}
+      rotation: {x: 0.01664637, y: 0.096525334, z: -0.16913006, w: 0.98071444}
+      scale: {x: 1, y: 1, z: 1}
+    - name: IndexFinger_01 1
+      parentName: Hand_R
+      position: {x: 0.080573425, y: -0.0038611519, z: -0.021352524}
+      rotation: {x: -0.00083872635, y: -0.08291691, z: 0.008060019, w: 0.99652356}
+      scale: {x: 1, y: 1, z: 1}
+    - name: IndexFinger_02 1
+      parentName: IndexFinger_01 1
+      position: {x: 0.031795476, y: -0.00043494417, z: -0.00024649652}
+      rotation: {x: -0.0015422135, y: -0.0046866965, z: 0.0411477, w: 0.9991409}
+      scale: {x: 1, y: 1, z: 1}
+    - name: IndexFinger_03 1
+      parentName: IndexFinger_02 1
+      position: {x: 0.02944365, y: -0.00055338256, z: -0.00026543537}
+      rotation: {x: -0.006911162, y: -0.017464366, z: 0.039307628, w: 0.9990507}
+      scale: {x: 1, y: 1, z: 1}
+    - name: IndexFinger_04 1
+      parentName: IndexFinger_03 1
+      position: {x: 0.029351868, y: -0.0006946568, z: -0.00029063335}
+      rotation: {x: -0.0045196484, y: -0.028039929, z: -0.15906802, w: 0.986859}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Thumb_01 1
+      parentName: Hand_R
+      position: {x: 0.027093507, y: 0.008616875, z: -0.03527702}
+      rotation: {x: 0.008689377, y: 0.301602, z: 0.043185525, w: 0.9524157}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Thumb_02 1
+      parentName: Thumb_01 1
+      position: {x: 0.049480725, y: -0.0004714786, z: -0.00031812117}
+      rotation: {x: -0.040473804, y: -0.021284632, z: 0.025860695, w: 0.9986191}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Thumb_03 1
+      parentName: Thumb_02 1
+      position: {x: 0.044007998, y: -0.00036011188, z: -0.00025854137}
+      rotation: {x: -0.036403257, y: -0.15203467, z: -0.22999534, w: 0.9605532}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Neck
+      parentName: Spine_03
+      position: {x: -0.093597665, y: -0.0005731651, z: 0.0000033965796}
+      rotation: {x: 7.064373e-17, y: 1.3015469e-15, z: 0.04173335, w: 0.9991288}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head
+      parentName: Neck
+      position: {x: -0.07552813, y: -0.002156618, z: -0.0000009839011}
+      rotation: {x: 0.458571, y: -0.5382496, z: 0.458571, w: 0.5382496}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Eyebrow_Left
+      parentName: Head
+      position: {x: -0.03738, y: 0.076144345, z: 0.10128373}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Eyebrow_Right
+      parentName: Head
+      position: {x: 0.03738, y: 0.076144345, z: 0.10128373}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Eyes_Left
+      parentName: Head
+      position: {x: -0.03738, y: 0.061539523, z: 0.10102804}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Eyes_Right
+      parentName: Head
+      position: {x: 0.037381444, y: 0.06157045, z: 0.10102985}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Face_01
+      parentName: Head
+      position: {x: -0.000028288936, y: 0.027902981, z: 0.10810318}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: UpperLeg_L
+      parentName: Hips
+      position: {x: 0.03305291, y: -0.025863247, z: 0.06592251}
+      rotation: {x: -0.7058717, y: 0.04177525, z: -0.064159356, w: 0.70419}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LowerLeg_L
+      parentName: UpperLeg_L
+      position: {x: 0.2435852, y: 0.0015737178, z: 0.0060370755}
+      rotation: {x: 0.64437777, y: 0.024462728, z: -0.00473771, w: 0.7643013}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Ankle_L
+      parentName: LowerLeg_L
+      position: {x: 0.18363008, y: -0.0046813926, z: 0.00061809865}
+      rotation: {x: 0.85767007, y: 0.507213, z: 0.039752707, w: -0.0745436}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Ball_L
+      parentName: Ankle_L
+      position: {x: 0.10193663, y: 0.006552859, z: 0.000064672735}
+      rotation: {x: 3.5039521e-15, y: 4.7849205e-15, z: -0.2700158, w: 0.96285594}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Toes_L
+      parentName: Ball_L
+      position: {x: 0.05836382, y: -0.0015907033, z: 0.00003425606}
+      rotation: {x: -2.7376528e-13, y: -0.7071068, z: -2.7376528e-13, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: UpperLeg_R
+      parentName: Hips
+      position: {x: 0.03305291, y: -0.025863247, z: -0.06592251}
+      rotation: {x: 0.04177524, y: 0.7058717, z: -0.70419, w: -0.06415935}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LowerLeg_R
+      parentName: UpperLeg_R
+      position: {x: -0.2436484, y: -0.0014723573, z: 0.0024432454}
+      rotation: {x: 0.64437777, y: 0.024462728, z: -0.00473771, w: 0.7643013}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Ankle_R
+      parentName: LowerLeg_R
+      position: {x: -0.18347627, y: 0.008874218, z: 0.00009901513}
+      rotation: {x: 0.85767007, y: 0.507213, z: 0.039752707, w: -0.0745436}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Ball_R
+      parentName: Ankle_R
+      position: {x: -0.10175773, y: -0.008909681, z: 0.00007069872}
+      rotation: {x: -1.2520131e-15, y: 1.5808957e-15, z: -0.2700158, w: 0.96285594}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Toes_R
+      parentName: Ball_R
+      position: {x: -0.058384985, y: 0.00024024, z: 0.000056326207}
+      rotation: {x: 1.9013454e-14, y: -0.7071068, z: 1.9013454e-14, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Adventure_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Alien_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Alien_02
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Android_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Ballerina_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Cardboard_Robot_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_CargoShorts_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Casual_04
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Cheerleader_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Cowboy_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Cowboy_02
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Demon_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Doctor_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Dress_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Eastern_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Eastern_Skirt_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Elf_Warrior_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Exercise_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Exercise_02
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Explorer_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Farmer_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Fat_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Fat_02
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Footballer_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Geisha_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Ghost_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Goblin_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Goblin_02
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_HolidayElf_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Hoodie_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Hoodie_02
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Hoodie_03
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_JungleKid_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Karate_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Knight_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Magician_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Maid_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Mummy_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Nerd_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Ninja_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Onesie_Bunny_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Onesie_Cat_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Onesie_Dino_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Onesie_Tiger_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Overalls_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Overalls_02
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Overalls_Dress_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Pajamas_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Peasant_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Pig_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Pilot_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Pirate_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Pirate_02
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_PlaidShirt_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_PoliceOfficer_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Prince_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Princess_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_PufferVest_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Punk_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Raincoat_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Raincoat_02
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Robber_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Robot_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Samurai_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Schoolboy_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Schoolboy_02
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Schoolgirl_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Schoolgirl_02
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Scifi_Casual_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Scifi_Spacesuit_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Scout_Shorts_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Scout_Skirt_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_ShirtDress_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Skater_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Skeleton_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_SnowJacket_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Spacesuit_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Summer_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Superhero_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Superhero_02
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Survivor_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Survivor_Armoured_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Survivor_Vest_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Sweater_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Sweater_02
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Sweater_Dress_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Swimwear_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Swimwear_02
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Tracksuit_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Troll_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Trucker_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Viking_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Viking_02
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Werewolf_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Wetsuit_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_WinterCoat_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Witch_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Wizard_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Zombie_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Chr_Kid_Zombie_Dress_01
+      parentName: Characters_Kids(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
