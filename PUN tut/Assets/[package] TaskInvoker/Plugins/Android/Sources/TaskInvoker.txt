@@ -1,0 +1,119 @@
+package com.vuopaja.background;
+
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+import java.util.ArrayList;
+
+public class TaskInvoker {
+
+    public static TaskCallback Callback;
+    public static Handler UnityHandler;
+    public static ArrayList<Task> Tasks = new ArrayList<Task>();
+    static final String TAG = "Unity";
+
+    public TaskInvoker(TaskCallback callback)
+    {
+        if (callback == null) {
+            throw new IllegalArgumentException("TaskInvoker created with a null callback reference");
+        } else {
+            Callback = callback;
+
+            // Create a handler for the main thread to post runnables on
+            UnityHandler = new Handler(Looper.myLooper());
+        }
+    }
+
+    // Starts a new background task and returns its task ID
+    public int StartTask(int delay)
+    {
+        final int i = getFreeIndex();
+
+        if (UnityHandler != null) {
+
+            // Enforce positive delay
+            if (delay <= 0) delay = 1;
+
+            // Keep track of tasks
+            Task task = new Task(i, delay);
+            Tasks.add(task);
+
+            // Create a runnable
+            task.Runnable = new Runnable() {
+                public void run() {
+
+                    // Invoke C# callback
+                    TaskInvoker.Callback.InvokeHandler(i);
+
+                    // Repeat if task still exists
+                    Task task = getTaskWithId(i);
+                    if (task != null) {
+                        UnityHandler.postDelayed(task.Runnable, task.Delay);
+                    }
+                }
+            };
+
+            // Post the created runnable with the delay
+            UnityHandler.postDelayed(task.Runnable, task.Delay);
+
+        } else {
+            Log.e(TAG,"UnityHandler null when running a task");
+            return -1;
+        }
+
+        return i;
+    }
+
+    // Stops a task with the given taskID
+    public void StopTask(int taskID)
+    {
+        if (UnityHandler != null) {
+
+            // Stop the task if it exists
+            Task task = getTaskWithId(taskID);
+            if (task != null) {
+                UnityHandler.removeCallbacks(task.Runnable);
+                Tasks.remove(task);
+            } else {
+                Log.e(TAG,"No task found with index " + taskID + " when stopping a task");
+            }
+
+        } else {
+            Log.e(TAG,"UnityHandler null when stopping a task");
+        }
+    }
+
+    // Stops all running tasks
+    public void StopAllTasks()
+    {
+        if (UnityHandler != null) {
+            for (int i = 0; i < Tasks.size(); i++) {
+                UnityHandler.removeCallbacks(Tasks.get(i).Runnable);
+            }
+            Tasks.clear();
+        } else {
+            Log.e(TAG,"UnityHandler null when stopping all tasks");
+        }
+    }
+
+    // Returns the task object that has the given taskID or null
+    Task getTaskWithId(int taskID)
+    {
+        for (int i = 0; i < Tasks.size(); i++)
+        {
+            if (Tasks.get(i).TaskId == taskID) return Tasks.get(i);
+        }
+        return null;
+    }
+
+    // Returns a free index in the list of running tasks
+    int getFreeIndex()
+    {
+        if (Tasks.size() == 0) return 0;
+        int indexOfHighest = 0;
+        for(int i = 0; i < Tasks.size(); i++){
+            if (Tasks.get(i).TaskId > Tasks.get(indexOfHighest).TaskId) indexOfHighest = i;
+        }
+        return Tasks.get(indexOfHighest).TaskId + 1;
+    }
+}

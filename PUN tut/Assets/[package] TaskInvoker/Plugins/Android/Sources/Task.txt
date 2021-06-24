@@ -1,0 +1,15 @@
+package com.vuopaja.background;
+
+public class Task
+{
+    public int TaskId;
+    public Runnable Runnable;
+    public int Delay;
+
+    public Task(int id, int delay)
+    {
+        TaskId = id;
+        Runnable = null;
+        Delay = delay;
+    }
+}

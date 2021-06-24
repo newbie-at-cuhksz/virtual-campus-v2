@@ -1,0 +1,5 @@
+package com.vuopaja.background;
+
+public interface TaskCallback {
+    void InvokeHandler(int taskIndex);
+}
