@@ -5,7 +5,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -22,13 +21,16 @@ namespace Com.MyCompany.MyGame
         [Tooltip("The instance of info panel")]
         public GameObject InfoPanel;
 
-        
+
 
         #endregion
 
 
 
         #region Unity callbacks
+
+        
+
         void Start()
         {
             InfoPanel.SetActive(false);

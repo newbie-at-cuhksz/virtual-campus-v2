@@ -47,11 +47,11 @@ namespace Com.MyCompany.MyGame
                     Destroy(InfoPanel.transform.GetChild(i).gameObject);
                 }
                 // 实例化child object
-                GameObject ChildPanel = Instantiate(ChildPanelPrefab) as GameObject;
+                GameObject ChildPanel = Instantiate(ChildPanelPrefab) as GameObject; // instantiate the panel which holds the board content
                 ChildPanel.transform.parent = InfoPanel.transform;
-                PhotonView PV = transform.GetComponent<PhotonView>();
+                PhotonView PV = transform.GetComponent<PhotonView>(); // get the photon view of the board
                 object[] data = PV.InstantiationData;
-                Debug.Log("the text is: "+ (string)data[0]);
+                Debug.Log("onclick, the text is: "+ (string)data[0]); // access the data stored in this board
                 ChildPanel.transform.Find("Text").GetComponent<Text>().text = (string)data[0];
             }
 
