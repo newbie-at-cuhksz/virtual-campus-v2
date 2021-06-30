@@ -16,10 +16,19 @@ namespace Com.MyCompany.MyGame
         {
             PhotonView PV = transform.GetComponent<PhotonView>(); // get the photon view of the board
             initDate = (int[])PV.InstantiationData[1];
-
+            StartCoroutine(updateOnFiveMinutes(300)); // update every 5 minutes
         }
 
-        private void FixedUpdate() // check if the board has reached the time limit
+        IEnumerator updateOnFiveMinutes(float waitTime)
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(waitTime);
+                UpdateBoard(); // check if the board needs to be destroyed.
+            }
+        }
+
+        private void UpdateBoard() // check if the board has reached the time limit
         {
             utcDate = System.DateTime.Now; // get the time now
             int[] nowDate = { utcDate.Year, utcDate.Month, utcDate.Day, utcDate.Hour, utcDate.Minute };
@@ -44,11 +53,9 @@ namespace Com.MyCompany.MyGame
                 if (nowDate[3] * 60 + nowDate[4] >= initDate[3] * 60 + nowDate[4]) return false; // do not destroy
                 else return true;
             }
-            else if (nowDate[0] > initDate[0]) // year different
+            else if (nowDate[2] > initDate[2]) //day different
             {
-                if (initDate[1] == 12 && nowDate[1] == 1 && initDate[2] == 31 && nowDate[2] == 1 &&
-                    ((24 - initDate[3] + nowDate[3]) < 24 || (((24 - initDate[3] + nowDate[3]) == 24) && nowDate[4] < initDate[4])))
-                    return false; // do not destroy
+                if (((24 - initDate[3] + nowDate[3]) < 24 || ((initDate[3] == nowDate[3]) && nowDate[4] < initDate[4]))) return false; // less than one day
                 else return true;
             }
             else if (nowDate[1] > initDate[1]) // month different
@@ -70,12 +77,14 @@ namespace Com.MyCompany.MyGame
                     }
                     else return true;
                 }
-                else return false;
-            }
-            else if (nowDate[2] > initDate[2]) //day different
+                else if (nowDate[0] > initDate[0]) // year different
             {
-                if (((24 - initDate[3] + nowDate[3]) < 24 || ((initDate[3] == nowDate[3]) && nowDate[4] < initDate[4]))) return false; // less than one day
+                if (initDate[1] == 12 && nowDate[1] == 1 && initDate[2] == 31 && nowDate[2] == 1 &&
+                    ((24 - initDate[3] + nowDate[3]) < 24 || (((24 - initDate[3] + nowDate[3]) == 24) && nowDate[4] < initDate[4])))
+                    return false; // do not destroy
                 else return true;
+            }
+                else return false;
             }
             else return true;
         }
