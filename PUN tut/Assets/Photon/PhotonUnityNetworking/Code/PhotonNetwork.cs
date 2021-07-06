@@ -1536,7 +1536,7 @@ namespace Photon.Pun
                 if (LogLevel == PunLogLevel.Informational) Debug.Log("Can not SetMasterClient(). Not in room or in OfflineMode.");
                 return false;
             }
-
+            Debug.Log("the master client set should be triggered");
             return CurrentRoom.SetMasterClient(masterClientPlayer);
         }
 

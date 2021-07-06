@@ -15,6 +15,8 @@ namespace Com.MyCompany.MyGame
     {
         #region Private Fields
 
+        //private int id; // for test
+
         [Tooltip("The Beams GameObject to control")]
         [SerializeField]
         private GameObject beams;
@@ -79,6 +81,7 @@ namespace Com.MyCompany.MyGame
         void Start()
         {
             CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
+            
 
             if (_cameraWork != null)
             {
@@ -91,7 +94,6 @@ namespace Com.MyCompany.MyGame
             {
                 Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
             }
-
         }
 
         /// <summary>
@@ -114,7 +116,9 @@ namespace Com.MyCompany.MyGame
             {
                 beams.SetActive(IsFiring);
             }
+            //Debug.Log("in the game the view ID should be: " + photonView.ViewID);
         }
+
         /// <summary>
         /// MonoBehaviour method called when the Collider 'other' enters the trigger.
         /// Affect Health of the Player if the collider is a beam
@@ -205,5 +209,6 @@ namespace Com.MyCompany.MyGame
         }
 
         #endregion
+        
     }
 }

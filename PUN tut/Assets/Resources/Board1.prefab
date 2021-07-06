@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 142639563757656753}
   - component: {fileID: 7365415640697307043}
   - component: {fileID: 1404535704718791135}
+  - component: {fileID: 4865749320733283438}
   m_Layer: 0
   m_Name: Board1
   m_TagString: Untagged
@@ -112,6 +113,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildPanelPrefab: {fileID: 1355122600444325481, guid: 2fd83a266e7543242b571de248b8ada6,
     type: 3}
+--- !u!114 &4865749320733283438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4093058154648969135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5073927da6eb18747963b7edae14197b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4575794562807697562
 GameObject:
   m_ObjectHideFlags: 0

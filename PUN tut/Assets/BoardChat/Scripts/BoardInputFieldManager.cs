@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// this script should be attached to the 'Board Inputfield' in under the canvas of the Room1 scence
+// to control the board content input, need to be improved
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
