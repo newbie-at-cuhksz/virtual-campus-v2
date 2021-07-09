@@ -9,19 +9,18 @@ public class App_MediaService : MonoBehaviour
     GalleryAccessStatus readAccessStatus;
     GalleryAccessStatus readWriteAccessStatus;
     CameraAccessStatus cameraAccessStatus;
-
-    public Texture2D currentImage;
-
-    private void Start()
+    public Texture2D currentImage; //IG_MediaService.instance.currentImage;
+    // Start is called before the first frame update
+    void Start()
     {
-        instance = this; // create a singleton of the class for reference
+        instance = this;
     }
-
-    // to use the function: App_MediaService.instance.GetImageFromGallery();
+    //App_MediaService.instance.GetImageFromGallery();
     public void GetImageFromGallery()
     {
-        GalleryAccessStatus readAccessStatus = MediaServices.GetGalleryAccessStatus(GalleryAccessMode.Read);
-        if (readAccessStatus == GalleryAccessStatus.NotDetermined)
+        Debug.Log("the get image method invoked");
+        readAccessStatus = MediaServices.GetGalleryAccessStatus(GalleryAccessMode.Read);
+        if (!(readAccessStatus == GalleryAccessStatus.Authorized))
         {
             MediaServices.RequestGalleryAccess(GalleryAccessMode.Read, callback: (result, error) =>
             {
@@ -38,20 +37,22 @@ public class App_MediaService : MonoBehaviour
                     Debug.Log("Select image from gallery finished successfully.");
                     //textureData.GetTexture() // This returns the texture
                     currentImage = textureData.GetTexture();
+                    //The event of successufully get the image goes here
                 }
                 else
                 {
                     Debug.Log("Select image from gallery failed with error. Error: " + error);
                 }
             });
-        }
-    }
 
-    // to use the function: App_MediaService.instance.TakePictureWithCamera();
+        }
+
+    }
+    //App_MediaService.instance.TakePictureWithCamera();
     public void TakePictureWithCamera()
     {
         cameraAccessStatus = MediaServices.GetCameraAccessStatus();
-        if (cameraAccessStatus == CameraAccessStatus.NotDetermined)
+        if (cameraAccessStatus != CameraAccessStatus.Authorized)
         {
             MediaServices.RequestCameraAccess(callback: (result, error) =>
             {
@@ -75,13 +76,11 @@ public class App_MediaService : MonoBehaviour
             });
         }
     }
-
-    // to use the function: App_MediaService.instance.SaveImageToGallery(image);
-    // image is the image to be saved to the gallery
+    //App_MediaService.instance.SaveImageToGallery(textureValue);
     public void SaveImageToGallery(Texture2D texture)
     {
-        GalleryAccessStatus readWriteAccessStatus = MediaServices.GetGalleryAccessStatus(GalleryAccessMode.ReadWrite);
-        if (readAccessStatus == GalleryAccessStatus.NotDetermined)
+        readWriteAccessStatus = MediaServices.GetGalleryAccessStatus(GalleryAccessMode.ReadWrite);
+        if (readWriteAccessStatus != GalleryAccessStatus.Authorized)
         {
             MediaServices.RequestGalleryAccess(GalleryAccessMode.ReadWrite, callback: (result, error) =>
             {
@@ -89,7 +88,7 @@ public class App_MediaService : MonoBehaviour
                 Debug.Log("Gallery access status: " + result.AccessStatus);
             });
         }
-        if (readAccessStatus == GalleryAccessStatus.Authorized)
+        if (readWriteAccessStatus == GalleryAccessStatus.Authorized)
         {
             MediaServices.SaveImageToGallery(texture, (result, error) =>
             {
@@ -104,5 +103,4 @@ public class App_MediaService : MonoBehaviour
             });
         }
     }
-
 }

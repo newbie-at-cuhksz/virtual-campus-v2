@@ -22,5 +22,26 @@
    // reference the image
    // when getting images, you need to call this to get the retrieved image
    ```
-
    
+
+   note: 
+
+   it is better to use a event to refresh the fetched image
+
+   the following code may not function properly
+
+   ```csharp
+   App_MediaService.instance.GetImageFromGallery();
+   Texture2D imageShow = App_MediaService.instance.currentImage;
+   ```
+
+   the imageShow will not receive the most recent updated image to fetch
+
+   However, you'd better to use a Event to refresh the image, the event can be added to the APP_MediaService.cs.
+
+   ```csharp
+   currentImage = textureData.GetTexture(); // the 40th line of the script
+   //The event of successufully get the image goes here
+   ```
+
+   (write a event is kind of complicated, you can use a simpler method if possible)
