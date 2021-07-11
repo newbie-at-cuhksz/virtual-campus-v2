@@ -20,7 +20,7 @@ namespace Com.MyCompany.MyGame
         #region Public field
         public GameObject infoPanelInstance;
         public static GameObject info_panel;
-        public static GameObject BoardSetted;
+       // public static GameObject BoardSetted;
 
         #endregion
         // Start is called before the first frame update

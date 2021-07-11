@@ -56,7 +56,33 @@ public class App_MediaService : MonoBehaviour
                 }
             }
             Debug.Log("the images size is: " + currentImages.Count);
-            //Event is triggered here
+            //Event goes here
+        });
+    }
+
+    public void SetBoardGetImagesFromGallery()
+    {
+        SetBoardGetImagesFromGallery(512);
+    }
+
+    public void SetBoardGetImagesFromGallery(int maxSize) // get more than one image, size is how many images you want to fetch
+    {
+        //currentImages = new List<Texture2D>(); // renew the instance
+        NativeGallery.Permission permission = NativeGallery.GetImagesFromGallery((paths) =>
+        {
+            foreach (var path in paths)
+            {
+                if (currentImages.Count >= 6) return;
+                Debug.Log("Image path: " + path);
+                if (path != null)
+                {
+                    // Create Texture from selected image
+                    currentImages.Add(NativeGallery.LoadImageAtPath(path, maxSize));
+                    Debug.Log("in process the images size is: " + currentImages.Count);
+                }
+            }
+            Debug.Log("the images size is: " + currentImages.Count);
+            EventManager_Board.instance.PressedSelectImage();
         });
     }
 

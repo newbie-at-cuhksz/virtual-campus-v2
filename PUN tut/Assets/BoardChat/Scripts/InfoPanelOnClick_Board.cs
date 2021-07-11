@@ -1,5 +1,5 @@
-﻿// this script is a modified version of 陈秋鸿's infoPanelOnclick script
-// this script should be attached to the Board gameobject (prefabs)
+﻿// this script should be attached to the Board gameobject (prefabs)
+// the script invokes the UI of board content when the player click on the board
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,8 +51,10 @@ namespace Com.MyCompany.MyGame
                 ChildPanel.transform.parent = InfoPanel.transform;
                 PhotonView PV = transform.GetComponent<PhotonView>(); // get the photon view of the board
                 object[] data = PV.InstantiationData;
-                Debug.Log("onclick, the text is: "+ (string)data[0]); // access the data stored in this board
-                ChildPanel.transform.Find("Text").GetComponent<Text>().text = (string)data[0];
+                
+                // display the board content on the UI
+                Debug.Log("onclick, the text is: "+ (string)data[2]); // access the data stored in this board
+                ChildPanel.transform.Find("Text").GetComponent<Text>().text = (string)data[2];
             }
 
 
