@@ -15,6 +15,8 @@ public class WebServerClient : MonoBehaviour
     private const int MaxRetryTime = 3;
     private string modelSavePath;
 
+    public GameObject sc;
+    private WebSocketClient socketClient;
     public bool loginStatus = false;
     public string nickname;
     public int token;
@@ -23,13 +25,14 @@ public class WebServerClient : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         UnityWebRequest.ClearCookieCache();
+        socketClient = sc.GetComponent<WebSocketClient>();
     }
 
     public WebServerClient()
     {
         RetryTime = 0;
         UID = "";
-        //StartCoroutine(LoopRequest());
+        
     }
 
 
@@ -88,7 +91,7 @@ public class WebServerClient : MonoBehaviour
                     string[] playerStatus = request.downloadHandler.text.Split(',');
                     nickname = playerStatus[0];
                     token = int.Parse(playerStatus[1]);
-                    
+                    socketClient.Connect(UID);
                     Debug.Log(cookies);
                     Debug.Log(sessionID);
                 }
@@ -454,7 +457,11 @@ public class WebServerClient : MonoBehaviour
         StartCoroutine(Post(form, url, "marketRemove"));
     }
 
-
+    public void add_friend(string uid)
+    {
+        uid = uid.Replace('@','-');
+        socketClient.send("add_friend:" + uid);
+    }
 
 
 }
