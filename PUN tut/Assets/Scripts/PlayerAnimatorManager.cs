@@ -29,7 +29,7 @@ namespace Com.MyCompany.MyGame
             }
 
         }
-
+        /*
         // Update is called once per frame
         void Update()
         {
@@ -60,7 +60,7 @@ namespace Com.MyCompany.MyGame
             }
             animator.SetFloat("Speed", h * h + v * v);
             animator.SetFloat("Direction", h, directionDampTime, Time.deltaTime);
-        }
+        }*/
 
         #endregion
     }

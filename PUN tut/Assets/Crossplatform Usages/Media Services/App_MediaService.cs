@@ -72,7 +72,7 @@ public class App_MediaService : MonoBehaviour
         {
             foreach (var path in paths)
             {
-                if (currentImages.Count >= 6) return;
+                if (currentImages.Count >= 6) continue;
                 Debug.Log("Image path: " + path);
                 if (path != null)
                 {

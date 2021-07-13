@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
         floatingJoystick = joyStick.GetComponent<FloatingJoystick>();
         characterController = transform.GetComponent<CharacterController>();
     }
-
+    /*
     void FixedUpdate()
     {   
         float x = floatingJoystick.Horizontal;
@@ -38,5 +38,5 @@ public class PlayerController : MonoBehaviour
         moveDirection.y -= gravity * Time.deltaTime;
         characterController.Move(moveDirection * Time.deltaTime);
 
-    }
+    }*/
 }
