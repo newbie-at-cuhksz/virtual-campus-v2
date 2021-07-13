@@ -8,8 +8,11 @@ public class EventManager_Board : MonoBehaviour
 {
     public static EventManager_Board instance;
     public delegate void SetBoardAction();
+    public delegate void ViewBoardAction();
     public static event SetBoardAction OnClickedSet;
     public static event SetBoardAction OnClickedSelectImage;
+    public static event ViewBoardAction OnCommentBoard;
+    public static event ViewBoardAction OnClickBoard;
 
     private void Start()
     {
@@ -29,6 +32,23 @@ public class EventManager_Board : MonoBehaviour
         if (OnClickedSelectImage != null)
         {
             OnClickedSelectImage();
+        }
+    }
+
+    public void PressComment()
+    {
+        if (OnCommentBoard != null)
+        {
+            OnCommentBoard();
+        }
+    }
+
+    public void ClickBoard()
+    {
+        if (OnClickBoard != null)
+        {
+            OnClickBoard();
+            Debug.Log("event onclick board is called");
         }
     }
 }

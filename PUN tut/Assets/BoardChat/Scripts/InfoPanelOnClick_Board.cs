@@ -11,21 +11,23 @@ namespace Com.MyCompany.MyGame
     public class InfoPanelOnClick_Board : MonoBehaviour
     {
         #region Public Fields
-        [Tooltip("放入info panel的GameObject")]
-        private GameObject InfoPanel;
-        [Tooltip("放入panel的prefab，用于在info panel上显示指定panel")]
-        public GameObject ChildPanelPrefab;
+        //[Tooltip("放入info panel的GameObject")]
+        //private GameObject InfoPanel;
+        //[Tooltip("放入panel的prefab，用于在info panel上显示指定panel")]
+        //public GameObject ChildPanelPrefab;
         #endregion
 
         #region Private Fields
         static private GameObject _CurrentGameObject;
+        public static PhotonView BoardPhotonView;
+        public static InfoPanelOnClick_Board instance;
         #endregion
 
         // Start is called before the first frame update
         void Start()
         {
+            instance = this;
             _CurrentGameObject = null;
-            InfoPanel = SetBoardManager.info_panel;
         }
 
         // Update is called once per frame
@@ -36,8 +38,8 @@ namespace Com.MyCompany.MyGame
 
         private void OnMouseDown()
         {
-            
-            InfoPanel.SetActive(true);
+
+            /*InfoPanel.SetActive(true);
             if (_CurrentGameObject != gameObject)
             {
                 _CurrentGameObject = gameObject;
@@ -45,17 +47,11 @@ namespace Com.MyCompany.MyGame
                 for (int i = 0; i < InfoPanel.transform.childCount; i++)
                 {
                     Destroy(InfoPanel.transform.GetChild(i).gameObject);
-                }
-                // 实例化child object
-                GameObject ChildPanel = Instantiate(ChildPanelPrefab) as GameObject; // instantiate the panel which holds the board content
-                ChildPanel.transform.parent = InfoPanel.transform;
-                PhotonView PV = transform.GetComponent<PhotonView>(); // get the photon view of the board
-                object[] data = PV.InstantiationData;
-                
-                // display the board content on the UI
-                Debug.Log("onclick, the text is: "+ (string)data[2]); // access the data stored in this board
-                ChildPanel.transform.Find("Text").GetComponent<Text>().text = (string)data[2];
-            }
+                }}*/
+            Debug.Log("the board is clicked");
+            BoardPhotonView = transform.GetComponent<PhotonView>();
+            Debug.Log("the onclick should be triggered");
+            EventManager_Board.instance.ClickBoard();
 
 
             // update panel infomation

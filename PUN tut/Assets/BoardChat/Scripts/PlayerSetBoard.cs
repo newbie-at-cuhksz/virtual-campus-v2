@@ -39,6 +39,12 @@ namespace Com.MyCompany.MyGame
             string line = InputFieldManager.InputFieldTransform.GetChild(1).GetComponent<Text>().text;
             List<Texture2D> Images = ImagesSelected;
             placeBoard(line, Images);
+            ImagesSelected = new List<Texture2D>();
+            for (int i = 0; i < 6; i++) // hide the last input
+            {
+                ImageShowManager.imagesTransform.GetChild(i).gameObject.SetActive(false);
+                ImageShowManager.imagesTransform.GetChild(i).GetComponent<Image>().sprite = null;
+            }
             SetBoardPanelManager.setBoardPanelManager.HidePanel();
         }
 
@@ -100,6 +106,7 @@ namespace Com.MyCompany.MyGame
                 imagesData[j] = null; // fill the rest space as null
             }
             instanceData[3] = imagesData;
+            Debug.Log("add images");
 
             // instance[4]: the future comments to be added
             instanceData[4] = "";
