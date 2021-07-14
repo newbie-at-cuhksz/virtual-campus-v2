@@ -15,7 +15,7 @@ namespace Com.MyCompany.MyGame
         private void Start()
         {
             PhotonView PV = transform.GetComponent<PhotonView>(); // get the photon view of the board
-            initDate = (int[])PV.InstantiationData[1];
+            initDate = (int[])PV.InstantiationData[0];
             StartCoroutine(updateOnFiveMinutes(300)); // update every 5 minutes
         }
 

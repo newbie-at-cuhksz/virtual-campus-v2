@@ -1,0 +1,7 @@
+﻿<linker>
+  <assembly fullname="VoxelBusters.EssentialKit.AndroidModule">
+    <namespace fullname="VoxelBusters.EssentialKit.MediaServicesCore.Android" preserve="all" />
+    <namespace fullname="VoxelBusters.EssentialKit.WebViewCore.Android" preserve="all" />
+    <namespace fullname="VoxelBusters.EssentialKit.ExtrasCore.Android" preserve="all" />
+  </assembly>
+</linker>
