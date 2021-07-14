@@ -8,10 +8,12 @@ using UnityEngine.UI;
 public class SetBoardPanelManager : MonoBehaviour
 {
     public static SetBoardPanelManager setBoardPanelManager;
+    private static InputField shareInput;
 
     private void Start()
     {
         setBoardPanelManager = this; // create a singleton to reference the panel
+        shareInput = this.transform.GetChild(0).gameObject.GetComponent<InputField>();
     }
 
     public void ActivatePanel()
@@ -23,7 +25,8 @@ public class SetBoardPanelManager : MonoBehaviour
     public void HidePanel()
     {
         // clear the text of the input field, input field is the child with index 0
-        this.transform.GetChild(0).transform.GetChild(1).GetComponent<Text>().text = "";
+        shareInput.Select();
+        shareInput.text = "";
         // clear the images selected
 
         this.gameObject.SetActive(false);

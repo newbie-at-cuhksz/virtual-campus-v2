@@ -12,13 +12,13 @@ namespace Com.MyCompany.MyGame
 
         private void Start()
         {
-            panelTransform = this.transform;
+            panelTransform = this.transform.GetChild(0).transform;
         }
 
         // triggered by the quit button
         public void QuitView()
         {
-            this.gameObject.SetActive(false);
+            this.transform.GetChild(0).gameObject.SetActive(false);
         }
 
         void OnEnable()
@@ -36,7 +36,7 @@ namespace Com.MyCompany.MyGame
         void ShowBoard()
         {
             Debug.Log("the board content should be shown");
-            this.gameObject.SetActive(true);
+            this.transform.GetChild(0).gameObject.SetActive(true);
             PhotonView PV = InfoPanelOnClick_Board.BoardPhotonView;
             object[] data = PV.InstantiationData;
             DisplayShareText((string)data[2]);
@@ -59,12 +59,13 @@ namespace Com.MyCompany.MyGame
         {
             Debug.Log("the images should be shown");
             int size = (int)imagesPNG[0];
+            Debug.Log("size can be cast, the size is: " + size);
             for (int i = 0; i < size; i++)
             {
                 Texture2D image = new Texture2D(2, 2); // the size of the texure can be further fixed
-                image.LoadImage((byte[])imagesPNG[i]);
-                panelTransform.GetChild(1 + i).gameObject.SetActive(true);
-                panelTransform.GetChild(1 + i).gameObject.GetComponent<Image>().sprite =
+                image.LoadImage((byte[])imagesPNG[i+1]);
+                panelTransform.GetChild(i+1).gameObject.SetActive(true);
+                panelTransform.GetChild(i+1).gameObject.GetComponent<Image>().sprite =
                     Sprite.Create(image, new Rect(0, 0, image.width, image.height), new Vector2(0.5f, 0.5f));
             }
         }

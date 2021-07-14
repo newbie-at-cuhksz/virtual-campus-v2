@@ -101,10 +101,10 @@ namespace Com.MyCompany.MyGame
             {
                 imagesData[i + 1] = duplicateTexture(Images[i]).EncodeToPNG();
             }
-            for (int j = Images.Count; j < 7; j++)
+            /*for (int j = Images.Count; j < 7; j++)
             {
                 imagesData[j] = null; // fill the rest space as null
-            }
+            }*/
             instanceData[3] = imagesData;
             Debug.Log("add images");
 
