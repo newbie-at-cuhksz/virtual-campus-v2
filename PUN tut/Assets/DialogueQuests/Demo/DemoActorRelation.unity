@@ -1267,7 +1267,8 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.196e-42, y: 1.04e-43, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 7.8719775e+31, y: 0.0008752712, z: 1.7414649e+25,
+    w: 805.5847}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -13324,6 +13325,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 2084291512510742745, guid: 37e22435cb91a5a459ef803cbb9b4c2f,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5434220141179868349, guid: 37e22435cb91a5a459ef803cbb9b4c2f,
         type: 3}
