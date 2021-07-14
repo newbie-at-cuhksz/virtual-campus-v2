@@ -30,7 +30,7 @@ namespace Com.MyCompany.MyGame
         private void OnMouseDown()
         {
             Debug.Log("the LGU board is clicked");
-            App_Webview.instance.NewWebView("https://www.baidu.com");
+            App_Webview.instance.NewWebView("https://www.lgulife.com/");
         } 
     }
 }
